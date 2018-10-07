@@ -15,6 +15,7 @@ import solab.innovativetransport.pipe.TilePipe;
 /**
  * Created by kirihi on 2018/10/07.
  */
+//これでいいといいんだけどなぁ
 public class Debugger extends Item {
     public Debugger() {
         super();
