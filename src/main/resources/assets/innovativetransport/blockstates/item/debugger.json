@@ -1,7 +1,7 @@
 {
   "forge_marker": 1,
   "defaults": {
-    "model":"innovativetransport:item/debugger"
+    "model":"innovativetransport:items/debugger"
   },
   "variants": {
     "normal": [{}],
