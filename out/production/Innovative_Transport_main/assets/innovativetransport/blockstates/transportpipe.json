@@ -9,21 +9,21 @@
     "up": {
       "true": {
         "submodel": "innovativetransport:pipe_side_on",
-        "x": 90
+        "x": 270
       },
       "false": {
         "submodel": "innovativetransport:pipe_side_off",
-        "x": 90
+        "x": 270
       }
     },
     "down": {
       "true": {
         "submodel": "innovativetransport:pipe_side_on",
-        "x": 270
+        "x": 90
       },
       "false": {
         "submodel": "innovativetransport:pipe_side_off",
-        "x": 270
+        "x": 90
       }
     },
     "north": {

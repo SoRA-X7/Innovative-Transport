@@ -89,29 +89,47 @@ public class TilePipe extends TileEntity {
 
     public void readFromNBT(NBTTagCompound nbt) {
         super.readFromNBT(nbt);
-        connection.put(EnumFacing.UP,null);
-        connection.put(EnumFacing.DOWN,null);
-        connection.put(EnumFacing.NORTH,null);
-        connection.put(EnumFacing.SOUTH,null);
-        connection.put(EnumFacing.WEST,null);
-        connection.put(EnumFacing.EAST,null);
         if (nbt.getBoolean("connection_up")) {
             connection.put(EnumFacing.UP,(TilePipe)worldObj.getTileEntity(pos.up()));
+            setBlockStatus(EnumFacing.UP,true);
+        } else {
+            connection.put(EnumFacing.UP,null);
+            setBlockStatus(EnumFacing.UP,false);
         }
         if (nbt.getBoolean("connection_down")) {
             connection.put(EnumFacing.DOWN,(TilePipe)worldObj.getTileEntity(pos.down()));
+            setBlockStatus(EnumFacing.DOWN,true);
+        } else {
+            connection.put(EnumFacing.DOWN,null);
+            setBlockStatus(EnumFacing.DOWN,false);
         }
         if (nbt.getBoolean("connection_north")) {
             connection.put(EnumFacing.NORTH,(TilePipe)worldObj.getTileEntity(pos.north()));
+            setBlockStatus(EnumFacing.NORTH,true);
+        } else {
+            connection.put(EnumFacing.NORTH,null);
+            setBlockStatus(EnumFacing.NORTH,false);
         }
         if (nbt.getBoolean("connection_south")) {
             connection.put(EnumFacing.SOUTH,(TilePipe)worldObj.getTileEntity(pos.south()));
+            setBlockStatus(EnumFacing.SOUTH,true);
+        } else {
+            connection.put(EnumFacing.SOUTH,null);
+            setBlockStatus(EnumFacing.SOUTH,true);
         }
         if (nbt.getBoolean("connection_east")) {
             connection.put(EnumFacing.EAST,(TilePipe)worldObj.getTileEntity(pos.east()));
+            setBlockStatus(EnumFacing.EAST,true);
+        } else {
+            connection.put(EnumFacing.EAST,null);
+            setBlockStatus(EnumFacing.EAST,true);
         }
         if (nbt.getBoolean("connection_west")) {
             connection.put(EnumFacing.WEST,(TilePipe)worldObj.getTileEntity(pos.west()));
+            setBlockStatus(EnumFacing.WEST,true);
+        } else {
+            connection.put(EnumFacing.WEST,null);
+            setBlockStatus(EnumFacing.WEST,true);
         }
         markDirty();
         worldObj.notifyBlockUpdate(pos,worldObj.getBlockState(pos),worldObj.getBlockState(pos),2);
