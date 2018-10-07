@@ -1,119 +1,88 @@
-[18:12:38] [main/INFO]: Logging in with username & password
-[18:12:42] [Client thread/INFO]: Setting user: GALAXYCOMET2002
-[18:12:47] [Client thread/WARN]: Skipping bad option: lastServer:
-[18:12:47] [Client thread/INFO]: LWJGL Version: 2.9.2
-[18:12:50] [Client thread/INFO]: Reloading ResourceManager: Default, FMLFileResourcePack:Forge Mod Loader, FMLFileResourcePack:Minecraft Forge, FMLFileResourcePack:innovativetransport
-[18:12:53] [Sound Library Loader/INFO]: Starting up SoundSystem...
-[18:12:53] [Thread-6/INFO]: Initializing LWJGL OpenAL
-[18:12:53] [Thread-6/INFO]: (The LWJGL binding of OpenAL.  For more information, see http://www.lwjgl.org)
-[18:12:53] [Thread-6/INFO]: OpenAL initialized.
-[18:12:53] [Sound Library Loader/INFO]: Sound engine started
-[18:12:55] [Client thread/INFO]: Created: 16x16 textures-atlas
-[18:12:57] [Client thread/INFO]: Reloading ResourceManager: Default, FMLFileResourcePack:Forge Mod Loader, FMLFileResourcePack:Minecraft Forge, FMLFileResourcePack:innovativetransport
-[18:12:59] [Client thread/INFO]: SoundSystem shutting down...
-[18:12:59] [Client thread/WARN]: Author: Paul Lamb, www.paulscode.com
-[18:12:59] [Sound Library Loader/INFO]: Starting up SoundSystem...
-[18:12:59] [Thread-8/INFO]: Initializing LWJGL OpenAL
-[18:12:59] [Thread-8/INFO]: (The LWJGL binding of OpenAL.  For more information, see http://www.lwjgl.org)
-[18:12:59] [Thread-8/INFO]: OpenAL initialized.
-[18:12:59] [Sound Library Loader/INFO]: Sound engine started
-[18:13:01] [Client thread/INFO]: Created: 512x512 textures-atlas
-[18:13:02] [Client thread/WARN]: Skipping bad option: lastServer:
-[18:14:01] [Server thread/INFO]: Starting integrated minecraft server version 1.10.2
-[18:14:01] [Server thread/INFO]: Generating keypair
-[18:14:02] [Server thread/INFO]: Preparing start region for level 0
-[18:14:03] [Server thread/INFO]: Preparing spawn area: 40%
-[18:14:03] [Server thread/INFO]: Changing view distance to 12, from 10
-[18:14:05] [Server thread/INFO]: GALAXYCOMET2002[local:E:40a4c063] logged in with entity id 182 at (-166.44823567600122, 64.0, 261.45034254566326)
-[18:14:05] [Server thread/INFO]: GALAXYCOMET2002 joined the game
-[18:14:07] [Server thread/INFO]: Saving and pausing game...
-[18:14:07] [Server thread/INFO]: Saving chunks for level 'New World'/Overworld
-[18:14:07] [Server thread/INFO]: Saving chunks for level 'New World'/Nether
-[18:14:07] [Server thread/INFO]: Saving chunks for level 'New World'/The End
-[18:14:26] [Server thread/INFO]: Saving and pausing game...
-[18:14:26] [Server thread/INFO]: Saving chunks for level 'New World'/Overworld
-[18:14:26] [Server thread/INFO]: Saving chunks for level 'New World'/Nether
-[18:14:26] [Server thread/INFO]: Saving chunks for level 'New World'/The End
-[18:18:20] [Client thread/INFO]: [CHAT] CLIENT-----------------
-[18:18:20] [Client thread/INFO]: [CHAT] BlockPos{x=-168, y=64, z=264}
-[18:18:20] [Client thread/INFO]: [CHAT] {north=null, south=null, down=null, up=null, east=null, west=solab.innovativetransport.pipe.TilePipe@6d64b0f2}
-[18:18:20] [Server thread/INFO]: [CHAT] SERVER-----------------
-[18:18:20] [Server thread/INFO]: [CHAT] BlockPos{x=-168, y=64, z=264}
-[18:18:20] [Server thread/INFO]: [CHAT] {north=null, south=null, down=null, up=null, east=null, west=solab.innovativetransport.pipe.TilePipe@649b1e2f}
-[18:18:20] [Server thread/INFO]: [CHAT] -----------------------
-[18:18:33] [Client thread/INFO]: [CHAT] CLIENT-----------------
-[18:18:33] [Client thread/INFO]: [CHAT] BlockPos{x=-168, y=64, z=264}
-[18:18:33] [Client thread/INFO]: [CHAT] {north=null, south=null, down=null, up=solab.innovativetransport.pipe.TilePipe@2ab0d2ac, east=solab.innovativetransport.pipe.TilePipe@d1406c2, west=solab.innovativetransport.pipe.TilePipe@6d64b0f2}
-[18:18:33] [Server thread/INFO]: [CHAT] SERVER-----------------
-[18:18:33] [Server thread/INFO]: [CHAT] BlockPos{x=-168, y=64, z=264}
-[18:18:33] [Server thread/INFO]: [CHAT] {north=null, south=null, down=null, up=solab.innovativetransport.pipe.TilePipe@50896633, east=solab.innovativetransport.pipe.TilePipe@77f5c73b, west=solab.innovativetransport.pipe.TilePipe@649b1e2f}
-[18:18:33] [Server thread/INFO]: [CHAT] -----------------------
-[18:18:34] [Client thread/INFO]: [CHAT] CLIENT-----------------
-[18:18:34] [Client thread/INFO]: [CHAT] BlockPos{x=-169, y=64, z=264}
-[18:18:34] [Client thread/INFO]: [CHAT] {north=null, south=null, down=null, up=solab.innovativetransport.pipe.TilePipe@1fa8610c, east=solab.innovativetransport.pipe.TilePipe@3321f5e7, west=solab.innovativetransport.pipe.TilePipe@1e2ed757}
-[18:18:34] [Server thread/INFO]: [CHAT] SERVER-----------------
-[18:18:34] [Server thread/INFO]: [CHAT] BlockPos{x=-169, y=64, z=264}
-[18:18:34] [Server thread/INFO]: [CHAT] {north=null, south=null, down=null, up=solab.innovativetransport.pipe.TilePipe@590edea3, east=solab.innovativetransport.pipe.TilePipe@42ad834f, west=solab.innovativetransport.pipe.TilePipe@1bb8483e}
-[18:18:34] [Server thread/INFO]: [CHAT] -----------------------
-[18:18:35] [Client thread/INFO]: [CHAT] CLIENT-----------------
-[18:18:35] [Client thread/INFO]: [CHAT] BlockPos{x=-170, y=64, z=264}
-[18:18:35] [Client thread/INFO]: [CHAT] {north=null, south=null, down=null, up=null, east=solab.innovativetransport.pipe.TilePipe@6d64b0f2, west=null}
-[18:18:35] [Server thread/INFO]: [CHAT] SERVER-----------------
-[18:18:35] [Server thread/INFO]: [CHAT] BlockPos{x=-170, y=64, z=264}
-[18:18:35] [Server thread/INFO]: [CHAT] {north=null, south=null, down=null, up=null, east=solab.innovativetransport.pipe.TilePipe@649b1e2f, west=null}
-[18:18:35] [Server thread/INFO]: [CHAT] -----------------------
-[18:18:41] [Client thread/INFO]: [CHAT] CLIENT-----------------
-[18:18:41] [Client thread/INFO]: [CHAT] BlockPos{x=-167, y=65, z=264}
-[18:18:41] [Client thread/INFO]: [CHAT] {north=null, south=null, down=solab.innovativetransport.pipe.TilePipe@d1406c2, up=null, east=null, west=null}
-[18:18:41] [Server thread/INFO]: [CHAT] SERVER-----------------
-[18:18:41] [Server thread/INFO]: [CHAT] BlockPos{x=-167, y=65, z=264}
-[18:18:41] [Server thread/INFO]: [CHAT] {north=null, south=null, down=solab.innovativetransport.pipe.TilePipe@77f5c73b, up=null, east=null, west=null}
-[18:18:41] [Server thread/INFO]: [CHAT] -----------------------
-[18:19:05] [Client thread/INFO]: [CHAT] CLIENT-----------------
-[18:19:05] [Client thread/INFO]: [CHAT] BlockPos{x=-169, y=64, z=263}
-[18:19:05] [Client thread/INFO]: [CHAT] {north=solab.innovativetransport.pipe.TilePipe@269e0783, south=solab.innovativetransport.pipe.TilePipe@47e4aa8d, down=null, up=null, east=solab.innovativetransport.pipe.TilePipe@26f4bfc2, west=solab.innovativetransport.pipe.TilePipe@434268fd}
-[18:19:05] [Server thread/INFO]: [CHAT] SERVER-----------------
-[18:19:05] [Server thread/INFO]: [CHAT] BlockPos{x=-169, y=64, z=263}
-[18:19:05] [Server thread/INFO]: [CHAT] {north=solab.innovativetransport.pipe.TilePipe@7c9fc9a, south=solab.innovativetransport.pipe.TilePipe@4f61747, down=null, up=null, east=solab.innovativetransport.pipe.TilePipe@1d4ea5e2, west=solab.innovativetransport.pipe.TilePipe@2d3b2a7e}
-[18:19:05] [Server thread/INFO]: [CHAT] -----------------------
-[18:19:19] [Client thread/INFO]: [CHAT] CLIENT-----------------
-[18:19:19] [Client thread/INFO]: [CHAT] BlockPos{x=-166, y=64, z=261}
-[18:19:19] [Client thread/INFO]: [CHAT] {north=null, south=null, down=null, up=null, east=null, west=solab.innovativetransport.pipe.TilePipe@64645e6}
-[18:19:19] [Server thread/INFO]: [CHAT] SERVER-----------------
-[18:19:19] [Server thread/INFO]: [CHAT] BlockPos{x=-166, y=64, z=261}
-[18:19:19] [Server thread/INFO]: [CHAT] {north=null, south=null, down=null, up=null, east=null, west=solab.innovativetransport.pipe.TilePipe@5a6ac6ce}
-[18:19:19] [Server thread/INFO]: [CHAT] -----------------------
-[18:19:20] [Client thread/INFO]: [CHAT] CLIENT-----------------
-[18:19:20] [Client thread/INFO]: [CHAT] BlockPos{x=-167, y=64, z=261}
-[18:19:20] [Client thread/INFO]: [CHAT] {north=null, south=null, down=null, up=null, east=null, west=null}
-[18:19:20] [Server thread/INFO]: [CHAT] SERVER-----------------
-[18:19:20] [Server thread/INFO]: [CHAT] BlockPos{x=-167, y=64, z=261}
-[18:19:20] [Server thread/INFO]: [CHAT] {north=null, south=null, down=null, up=null, east=null, west=null}
-[18:19:20] [Server thread/INFO]: [CHAT] -----------------------
-[18:19:27] [Client thread/INFO]: [CHAT] CLIENT-----------------
-[18:19:27] [Client thread/INFO]: [CHAT] BlockPos{x=-167, y=64, z=262}
-[18:19:27] [Client thread/INFO]: [CHAT] {north=solab.innovativetransport.pipe.TilePipe@64645e6, south=null, down=null, up=null, east=null, west=null}
-[18:19:27] [Server thread/INFO]: [CHAT] SERVER-----------------
-[18:19:27] [Server thread/INFO]: [CHAT] BlockPos{x=-167, y=64, z=262}
-[18:19:27] [Server thread/INFO]: [CHAT] {north=solab.innovativetransport.pipe.TilePipe@5a6ac6ce, south=null, down=null, up=null, east=null, west=null}
-[18:19:27] [Server thread/INFO]: [CHAT] -----------------------
-[18:19:50] [Client thread/INFO]: [CHAT] CLIENT-----------------
-[18:19:50] [Client thread/INFO]: [CHAT] BlockPos{x=-170, y=64, z=264}
-[18:19:50] [Client thread/INFO]: [CHAT] {north=null, south=null, down=null, up=null, east=null, west=null}
-[18:19:50] [Server thread/INFO]: [CHAT] SERVER-----------------
-[18:19:50] [Server thread/INFO]: [CHAT] BlockPos{x=-170, y=64, z=264}
-[18:19:50] [Server thread/INFO]: [CHAT] {north=null, south=null, down=null, up=null, east=null, west=null}
-[18:19:50] [Server thread/INFO]: [CHAT] -----------------------
-[18:20:44] [Client thread/INFO]: Stopping!
-[18:20:44] [Client thread/INFO]: SoundSystem shutting down...
-[18:20:44] [Server thread/INFO]: Stopping server
-[18:20:44] [Server thread/INFO]: Saving players
-[18:20:44] [Server thread/INFO]: Saving worlds
-[18:20:44] [Server thread/INFO]: Saving chunks for level 'New World'/Overworld
-[18:20:44] [Server thread/INFO]: Saving chunks for level 'New World'/Nether
-[18:20:44] [Server thread/INFO]: Saving chunks for level 'New World'/The End
-[18:20:44] [Client thread/WARN]: Author: Paul Lamb, www.paulscode.com
-[18:20:44] [Client Shutdown Thread/INFO]: Stopping server
-[18:20:44] [Client Shutdown Thread/INFO]: Saving players
-[18:20:44] [Client Shutdown Thread/INFO]: Saving worlds
-[18:20:44] [Client Shutdown Thread/INFO]: Saving chunks for level 'New World'/Overworld
+[18:52:26] [Client thread/INFO]: Setting user: Player618
+[18:52:31] [Client thread/WARN]: Skipping bad option: lastServer:
+[18:52:31] [Client thread/INFO]: LWJGL Version: 2.9.2
+[18:52:35] [Client thread/INFO]: Reloading ResourceManager: Default, FMLFileResourcePack:Forge Mod Loader, FMLFileResourcePack:Minecraft Forge, FMLFileResourcePack:innovativetransport
+[18:52:38] [Sound Library Loader/INFO]: Starting up SoundSystem...
+[18:52:38] [Thread-6/INFO]: Initializing LWJGL OpenAL
+[18:52:38] [Thread-6/INFO]: (The LWJGL binding of OpenAL.  For more information, see http://www.lwjgl.org)
+[18:52:38] [Thread-6/INFO]: OpenAL initialized.
+[18:52:38] [Sound Library Loader/INFO]: Sound engine started
+[18:52:41] [Client thread/INFO]: Created: 16x16 textures-atlas
+[18:52:43] [Client thread/INFO]: Reloading ResourceManager: Default, FMLFileResourcePack:Forge Mod Loader, FMLFileResourcePack:Minecraft Forge, FMLFileResourcePack:innovativetransport
+[18:52:45] [Client thread/INFO]: SoundSystem shutting down...
+[18:52:45] [Client thread/WARN]: Author: Paul Lamb, www.paulscode.com
+[18:52:45] [Sound Library Loader/INFO]: Starting up SoundSystem...
+[18:52:45] [Thread-8/INFO]: Initializing LWJGL OpenAL
+[18:52:45] [Thread-8/INFO]: (The LWJGL binding of OpenAL.  For more information, see http://www.lwjgl.org)
+[18:52:45] [Thread-8/INFO]: OpenAL initialized.
+[18:52:46] [Sound Library Loader/INFO]: Sound engine started
+[18:52:48] [Client thread/INFO]: Created: 512x512 textures-atlas
+[18:52:48] [Client thread/WARN]: Skipping bad option: lastServer:
+[18:52:50] [Realms Notification Availability checker #1/INFO]: Could not authorize you against Realms server: Invalid session id
+[18:52:54] [Server thread/INFO]: Starting integrated minecraft server version 1.10.2
+[18:52:54] [Server thread/INFO]: Generating keypair
+[18:52:55] [Server thread/INFO]: Preparing start region for level 0
+[18:52:56] [Server thread/INFO]: Preparing spawn area: 11%
+[18:52:57] [Server thread/INFO]: Changing view distance to 12, from 10
+[18:52:58] [Server thread/INFO]: Player618[local:E:6f35a665] logged in with entity id 191 at (-168.7177916127161, 64.0, 260.9030788280027)
+[18:52:58] [Server thread/INFO]: Player618 joined the game
+[18:52:59] [Server thread/INFO]: Saving and pausing game...
+[18:52:59] [Server thread/INFO]: Saving chunks for level 'New World'/Overworld
+[18:53:00] [Server thread/INFO]: Saving chunks for level 'New World'/Nether
+[18:53:00] [Server thread/INFO]: Saving chunks for level 'New World'/The End
+[18:53:00] [pool-2-thread-1/WARN]: Couldn't look up profile properties for com.mojang.authlib.GameProfile@3b2c58d7[id=9558103d-7825-31db-a05b-a05b47d33b95,name=Player618,properties={},legacy=false]
+com.mojang.authlib.exceptions.AuthenticationException: The client has sent too many requests within a certain amount of time
+	at com.mojang.authlib.yggdrasil.YggdrasilAuthenticationService.makeRequest(YggdrasilAuthenticationService.java:65) ~[YggdrasilAuthenticationService.class:?]
+	at com.mojang.authlib.yggdrasil.YggdrasilMinecraftSessionService.fillGameProfile(YggdrasilMinecraftSessionService.java:175) [YggdrasilMinecraftSessionService.class:?]
+	at com.mojang.authlib.yggdrasil.YggdrasilMinecraftSessionService$1.load(YggdrasilMinecraftSessionService.java:59) [YggdrasilMinecraftSessionService$1.class:?]
+	at com.mojang.authlib.yggdrasil.YggdrasilMinecraftSessionService$1.load(YggdrasilMinecraftSessionService.java:56) [YggdrasilMinecraftSessionService$1.class:?]
+	at com.google.common.cache.LocalCache$LoadingValueReference.loadFuture(LocalCache.java:3524) [guava-17.0.jar:?]
+	at com.google.common.cache.LocalCache$Segment.loadSync(LocalCache.java:2317) [guava-17.0.jar:?]
+	at com.google.common.cache.LocalCache$Segment.lockedGetOrLoad(LocalCache.java:2280) [guava-17.0.jar:?]
+	at com.google.common.cache.LocalCache$Segment.get(LocalCache.java:2195) [guava-17.0.jar:?]
+	at com.google.common.cache.LocalCache.get(LocalCache.java:3934) [guava-17.0.jar:?]
+	at com.google.common.cache.LocalCache.getOrLoad(LocalCache.java:3938) [guava-17.0.jar:?]
+	at com.google.common.cache.LocalCache$LocalLoadingCache.get(LocalCache.java:4821) [guava-17.0.jar:?]
+	at com.google.common.cache.LocalCache$LocalLoadingCache.getUnchecked(LocalCache.java:4827) [guava-17.0.jar:?]
+	at com.mojang.authlib.yggdrasil.YggdrasilMinecraftSessionService.fillProfileProperties(YggdrasilMinecraftSessionService.java:165) [YggdrasilMinecraftSessionService.class:?]
+	at net.minecraft.client.Minecraft.getProfileProperties(Minecraft.java:3060) [Minecraft.class:?]
+	at net.minecraft.client.resources.SkinManager$3.run(SkinManager.java:131) [SkinManager$3.class:?]
+	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:511) [?:1.8.0_45]
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266) [?:1.8.0_45]
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142) [?:1.8.0_45]
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617) [?:1.8.0_45]
+	at java.lang.Thread.run(Thread.java:745) [?:1.8.0_45]
+[18:53:05] [Server thread/INFO]: Player618 has just earned the achievement [Taking Inventory]
+[18:53:05] [Client thread/INFO]: [CHAT] Player618 has just earned the achievement [Taking Inventory]
+[18:53:11] [Client thread/INFO]: [CHAT] CLIENT-----------------
+[18:53:11] [Client thread/INFO]: [CHAT] BlockPos{x=-169, y=64, z=258}
+[18:53:11] [Client thread/INFO]: [CHAT] {north=null, down=null, south=null, west=null, east=null, up=null}
+[18:53:11] [Server thread/INFO]: [CHAT] SERVER-----------------
+[18:53:11] [Server thread/INFO]: [CHAT] BlockPos{x=-169, y=64, z=258}
+[18:53:11] [Server thread/INFO]: [CHAT] {north=null, down=null, south=null, west=null, east=null, up=null}
+[18:53:11] [Server thread/INFO]: [CHAT] -----------------------
+[18:53:18] [Server thread/INFO]: Saving and pausing game...
+[18:53:18] [Server thread/INFO]: Saving chunks for level 'New World'/Overworld
+[18:53:18] [Server thread/INFO]: Saving chunks for level 'New World'/Nether
+[18:53:18] [Server thread/INFO]: Saving chunks for level 'New World'/The End
+[18:53:23] [Server thread/INFO]: Changing difficulty to PEACEFUL, from NORMAL
+[18:53:28] [Client thread/INFO]: [CHAT] CLIENT-----------------
+[18:53:28] [Client thread/INFO]: [CHAT] BlockPos{x=-169, y=64, z=258}
+[18:53:28] [Client thread/INFO]: [CHAT] {north=null, down=null, south=null, west=null, east=null, up=null}
+[18:53:28] [Server thread/INFO]: [CHAT] SERVER-----------------
+[18:53:28] [Server thread/INFO]: [CHAT] BlockPos{x=-169, y=64, z=258}
+[18:53:28] [Server thread/INFO]: [CHAT] {north=null, down=null, south=null, west=null, east=null, up=null}
+[18:53:28] [Server thread/INFO]: [CHAT] -----------------------
+[18:53:30] [Server thread/INFO]: Saving and pausing game...
+[18:53:30] [Server thread/INFO]: Saving chunks for level 'New World'/Overworld
+[18:53:30] [Server thread/INFO]: Saving chunks for level 'New World'/Nether
+[18:53:30] [Server thread/INFO]: Saving chunks for level 'New World'/The End
+[18:53:30] [Server thread/INFO]: Stopping server
+[18:53:30] [Server thread/INFO]: Saving players
+[18:53:30] [Server thread/INFO]: Saving worlds
+[18:53:30] [Server thread/INFO]: Saving chunks for level 'New World'/Overworld
+[18:53:30] [Server thread/INFO]: Saving chunks for level 'New World'/Nether
+[18:53:30] [Server thread/INFO]: Saving chunks for level 'New World'/The End
+[18:53:33] [Client thread/INFO]: Stopping!
+[18:53:33] [Client thread/INFO]: SoundSystem shutting down...
+[18:53:33] [Client thread/WARN]: Author: Paul Lamb, www.paulscode.com
