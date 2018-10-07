@@ -36,7 +36,7 @@ public class Debugger extends Item {
                     mc.thePlayer.addChatMessage(new TextComponentTranslation("DOWN"));
                 }
                 if(me.connection.get(EnumFacing.NORTH) != null){
-                    mc.thePlayer.addChatMessage(new TextComponentTranslation("NORYH"));
+                    mc.thePlayer.addChatMessage(new TextComponentTranslation("NORTH"));
                 }
                 if(me.connection.get(EnumFacing.SOUTH) != null){
                     mc.thePlayer.addChatMessage(new TextComponentTranslation("SOUTH"));
@@ -57,7 +57,7 @@ public class Debugger extends Item {
                     mc.thePlayer.addChatMessage(new TextComponentTranslation("DOWN"));
                 }
                 if(me.connection.get(EnumFacing.NORTH) != null){
-                    mc.thePlayer.addChatMessage(new TextComponentTranslation("NORYH"));
+                    mc.thePlayer.addChatMessage(new TextComponentTranslation("NORTH"));
                 }
                 if(me.connection.get(EnumFacing.SOUTH) != null){
                     mc.thePlayer.addChatMessage(new TextComponentTranslation("SOUTH"));

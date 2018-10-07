@@ -1,11 +1,17 @@
 {
   "forge_marker": 1,
   "defaults": {
-
+    "textures": {
+      "all":"innovativetransport:block/pipetex"
+    }
   },
   "variants": {
-    "normal": [{}],
-    "inventory": [{}],
+    "normal": [{
+      "model": "innovativetransport:transportpipe"
+    }],
+    "inventory": [{
+      "model": "innovativetransport:transportpipe"
+    }],
     "up": {
       "true": {
         "submodel": "innovativetransport:pipe_side_on",
