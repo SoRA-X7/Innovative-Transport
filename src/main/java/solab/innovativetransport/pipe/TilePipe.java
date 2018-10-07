@@ -1,5 +1,6 @@
 package solab.innovativetransport.pipe;
 
+import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
@@ -19,6 +20,13 @@ public class TilePipe extends TileEntity {
 
     public List<Transporter> transporters = new ArrayList<Transporter>();
     public Map<EnumFacing,TilePipe> connection = new HashMap<>();
+    static Map<EnumFacing,PropertyBool> states = new HashMap<>();
+    public static final PropertyBool stateU = PropertyBool.create("up");
+    public static final PropertyBool stateD = PropertyBool.create("down");
+    public static final PropertyBool stateN = PropertyBool.create("north");
+    public static final PropertyBool stateS = PropertyBool.create("south");
+    public static final PropertyBool stateE = PropertyBool.create("east");
+    public static final PropertyBool stateW = PropertyBool.create("west");
 
     public TilePipe() {
         connection.put(EnumFacing.UP,null);
@@ -29,6 +37,29 @@ public class TilePipe extends TileEntity {
         connection.put(EnumFacing.EAST,null);
     }
 
+    void setBlockStatus(EnumFacing facing,boolean v) {
+        switch (facing) {
+            case UP:
+                worldObj.setBlockState(pos,worldObj.getBlockState(pos).withProperty(stateU,v));
+                break;
+            case DOWN:
+                worldObj.setBlockState(pos,worldObj.getBlockState(pos).withProperty(stateD,v));
+                break;
+            case NORTH:
+                worldObj.setBlockState(pos,worldObj.getBlockState(pos).withProperty(stateN,v));
+                break;
+            case SOUTH:
+                worldObj.setBlockState(pos,worldObj.getBlockState(pos).withProperty(stateS,v));
+                break;
+            case EAST:
+                worldObj.setBlockState(pos,worldObj.getBlockState(pos).withProperty(stateE,v));
+                break;
+            case WEST:
+                worldObj.setBlockState(pos,worldObj.getBlockState(pos).withProperty(stateW,v));
+                break;
+        }
+    }
+
     public void connect(TilePipe to) {
         System.out.println("Connect from " + pos.toString() + " to " + to.pos.toString());
         BlockPos hispos = to.getPos();
@@ -37,6 +68,7 @@ public class TilePipe extends TileEntity {
         );
         System.out.println(facing.toString());
         connection.put(facing,to);
+        setBlockStatus(facing,true);
         markDirty();
         worldObj.notifyBlockUpdate(pos,worldObj.getBlockState(pos),worldObj.getBlockState(pos),2);
     }
@@ -46,6 +78,7 @@ public class TilePipe extends TileEntity {
              connection.entrySet()) {
             if (entry.getValue() == to) {
                 connection.put(entry.getKey(),null);
+                setBlockStatus(entry.getKey(),false);
             }
         }
         worldObj.markBlockRangeForRenderUpdate(pos, pos);

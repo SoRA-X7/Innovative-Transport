@@ -2,6 +2,7 @@ package solab.innovativetransport.pipe;
 
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
@@ -24,6 +25,33 @@ public class BlockPipe extends BlockContainer {
         setRegistryName(InnovativeTransport.MODID,"transportPipe");
         setUnlocalizedName("transportpipe");
         setCreativeTab(InnovativeTransport.tab);
+        setDefaultState(blockState.getBaseState().withProperty(TilePipe.stateU,false)
+                .withProperty(TilePipe.stateD,false)
+                .withProperty(TilePipe.stateN,false)
+                .withProperty(TilePipe.stateS,false)
+                .withProperty(TilePipe.stateE,false)
+                .withProperty(TilePipe.stateW,false)
+        );
+    }
+    @Override
+    protected BlockStateContainer createBlockState(){
+        return new BlockStateContainer(this,TilePipe.stateU,TilePipe.stateD,TilePipe.stateN,TilePipe.stateS,TilePipe.stateE,TilePipe.stateW);
+    }
+
+    public int getMetaFromState(IBlockState state)
+    {
+        return 0;
+    }
+
+    public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos) {
+        TilePipe tilePipe = (TilePipe)worldIn.getTileEntity(pos);
+        state.withProperty(TilePipe.stateU,tilePipe.connection.get(EnumFacing.UP) != null);
+        state.withProperty(TilePipe.stateD,tilePipe.connection.get(EnumFacing.DOWN) != null);
+        state.withProperty(TilePipe.stateN,tilePipe.connection.get(EnumFacing.NORTH) != null);
+        state.withProperty(TilePipe.stateS,tilePipe.connection.get(EnumFacing.SOUTH) != null);
+        state.withProperty(TilePipe.stateE,tilePipe.connection.get(EnumFacing.EAST) != null);
+        state.withProperty(TilePipe.stateW,tilePipe.connection.get(EnumFacing.WEST) != null);
+        return state;
     }
 
     @Override
