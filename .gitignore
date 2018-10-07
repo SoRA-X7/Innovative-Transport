@@ -1,4 +1,1 @@
-/run
-/gradle
-/.gradle
-/.idea
+run/
