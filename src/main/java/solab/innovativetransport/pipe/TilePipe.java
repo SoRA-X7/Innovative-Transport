@@ -115,21 +115,21 @@ public class TilePipe extends TileEntity {
             setBlockStatus(EnumFacing.SOUTH,true);
         } else {
             connection.put(EnumFacing.SOUTH,null);
-            setBlockStatus(EnumFacing.SOUTH,true);
+            setBlockStatus(EnumFacing.SOUTH,false);
         }
         if (nbt.getBoolean("connection_east")) {
             connection.put(EnumFacing.EAST,(TilePipe)worldObj.getTileEntity(pos.east()));
             setBlockStatus(EnumFacing.EAST,true);
         } else {
             connection.put(EnumFacing.EAST,null);
-            setBlockStatus(EnumFacing.EAST,true);
+            setBlockStatus(EnumFacing.EAST,false);
         }
         if (nbt.getBoolean("connection_west")) {
             connection.put(EnumFacing.WEST,(TilePipe)worldObj.getTileEntity(pos.west()));
             setBlockStatus(EnumFacing.WEST,true);
         } else {
             connection.put(EnumFacing.WEST,null);
-            setBlockStatus(EnumFacing.WEST,true);
+            setBlockStatus(EnumFacing.WEST,false);
         }
         markDirty();
         worldObj.notifyBlockUpdate(pos,worldObj.getBlockState(pos),worldObj.getBlockState(pos),2);
