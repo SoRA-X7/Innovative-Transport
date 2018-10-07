@@ -92,22 +92,22 @@ public class BlockPipe extends BlockContainer {
     @Override
     public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
 
-        for (TilePipe neighborPipe:((TilePipe)(worldIn.getTileEntity(pos))).connection.values()) {
+        for (TilePipe neighborPipe:((TilePipe)worldIn.getTileEntity(pos)).connection.values()) {
             if (neighborPipe != null) {
-                ((TilePipe) worldIn.getTileEntity(neighborPipe.getPos())).disconnect((TilePipe)worldIn.getTileEntity(pos));
+                ((TilePipe)worldIn.getTileEntity(neighborPipe.getPos())).disconnect((TilePipe)worldIn.getTileEntity(pos));
             }
         }
 //        super.breakBlock(worldIn,pos,state);
 
         worldIn.removeTileEntity(pos);
-        worldIn.markBlockRangeForRenderUpdate(pos, pos);
-        worldIn.notifyBlockUpdate(pos,worldIn.getBlockState(pos),worldIn.getBlockState(pos),2);
+//        worldIn.markBlockRangeForRenderUpdate(pos, pos);
+//        worldIn.notifyBlockUpdate(pos,worldIn.getBlockState(pos),worldIn.getBlockState(pos),2);
     }
 
     public void updateConnection(IBlockAccess world, BlockPos pos, BlockPos neighbor) {
         TileEntity tile = world.getTileEntity(neighbor);
         TilePipe me = (TilePipe) world.getTileEntity(pos);
-        if (tile != null && tile instanceof TilePipe) {
+        if (tile instanceof TilePipe) {
             me.connect((TilePipe)tile);
             ((TilePipe)tile).connect(me);
         }

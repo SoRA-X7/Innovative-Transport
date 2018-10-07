@@ -20,12 +20,12 @@ public class TilePipe extends TileEntity {
 
     public List<Transporter> transporters = new ArrayList<Transporter>();
     public Map<EnumFacing,TilePipe> connection = new HashMap<>();
-    public static final PropertyBool stateU = PropertyBool.create("up");
-    public static final PropertyBool stateD = PropertyBool.create("down");
-    public static final PropertyBool stateN = PropertyBool.create("north");
-    public static final PropertyBool stateS = PropertyBool.create("south");
-    public static final PropertyBool stateE = PropertyBool.create("east");
-    public static final PropertyBool stateW = PropertyBool.create("west");
+    static final PropertyBool stateU = PropertyBool.create("up");
+    static final PropertyBool stateD = PropertyBool.create("down");
+    static final PropertyBool stateN = PropertyBool.create("north");
+    static final PropertyBool stateS = PropertyBool.create("south");
+    static final PropertyBool stateE = PropertyBool.create("east");
+    static final PropertyBool stateW = PropertyBool.create("west");
 
     public TilePipe() {
         connection.put(EnumFacing.UP,null);
@@ -65,15 +65,16 @@ public class TilePipe extends TileEntity {
         EnumFacing facing = EnumFacing.getFacingFromVector(
                 hispos.getX() - pos.getX(),hispos.getY() - pos.getY(),hispos.getZ() - pos.getZ()
         );
-        System.out.println(facing.toString());
         connection.put(facing,to);
         setBlockStatus(facing,true);
-        System.out.println(worldObj.getBlockState(pos));
+//        System.out.println(connection.toString());
+//        System.out.println(worldObj.getBlockState(pos));
         markDirty();
         worldObj.notifyBlockUpdate(pos,worldObj.getBlockState(pos),worldObj.getBlockState(pos),2);
     }
 
     public void disconnect(TilePipe to) {
+        System.out.println("Disconnect from " + pos.toString() + " to " + to.pos.toString());
         for (Map.Entry<EnumFacing,TilePipe> entry:
              connection.entrySet()) {
             if (entry.getValue() == to) {
@@ -89,54 +90,55 @@ public class TilePipe extends TileEntity {
 
     public void readFromNBT(NBTTagCompound nbt) {
         super.readFromNBT(nbt);
-        System.out.println(nbt.toString());
+//        System.out.println(nbt.toString());
         if (nbt.getBoolean("connection_up")) {
-            connection.put(EnumFacing.UP,(TilePipe)worldObj.getTileEntity(pos.up()));
+            connect((TilePipe)worldObj.getTileEntity(pos.up()));
 //            setBlockStatus(EnumFacing.UP,true);
         } else {
-            connection.put(EnumFacing.UP,null);
+//            connection.put(EnumFacing.UP,null);
 //            setBlockStatus(EnumFacing.UP,false);
         }
         if (nbt.getBoolean("connection_down")) {
-            connection.put(EnumFacing.DOWN,(TilePipe)worldObj.getTileEntity(pos.down()));
+            connect((TilePipe)worldObj.getTileEntity(pos.up()));
 //            setBlockStatus(EnumFacing.DOWN,true);
         } else {
-            connection.put(EnumFacing.DOWN,null);
+//            connection.put(EnumFacing.DOWN,null);
 //            setBlockStatus(EnumFacing.DOWN,false);
         }
         if (nbt.getBoolean("connection_north")) {
-            connection.put(EnumFacing.NORTH,(TilePipe)worldObj.getTileEntity(pos.north()));
+            connect((TilePipe)worldObj.getTileEntity(pos.up()));
 //            setBlockStatus(EnumFacing.NORTH,true);
         } else {
-            connection.put(EnumFacing.NORTH,null);
+//            connection.put(EnumFacing.NORTH,null);
 //            setBlockStatus(EnumFacing.NORTH,false);
         }
         if (nbt.getBoolean("connection_south")) {
-            connection.put(EnumFacing.SOUTH,(TilePipe)worldObj.getTileEntity(pos.south()));
+            connect((TilePipe)worldObj.getTileEntity(pos.up()));
 //            setBlockStatus(EnumFacing.SOUTH,true);
         } else {
-            connection.put(EnumFacing.SOUTH,null);
+//            connection.put(EnumFacing.SOUTH,null);
 //            setBlockStatus(EnumFacing.SOUTH,false);
         }
         if (nbt.getBoolean("connection_east")) {
-            connection.put(EnumFacing.EAST,(TilePipe)worldObj.getTileEntity(pos.east()));
+            connect((TilePipe)worldObj.getTileEntity(pos.up()));
 //            setBlockStatus(EnumFacing.EAST,true);
         } else {
-            connection.put(EnumFacing.EAST,null);
+//            connection.put(EnumFacing.EAST,null);
 //            setBlockStatus(EnumFacing.EAST,false);
         }
         if (nbt.getBoolean("connection_west")) {
-            connection.put(EnumFacing.WEST,(TilePipe)worldObj.getTileEntity(pos.west()));
+            connect((TilePipe)worldObj.getTileEntity(pos.up()));
 //            setBlockStatus(EnumFacing.WEST,true);
         } else {
-            connection.put(EnumFacing.WEST,null);
+//            connection.put(EnumFacing.WEST,null);
 //            setBlockStatus(EnumFacing.WEST,false);
         }
         markDirty();
-//        worldObj.notifyBlockUpdate(pos,worldObj.getBlockState(pos),worldObj.getBlockState(pos),2);
+        worldObj.notifyBlockUpdate(pos,worldObj.getBlockState(pos),worldObj.getBlockState(pos),2);
     }
     public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
         nbt = super.writeToNBT(nbt);
+        System.out.println(connection.toString());
 //        IBlockState state = worldObj.getBlockState(pos);
         nbt.setBoolean("connection_up",connection.get(EnumFacing.UP) != null);
         nbt.setBoolean("connection_down",connection.get(EnumFacing.DOWN) != null);
@@ -149,7 +151,7 @@ public class TilePipe extends TileEntity {
     }
 
     public boolean shouldRefresh(World world, BlockPos pos, IBlockState oldState, IBlockState newSate) {
-        return oldState != newSate;
+        return oldState == newSate;
     }
 
     @Override
@@ -162,6 +164,7 @@ public class TilePipe extends TileEntity {
     @Override
     public void handleUpdateTag(NBTTagCompound tag)
     {
+        super.handleUpdateTag(tag);
         readFromNBT(tag);
     }
 
@@ -170,13 +173,14 @@ public class TilePipe extends TileEntity {
         NBTTagCompound nbtTag = new NBTTagCompound();
         //Write your data into the nbtTag
         nbtTag = writeToNBT(nbtTag);
-        return new SPacketUpdateTileEntity(getPos(), 1, nbtTag);
+        return new SPacketUpdateTileEntity(pos, 1, nbtTag);
     }
 
     @Override
     public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity pkt){
         NBTTagCompound tag = pkt.getNbtCompound();
         //Handle your Data
+        super.readFromNBT(tag);
         readFromNBT(tag);
     }
 
