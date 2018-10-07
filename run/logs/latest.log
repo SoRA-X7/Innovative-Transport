@@ -34,3 +34,86 @@
 [18:14:26] [Server thread/INFO]: Saving chunks for level 'New World'/Overworld
 [18:14:26] [Server thread/INFO]: Saving chunks for level 'New World'/Nether
 [18:14:26] [Server thread/INFO]: Saving chunks for level 'New World'/The End
+[18:18:20] [Client thread/INFO]: [CHAT] CLIENT-----------------
+[18:18:20] [Client thread/INFO]: [CHAT] BlockPos{x=-168, y=64, z=264}
+[18:18:20] [Client thread/INFO]: [CHAT] {north=null, south=null, down=null, up=null, east=null, west=solab.innovativetransport.pipe.TilePipe@6d64b0f2}
+[18:18:20] [Server thread/INFO]: [CHAT] SERVER-----------------
+[18:18:20] [Server thread/INFO]: [CHAT] BlockPos{x=-168, y=64, z=264}
+[18:18:20] [Server thread/INFO]: [CHAT] {north=null, south=null, down=null, up=null, east=null, west=solab.innovativetransport.pipe.TilePipe@649b1e2f}
+[18:18:20] [Server thread/INFO]: [CHAT] -----------------------
+[18:18:33] [Client thread/INFO]: [CHAT] CLIENT-----------------
+[18:18:33] [Client thread/INFO]: [CHAT] BlockPos{x=-168, y=64, z=264}
+[18:18:33] [Client thread/INFO]: [CHAT] {north=null, south=null, down=null, up=solab.innovativetransport.pipe.TilePipe@2ab0d2ac, east=solab.innovativetransport.pipe.TilePipe@d1406c2, west=solab.innovativetransport.pipe.TilePipe@6d64b0f2}
+[18:18:33] [Server thread/INFO]: [CHAT] SERVER-----------------
+[18:18:33] [Server thread/INFO]: [CHAT] BlockPos{x=-168, y=64, z=264}
+[18:18:33] [Server thread/INFO]: [CHAT] {north=null, south=null, down=null, up=solab.innovativetransport.pipe.TilePipe@50896633, east=solab.innovativetransport.pipe.TilePipe@77f5c73b, west=solab.innovativetransport.pipe.TilePipe@649b1e2f}
+[18:18:33] [Server thread/INFO]: [CHAT] -----------------------
+[18:18:34] [Client thread/INFO]: [CHAT] CLIENT-----------------
+[18:18:34] [Client thread/INFO]: [CHAT] BlockPos{x=-169, y=64, z=264}
+[18:18:34] [Client thread/INFO]: [CHAT] {north=null, south=null, down=null, up=solab.innovativetransport.pipe.TilePipe@1fa8610c, east=solab.innovativetransport.pipe.TilePipe@3321f5e7, west=solab.innovativetransport.pipe.TilePipe@1e2ed757}
+[18:18:34] [Server thread/INFO]: [CHAT] SERVER-----------------
+[18:18:34] [Server thread/INFO]: [CHAT] BlockPos{x=-169, y=64, z=264}
+[18:18:34] [Server thread/INFO]: [CHAT] {north=null, south=null, down=null, up=solab.innovativetransport.pipe.TilePipe@590edea3, east=solab.innovativetransport.pipe.TilePipe@42ad834f, west=solab.innovativetransport.pipe.TilePipe@1bb8483e}
+[18:18:34] [Server thread/INFO]: [CHAT] -----------------------
+[18:18:35] [Client thread/INFO]: [CHAT] CLIENT-----------------
+[18:18:35] [Client thread/INFO]: [CHAT] BlockPos{x=-170, y=64, z=264}
+[18:18:35] [Client thread/INFO]: [CHAT] {north=null, south=null, down=null, up=null, east=solab.innovativetransport.pipe.TilePipe@6d64b0f2, west=null}
+[18:18:35] [Server thread/INFO]: [CHAT] SERVER-----------------
+[18:18:35] [Server thread/INFO]: [CHAT] BlockPos{x=-170, y=64, z=264}
+[18:18:35] [Server thread/INFO]: [CHAT] {north=null, south=null, down=null, up=null, east=solab.innovativetransport.pipe.TilePipe@649b1e2f, west=null}
+[18:18:35] [Server thread/INFO]: [CHAT] -----------------------
+[18:18:41] [Client thread/INFO]: [CHAT] CLIENT-----------------
+[18:18:41] [Client thread/INFO]: [CHAT] BlockPos{x=-167, y=65, z=264}
+[18:18:41] [Client thread/INFO]: [CHAT] {north=null, south=null, down=solab.innovativetransport.pipe.TilePipe@d1406c2, up=null, east=null, west=null}
+[18:18:41] [Server thread/INFO]: [CHAT] SERVER-----------------
+[18:18:41] [Server thread/INFO]: [CHAT] BlockPos{x=-167, y=65, z=264}
+[18:18:41] [Server thread/INFO]: [CHAT] {north=null, south=null, down=solab.innovativetransport.pipe.TilePipe@77f5c73b, up=null, east=null, west=null}
+[18:18:41] [Server thread/INFO]: [CHAT] -----------------------
+[18:19:05] [Client thread/INFO]: [CHAT] CLIENT-----------------
+[18:19:05] [Client thread/INFO]: [CHAT] BlockPos{x=-169, y=64, z=263}
+[18:19:05] [Client thread/INFO]: [CHAT] {north=solab.innovativetransport.pipe.TilePipe@269e0783, south=solab.innovativetransport.pipe.TilePipe@47e4aa8d, down=null, up=null, east=solab.innovativetransport.pipe.TilePipe@26f4bfc2, west=solab.innovativetransport.pipe.TilePipe@434268fd}
+[18:19:05] [Server thread/INFO]: [CHAT] SERVER-----------------
+[18:19:05] [Server thread/INFO]: [CHAT] BlockPos{x=-169, y=64, z=263}
+[18:19:05] [Server thread/INFO]: [CHAT] {north=solab.innovativetransport.pipe.TilePipe@7c9fc9a, south=solab.innovativetransport.pipe.TilePipe@4f61747, down=null, up=null, east=solab.innovativetransport.pipe.TilePipe@1d4ea5e2, west=solab.innovativetransport.pipe.TilePipe@2d3b2a7e}
+[18:19:05] [Server thread/INFO]: [CHAT] -----------------------
+[18:19:19] [Client thread/INFO]: [CHAT] CLIENT-----------------
+[18:19:19] [Client thread/INFO]: [CHAT] BlockPos{x=-166, y=64, z=261}
+[18:19:19] [Client thread/INFO]: [CHAT] {north=null, south=null, down=null, up=null, east=null, west=solab.innovativetransport.pipe.TilePipe@64645e6}
+[18:19:19] [Server thread/INFO]: [CHAT] SERVER-----------------
+[18:19:19] [Server thread/INFO]: [CHAT] BlockPos{x=-166, y=64, z=261}
+[18:19:19] [Server thread/INFO]: [CHAT] {north=null, south=null, down=null, up=null, east=null, west=solab.innovativetransport.pipe.TilePipe@5a6ac6ce}
+[18:19:19] [Server thread/INFO]: [CHAT] -----------------------
+[18:19:20] [Client thread/INFO]: [CHAT] CLIENT-----------------
+[18:19:20] [Client thread/INFO]: [CHAT] BlockPos{x=-167, y=64, z=261}
+[18:19:20] [Client thread/INFO]: [CHAT] {north=null, south=null, down=null, up=null, east=null, west=null}
+[18:19:20] [Server thread/INFO]: [CHAT] SERVER-----------------
+[18:19:20] [Server thread/INFO]: [CHAT] BlockPos{x=-167, y=64, z=261}
+[18:19:20] [Server thread/INFO]: [CHAT] {north=null, south=null, down=null, up=null, east=null, west=null}
+[18:19:20] [Server thread/INFO]: [CHAT] -----------------------
+[18:19:27] [Client thread/INFO]: [CHAT] CLIENT-----------------
+[18:19:27] [Client thread/INFO]: [CHAT] BlockPos{x=-167, y=64, z=262}
+[18:19:27] [Client thread/INFO]: [CHAT] {north=solab.innovativetransport.pipe.TilePipe@64645e6, south=null, down=null, up=null, east=null, west=null}
+[18:19:27] [Server thread/INFO]: [CHAT] SERVER-----------------
+[18:19:27] [Server thread/INFO]: [CHAT] BlockPos{x=-167, y=64, z=262}
+[18:19:27] [Server thread/INFO]: [CHAT] {north=solab.innovativetransport.pipe.TilePipe@5a6ac6ce, south=null, down=null, up=null, east=null, west=null}
+[18:19:27] [Server thread/INFO]: [CHAT] -----------------------
+[18:19:50] [Client thread/INFO]: [CHAT] CLIENT-----------------
+[18:19:50] [Client thread/INFO]: [CHAT] BlockPos{x=-170, y=64, z=264}
+[18:19:50] [Client thread/INFO]: [CHAT] {north=null, south=null, down=null, up=null, east=null, west=null}
+[18:19:50] [Server thread/INFO]: [CHAT] SERVER-----------------
+[18:19:50] [Server thread/INFO]: [CHAT] BlockPos{x=-170, y=64, z=264}
+[18:19:50] [Server thread/INFO]: [CHAT] {north=null, south=null, down=null, up=null, east=null, west=null}
+[18:19:50] [Server thread/INFO]: [CHAT] -----------------------
+[18:20:44] [Client thread/INFO]: Stopping!
+[18:20:44] [Client thread/INFO]: SoundSystem shutting down...
+[18:20:44] [Server thread/INFO]: Stopping server
+[18:20:44] [Server thread/INFO]: Saving players
+[18:20:44] [Server thread/INFO]: Saving worlds
+[18:20:44] [Server thread/INFO]: Saving chunks for level 'New World'/Overworld
+[18:20:44] [Server thread/INFO]: Saving chunks for level 'New World'/Nether
+[18:20:44] [Server thread/INFO]: Saving chunks for level 'New World'/The End
+[18:20:44] [Client thread/WARN]: Author: Paul Lamb, www.paulscode.com
+[18:20:44] [Client Shutdown Thread/INFO]: Stopping server
+[18:20:44] [Client Shutdown Thread/INFO]: Saving players
+[18:20:44] [Client Shutdown Thread/INFO]: Saving worlds
+[18:20:44] [Client Shutdown Thread/INFO]: Saving chunks for level 'New World'/Overworld
