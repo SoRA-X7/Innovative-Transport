@@ -1,1 +1,6 @@
 # Language file (en_US)
+itemGroup.Innovative Transport=Innovative Transport
+
+tile.transportpipe.name=InnovativeTransportPipe
+
+item.innovativetransportdebugger.name=Debugger
