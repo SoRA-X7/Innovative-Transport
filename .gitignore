@@ -1,2 +1,5 @@
 run/
 .idea/
+out/
+gradle/
+.gradle/
