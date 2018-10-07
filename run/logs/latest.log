@@ -1,126 +1,36 @@
-[19:57:11] [Client thread/INFO]: Setting user: Player951
-[19:57:16] [Client thread/WARN]: Skipping bad option: lastServer:
-[19:57:16] [Client thread/INFO]: LWJGL Version: 2.9.2
-[19:57:20] [Client thread/INFO]: Reloading ResourceManager: Default, FMLFileResourcePack:Forge Mod Loader, FMLFileResourcePack:Minecraft Forge, FMLFileResourcePack:innovativetransport
-[19:57:23] [Sound Library Loader/INFO]: Starting up SoundSystem...
-[19:57:23] [Thread-6/INFO]: Initializing LWJGL OpenAL
-[19:57:23] [Thread-6/INFO]: (The LWJGL binding of OpenAL.  For more information, see http://www.lwjgl.org)
-[19:57:23] [Thread-6/INFO]: OpenAL initialized.
-[19:57:23] [Sound Library Loader/INFO]: Sound engine started
-[19:57:26] [Client thread/INFO]: Created: 16x16 textures-atlas
-[19:57:28] [Client thread/INFO]: Reloading ResourceManager: Default, FMLFileResourcePack:Forge Mod Loader, FMLFileResourcePack:Minecraft Forge, FMLFileResourcePack:innovativetransport
-[19:57:30] [Client thread/INFO]: SoundSystem shutting down...
-[19:57:30] [Client thread/WARN]: Author: Paul Lamb, www.paulscode.com
-[19:57:30] [Sound Library Loader/INFO]: Starting up SoundSystem...
-[19:57:30] [Thread-8/INFO]: Initializing LWJGL OpenAL
-[19:57:30] [Thread-8/INFO]: (The LWJGL binding of OpenAL.  For more information, see http://www.lwjgl.org)
-[19:57:30] [Thread-8/INFO]: OpenAL initialized.
-[19:57:31] [Sound Library Loader/INFO]: Sound engine started
-[19:57:33] [Client thread/INFO]: Created: 512x512 textures-atlas
-[19:57:34] [Client thread/WARN]: Skipping bad option: lastServer:
-[19:57:35] [Realms Notification Availability checker #1/INFO]: Could not authorize you against Realms server: Invalid session id
-[19:57:41] [Server thread/INFO]: Starting integrated minecraft server version 1.10.2
-[19:57:41] [Server thread/INFO]: Generating keypair
-[19:57:42] [Server thread/INFO]: Preparing start region for level 0
-[19:57:43] [Server thread/INFO]: Preparing spawn area: 23%
-[19:57:43] [Server thread/ERROR]: Failed to load data for block entity innovativetransport:transportpipe
-java.lang.NullPointerException
-	at solab.innovativetransport.pipe.TilePipe.readFromNBT(TilePipe.java:66) ~[TilePipe.class:?]
-	at net.minecraft.tileentity.TileEntity.create(TileEntity.java:137) [TileEntity.class:?]
-	at net.minecraft.world.chunk.storage.AnvilChunkLoader.loadEntities(AnvilChunkLoader.java:515) [AnvilChunkLoader.class:?]
-	at net.minecraftforge.common.chunkio.ChunkIOProvider.syncCallback(ChunkIOProvider.java:96) [ChunkIOProvider.class:?]
-	at net.minecraftforge.common.chunkio.ChunkIOExecutor.syncChunkLoad(ChunkIOExecutor.java:94) [ChunkIOExecutor.class:?]
-	at net.minecraft.world.gen.ChunkProviderServer.loadChunk(ChunkProviderServer.java:122) [ChunkProviderServer.class:?]
-	at net.minecraft.world.gen.ChunkProviderServer.loadChunk(ChunkProviderServer.java:93) [ChunkProviderServer.class:?]
-	at net.minecraft.world.gen.ChunkProviderServer.provideChunk(ChunkProviderServer.java:139) [ChunkProviderServer.class:?]
-	at net.minecraft.server.MinecraftServer.initialWorldChunkLoad(MinecraftServer.java:337) [MinecraftServer.class:?]
-	at net.minecraft.server.integrated.IntegratedServer.loadAllWorlds(IntegratedServer.java:107) [IntegratedServer.class:?]
-	at net.minecraft.server.integrated.IntegratedServer.startServer(IntegratedServer.java:124) [IntegratedServer.class:?]
-	at net.minecraft.server.MinecraftServer.run(MinecraftServer.java:497) [MinecraftServer.class:?]
-	at java.lang.Thread.run(Thread.java:745) [?:1.8.0_45]
-[19:57:43] [Server thread/ERROR]: Failed to load data for block entity innovativetransport:transportpipe
-java.lang.NullPointerException
-	at solab.innovativetransport.pipe.TilePipe.readFromNBT(TilePipe.java:69) ~[TilePipe.class:?]
-	at net.minecraft.tileentity.TileEntity.create(TileEntity.java:137) [TileEntity.class:?]
-	at net.minecraft.world.chunk.storage.AnvilChunkLoader.loadEntities(AnvilChunkLoader.java:515) [AnvilChunkLoader.class:?]
-	at net.minecraftforge.common.chunkio.ChunkIOProvider.syncCallback(ChunkIOProvider.java:96) [ChunkIOProvider.class:?]
-	at net.minecraftforge.common.chunkio.ChunkIOExecutor.syncChunkLoad(ChunkIOExecutor.java:94) [ChunkIOExecutor.class:?]
-	at net.minecraft.world.gen.ChunkProviderServer.loadChunk(ChunkProviderServer.java:122) [ChunkProviderServer.class:?]
-	at net.minecraft.world.gen.ChunkProviderServer.loadChunk(ChunkProviderServer.java:93) [ChunkProviderServer.class:?]
-	at net.minecraft.world.gen.ChunkProviderServer.provideChunk(ChunkProviderServer.java:139) [ChunkProviderServer.class:?]
-	at net.minecraft.server.MinecraftServer.initialWorldChunkLoad(MinecraftServer.java:337) [MinecraftServer.class:?]
-	at net.minecraft.server.integrated.IntegratedServer.loadAllWorlds(IntegratedServer.java:107) [IntegratedServer.class:?]
-	at net.minecraft.server.integrated.IntegratedServer.startServer(IntegratedServer.java:124) [IntegratedServer.class:?]
-	at net.minecraft.server.MinecraftServer.run(MinecraftServer.java:497) [MinecraftServer.class:?]
-	at java.lang.Thread.run(Thread.java:745) [?:1.8.0_45]
-[19:57:43] [Server thread/ERROR]: Failed to load data for block entity innovativetransport:transportpipe
-java.lang.NullPointerException
-	at solab.innovativetransport.pipe.TilePipe.readFromNBT(TilePipe.java:72) ~[TilePipe.class:?]
-	at net.minecraft.tileentity.TileEntity.create(TileEntity.java:137) [TileEntity.class:?]
-	at net.minecraft.world.chunk.storage.AnvilChunkLoader.loadEntities(AnvilChunkLoader.java:515) [AnvilChunkLoader.class:?]
-	at net.minecraftforge.common.chunkio.ChunkIOProvider.syncCallback(ChunkIOProvider.java:96) [ChunkIOProvider.class:?]
-	at net.minecraftforge.common.chunkio.ChunkIOExecutor.syncChunkLoad(ChunkIOExecutor.java:94) [ChunkIOExecutor.class:?]
-	at net.minecraft.world.gen.ChunkProviderServer.loadChunk(ChunkProviderServer.java:122) [ChunkProviderServer.class:?]
-	at net.minecraft.world.gen.ChunkProviderServer.loadChunk(ChunkProviderServer.java:93) [ChunkProviderServer.class:?]
-	at net.minecraft.world.gen.ChunkProviderServer.provideChunk(ChunkProviderServer.java:139) [ChunkProviderServer.class:?]
-	at net.minecraft.server.MinecraftServer.initialWorldChunkLoad(MinecraftServer.java:337) [MinecraftServer.class:?]
-	at net.minecraft.server.integrated.IntegratedServer.loadAllWorlds(IntegratedServer.java:107) [IntegratedServer.class:?]
-	at net.minecraft.server.integrated.IntegratedServer.startServer(IntegratedServer.java:124) [IntegratedServer.class:?]
-	at net.minecraft.server.MinecraftServer.run(MinecraftServer.java:497) [MinecraftServer.class:?]
-	at java.lang.Thread.run(Thread.java:745) [?:1.8.0_45]
-[19:57:43] [Server thread/ERROR]: Failed to load data for block entity innovativetransport:transportpipe
-java.lang.NullPointerException
-	at solab.innovativetransport.pipe.TilePipe.readFromNBT(TilePipe.java:66) ~[TilePipe.class:?]
-	at net.minecraft.tileentity.TileEntity.create(TileEntity.java:137) [TileEntity.class:?]
-	at net.minecraft.world.chunk.storage.AnvilChunkLoader.loadEntities(AnvilChunkLoader.java:515) [AnvilChunkLoader.class:?]
-	at net.minecraftforge.common.chunkio.ChunkIOProvider.syncCallback(ChunkIOProvider.java:96) [ChunkIOProvider.class:?]
-	at net.minecraftforge.common.chunkio.ChunkIOExecutor.syncChunkLoad(ChunkIOExecutor.java:94) [ChunkIOExecutor.class:?]
-	at net.minecraft.world.gen.ChunkProviderServer.loadChunk(ChunkProviderServer.java:122) [ChunkProviderServer.class:?]
-	at net.minecraft.world.gen.ChunkProviderServer.loadChunk(ChunkProviderServer.java:93) [ChunkProviderServer.class:?]
-	at net.minecraft.world.gen.ChunkProviderServer.provideChunk(ChunkProviderServer.java:139) [ChunkProviderServer.class:?]
-	at net.minecraft.server.MinecraftServer.initialWorldChunkLoad(MinecraftServer.java:337) [MinecraftServer.class:?]
-	at net.minecraft.server.integrated.IntegratedServer.loadAllWorlds(IntegratedServer.java:107) [IntegratedServer.class:?]
-	at net.minecraft.server.integrated.IntegratedServer.startServer(IntegratedServer.java:124) [IntegratedServer.class:?]
-	at net.minecraft.server.MinecraftServer.run(MinecraftServer.java:497) [MinecraftServer.class:?]
-	at java.lang.Thread.run(Thread.java:745) [?:1.8.0_45]
-[19:57:43] [Server thread/ERROR]: Failed to load data for block entity innovativetransport:transportpipe
-java.lang.NullPointerException
-	at solab.innovativetransport.pipe.TilePipe.readFromNBT(TilePipe.java:75) ~[TilePipe.class:?]
-	at net.minecraft.tileentity.TileEntity.create(TileEntity.java:137) [TileEntity.class:?]
-	at net.minecraft.world.chunk.storage.AnvilChunkLoader.loadEntities(AnvilChunkLoader.java:515) [AnvilChunkLoader.class:?]
-	at net.minecraftforge.common.chunkio.ChunkIOProvider.syncCallback(ChunkIOProvider.java:96) [ChunkIOProvider.class:?]
-	at net.minecraftforge.common.chunkio.ChunkIOExecutor.syncChunkLoad(ChunkIOExecutor.java:94) [ChunkIOExecutor.class:?]
-	at net.minecraft.world.gen.ChunkProviderServer.loadChunk(ChunkProviderServer.java:122) [ChunkProviderServer.class:?]
-	at net.minecraft.world.gen.ChunkProviderServer.loadChunk(ChunkProviderServer.java:93) [ChunkProviderServer.class:?]
-	at net.minecraft.world.gen.ChunkProviderServer.provideChunk(ChunkProviderServer.java:139) [ChunkProviderServer.class:?]
-	at net.minecraft.server.MinecraftServer.initialWorldChunkLoad(MinecraftServer.java:337) [MinecraftServer.class:?]
-	at net.minecraft.server.integrated.IntegratedServer.loadAllWorlds(IntegratedServer.java:107) [IntegratedServer.class:?]
-	at net.minecraft.server.integrated.IntegratedServer.startServer(IntegratedServer.java:124) [IntegratedServer.class:?]
-	at net.minecraft.server.MinecraftServer.run(MinecraftServer.java:497) [MinecraftServer.class:?]
-	at java.lang.Thread.run(Thread.java:745) [?:1.8.0_45]
-[19:57:43] [Server thread/ERROR]: Failed to load data for block entity innovativetransport:transportpipe
-java.lang.NullPointerException
-	at solab.innovativetransport.pipe.TilePipe.readFromNBT(TilePipe.java:78) ~[TilePipe.class:?]
-	at net.minecraft.tileentity.TileEntity.create(TileEntity.java:137) [TileEntity.class:?]
-	at net.minecraft.world.chunk.storage.AnvilChunkLoader.loadEntities(AnvilChunkLoader.java:515) [AnvilChunkLoader.class:?]
-	at net.minecraftforge.common.chunkio.ChunkIOProvider.syncCallback(ChunkIOProvider.java:96) [ChunkIOProvider.class:?]
-	at net.minecraftforge.common.chunkio.ChunkIOExecutor.syncChunkLoad(ChunkIOExecutor.java:94) [ChunkIOExecutor.class:?]
-	at net.minecraft.world.gen.ChunkProviderServer.loadChunk(ChunkProviderServer.java:122) [ChunkProviderServer.class:?]
-	at net.minecraft.world.gen.ChunkProviderServer.loadChunk(ChunkProviderServer.java:93) [ChunkProviderServer.class:?]
-	at net.minecraft.world.gen.ChunkProviderServer.provideChunk(ChunkProviderServer.java:139) [ChunkProviderServer.class:?]
-	at net.minecraft.server.MinecraftServer.initialWorldChunkLoad(MinecraftServer.java:337) [MinecraftServer.class:?]
-	at net.minecraft.server.integrated.IntegratedServer.loadAllWorlds(IntegratedServer.java:107) [IntegratedServer.class:?]
-	at net.minecraft.server.integrated.IntegratedServer.startServer(IntegratedServer.java:124) [IntegratedServer.class:?]
-	at net.minecraft.server.MinecraftServer.run(MinecraftServer.java:497) [MinecraftServer.class:?]
-	at java.lang.Thread.run(Thread.java:745) [?:1.8.0_45]
-[19:57:43] [Server thread/INFO]: Changing view distance to 12, from 10
-[19:57:45] [Server thread/INFO]: Player951[local:E:db17e580] logged in with entity id 143 at (-166.9304334592963, 64.0, 261.31713400987184)
-[19:57:45] [Server thread/INFO]: Player951 joined the game
-[19:57:46] [Server thread/INFO]: Saving and pausing game...
-[19:57:46] [Server thread/INFO]: Saving chunks for level 'New World'/Overworld
-[19:57:47] [Server thread/INFO]: Saving chunks for level 'New World'/Nether
-[19:57:47] [Server thread/INFO]: Saving chunks for level 'New World'/The End
-[19:57:47] [pool-2-thread-1/WARN]: Couldn't look up profile properties for com.mojang.authlib.GameProfile@ade1934[id=d9258d3e-83ae-34f1-aa1c-425748be48d3,name=Player951,properties={},legacy=false]
+[20:03:02] [Client thread/INFO]: Setting user: Player748
+[20:03:06] [Client thread/WARN]: Skipping bad option: lastServer:
+[20:03:06] [Client thread/INFO]: LWJGL Version: 2.9.2
+[20:03:10] [Client thread/INFO]: Reloading ResourceManager: Default, FMLFileResourcePack:Forge Mod Loader, FMLFileResourcePack:Minecraft Forge, FMLFileResourcePack:innovativetransport
+[20:03:13] [Sound Library Loader/INFO]: Starting up SoundSystem...
+[20:03:13] [Thread-6/INFO]: Initializing LWJGL OpenAL
+[20:03:13] [Thread-6/INFO]: (The LWJGL binding of OpenAL.  For more information, see http://www.lwjgl.org)
+[20:03:13] [Thread-6/INFO]: OpenAL initialized.
+[20:03:14] [Sound Library Loader/INFO]: Sound engine started
+[20:03:16] [Client thread/INFO]: Created: 16x16 textures-atlas
+[20:03:17] [Client thread/INFO]: Reloading ResourceManager: Default, FMLFileResourcePack:Forge Mod Loader, FMLFileResourcePack:Minecraft Forge, FMLFileResourcePack:innovativetransport
+[20:03:19] [Client thread/INFO]: SoundSystem shutting down...
+[20:03:19] [Client thread/WARN]: Author: Paul Lamb, www.paulscode.com
+[20:03:19] [Sound Library Loader/INFO]: Starting up SoundSystem...
+[20:03:20] [Thread-8/INFO]: Initializing LWJGL OpenAL
+[20:03:20] [Thread-8/INFO]: (The LWJGL binding of OpenAL.  For more information, see http://www.lwjgl.org)
+[20:03:20] [Thread-8/INFO]: OpenAL initialized.
+[20:03:20] [Sound Library Loader/INFO]: Sound engine started
+[20:03:22] [Client thread/INFO]: Created: 512x512 textures-atlas
+[20:03:23] [Client thread/WARN]: Skipping bad option: lastServer:
+[20:03:24] [Realms Notification Availability checker #1/INFO]: Could not authorize you against Realms server: Invalid session id
+[20:03:26] [Server thread/INFO]: Starting integrated minecraft server version 1.10.2
+[20:03:26] [Server thread/INFO]: Generating keypair
+[20:03:27] [Server thread/INFO]: Preparing start region for level 0
+[20:03:28] [Server thread/INFO]: Preparing spawn area: 17%
+[20:03:29] [Server thread/INFO]: Changing view distance to 12, from 10
+[20:03:30] [Server thread/INFO]: Player748[local:E:143854a2] logged in with entity id 164 at (-168.52380640542765, 67.0, 260.12144151490014)
+[20:03:30] [Server thread/INFO]: Player748 joined the game
+[20:03:32] [Server thread/INFO]: Saving and pausing game...
+[20:03:32] [Server thread/INFO]: Saving chunks for level 'New World'/Overworld
+[20:03:32] [Server thread/INFO]: Saving chunks for level 'New World'/Nether
+[20:03:32] [Server thread/INFO]: Saving chunks for level 'New World'/The End
+[20:03:32] [pool-2-thread-1/WARN]: Couldn't look up profile properties for com.mojang.authlib.GameProfile@3f49b13a[id=05d2e66a-903f-3232-a8b0-3899ccc17800,name=Player748,properties={},legacy=false]
 com.mojang.authlib.exceptions.AuthenticationException: The client has sent too many requests within a certain amount of time
 	at com.mojang.authlib.yggdrasil.YggdrasilAuthenticationService.makeRequest(YggdrasilAuthenticationService.java:65) ~[YggdrasilAuthenticationService.class:?]
 	at com.mojang.authlib.yggdrasil.YggdrasilMinecraftSessionService.fillGameProfile(YggdrasilMinecraftSessionService.java:175) [YggdrasilMinecraftSessionService.class:?]
@@ -142,22 +52,23 @@ com.mojang.authlib.exceptions.AuthenticationException: The client has sent too m
 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142) [?:1.8.0_45]
 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617) [?:1.8.0_45]
 	at java.lang.Thread.run(Thread.java:745) [?:1.8.0_45]
-[19:57:47] [Server thread/INFO]: Saving and pausing game...
-[19:57:47] [Server thread/INFO]: Saving chunks for level 'New World'/Overworld
-[19:57:47] [Server thread/INFO]: Saving chunks for level 'New World'/Nether
-[19:57:47] [Server thread/INFO]: Saving chunks for level 'New World'/The End
-[19:57:59] [Server thread/INFO]: Player951 has just earned the achievement [Taking Inventory]
-[19:57:59] [Client thread/INFO]: [CHAT] Player951 has just earned the achievement [Taking Inventory]
-[20:00:07] [Server thread/INFO]: Saving and pausing game...
-[20:00:07] [Server thread/INFO]: Saving chunks for level 'New World'/Overworld
-[20:00:07] [Server thread/INFO]: Saving chunks for level 'New World'/Nether
-[20:00:07] [Server thread/INFO]: Saving chunks for level 'New World'/The End
-[20:00:08] [Server thread/INFO]: Stopping server
-[20:00:08] [Server thread/INFO]: Saving players
-[20:00:08] [Server thread/INFO]: Saving worlds
-[20:00:08] [Server thread/INFO]: Saving chunks for level 'New World'/Overworld
-[20:00:08] [Server thread/INFO]: Saving chunks for level 'New World'/Nether
-[20:00:08] [Server thread/INFO]: Saving chunks for level 'New World'/The End
-[20:00:10] [Client thread/INFO]: Stopping!
-[20:00:10] [Client thread/INFO]: SoundSystem shutting down...
-[20:00:10] [Client thread/WARN]: Author: Paul Lamb, www.paulscode.com
+[20:03:35] [Client thread/INFO]: [CHAT] CLIENT-----------------
+[20:03:35] [Client thread/INFO]: [CHAT] BlockPos{x=-169, y=65, z=260}
+[20:03:35] [Client thread/INFO]: [CHAT] {north=null, down=null, south=null, west=null, east=null, up=null}
+[20:03:35] [Server thread/INFO]: [CHAT] SERVER-----------------
+[20:03:35] [Server thread/INFO]: [CHAT] BlockPos{x=-169, y=65, z=260}
+[20:03:35] [Server thread/INFO]: [CHAT] {north=null, down=null, south=null, west=null, east=null, up=null}
+[20:03:35] [Server thread/INFO]: [CHAT] -----------------------
+[20:03:39] [Server thread/INFO]: Saving and pausing game...
+[20:03:39] [Server thread/INFO]: Saving chunks for level 'New World'/Overworld
+[20:03:39] [Server thread/INFO]: Saving chunks for level 'New World'/Nether
+[20:03:39] [Server thread/INFO]: Saving chunks for level 'New World'/The End
+[20:03:40] [Server thread/INFO]: Stopping server
+[20:03:40] [Server thread/INFO]: Saving players
+[20:03:40] [Server thread/INFO]: Saving worlds
+[20:03:40] [Server thread/INFO]: Saving chunks for level 'New World'/Overworld
+[20:03:40] [Server thread/INFO]: Saving chunks for level 'New World'/Nether
+[20:03:40] [Server thread/INFO]: Saving chunks for level 'New World'/The End
+[20:03:41] [Client thread/INFO]: Stopping!
+[20:03:41] [Client thread/INFO]: SoundSystem shutting down...
+[20:03:41] [Client thread/WARN]: Author: Paul Lamb, www.paulscode.com
