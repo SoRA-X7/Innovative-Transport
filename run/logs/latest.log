@@ -1,53 +1,36 @@
-[16:58:53] [main/INFO]: Logging in with username & password
-[16:59:03] [Client thread/INFO]: Setting user: GALAXYCOMET2002
-[16:59:14] [Client thread/WARN]: Skipping bad option: lastServer:
-[16:59:14] [Client thread/INFO]: LWJGL Version: 2.9.2
-[16:59:23] [Client thread/INFO]: Reloading ResourceManager: Default, FMLFileResourcePack:Forge Mod Loader, FMLFileResourcePack:Minecraft Forge, FMLFileResourcePack:innovativetransport
-[16:59:26] [Sound Library Loader/INFO]: Starting up SoundSystem...
-[16:59:27] [Thread-7/INFO]: Initializing LWJGL OpenAL
-[16:59:27] [Thread-7/INFO]: (The LWJGL binding of OpenAL.  For more information, see http://www.lwjgl.org)
-[16:59:27] [Thread-7/INFO]: OpenAL initialized.
-[16:59:27] [Sound Library Loader/INFO]: Sound engine started
-[16:59:32] [Client thread/INFO]: Created: 16x16 textures-atlas
-[16:59:35] [Client thread/INFO]: Reloading ResourceManager: Default, FMLFileResourcePack:Forge Mod Loader, FMLFileResourcePack:Minecraft Forge, FMLFileResourcePack:innovativetransport
-[16:59:38] [Client thread/INFO]: SoundSystem shutting down...
-[16:59:38] [Client thread/WARN]: Author: Paul Lamb, www.paulscode.com
-[16:59:38] [Sound Library Loader/INFO]: Starting up SoundSystem...
-[16:59:38] [Thread-9/INFO]: Initializing LWJGL OpenAL
-[16:59:38] [Thread-9/INFO]: (The LWJGL binding of OpenAL.  For more information, see http://www.lwjgl.org)
-[16:59:38] [Thread-9/INFO]: OpenAL initialized.
-[16:59:39] [Sound Library Loader/INFO]: Sound engine started
-[16:59:41] [Client thread/INFO]: Created: 512x512 textures-atlas
-[16:59:42] [Client thread/WARN]: Skipping bad option: lastServer:
-[16:59:44] [Realms Notification Availability checker #1/INFO]: Could not authorize you against Realms server: Invalid session id
-[16:59:46] [Server thread/INFO]: Starting integrated minecraft server version 1.10.2
-[16:59:46] [Server thread/INFO]: Generating keypair
-[16:59:47] [Server thread/INFO]: Preparing start region for level 0
-[16:59:48] [Server thread/INFO]: Preparing spawn area: 0%
-[16:59:49] [Server thread/INFO]: Preparing spawn area: 22%
-[16:59:50] [Server thread/INFO]: Preparing spawn area: 45%
-[16:59:51] [Server thread/ERROR]: Failed to load data for block entity innovativetransport:transportpipe
-java.lang.NullPointerException
-	at solab.innovativetransport.pipe.TilePipe.readFromNBT(TilePipe.java:84) ~[TilePipe.class:?]
-	at net.minecraft.tileentity.TileEntity.create(TileEntity.java:137) [TileEntity.class:?]
-	at net.minecraft.world.chunk.storage.AnvilChunkLoader.loadEntities(AnvilChunkLoader.java:515) [AnvilChunkLoader.class:?]
-	at net.minecraftforge.common.chunkio.ChunkIOProvider.syncCallback(ChunkIOProvider.java:96) [ChunkIOProvider.class:?]
-	at net.minecraftforge.common.chunkio.ChunkIOExecutor.syncChunkLoad(ChunkIOExecutor.java:94) [ChunkIOExecutor.class:?]
-	at net.minecraft.world.gen.ChunkProviderServer.loadChunk(ChunkProviderServer.java:122) [ChunkProviderServer.class:?]
-	at net.minecraft.world.gen.ChunkProviderServer.loadChunk(ChunkProviderServer.java:93) [ChunkProviderServer.class:?]
-	at net.minecraft.world.gen.ChunkProviderServer.provideChunk(ChunkProviderServer.java:139) [ChunkProviderServer.class:?]
-	at net.minecraft.server.MinecraftServer.initialWorldChunkLoad(MinecraftServer.java:337) [MinecraftServer.class:?]
-	at net.minecraft.server.integrated.IntegratedServer.loadAllWorlds(IntegratedServer.java:107) [IntegratedServer.class:?]
-	at net.minecraft.server.integrated.IntegratedServer.startServer(IntegratedServer.java:124) [IntegratedServer.class:?]
-	at net.minecraft.server.MinecraftServer.run(MinecraftServer.java:497) [MinecraftServer.class:?]
-	at java.lang.Thread.run(Thread.java:748) [?:1.8.0_161]
-[16:59:51] [Server thread/INFO]: Preparing spawn area: 70%
-[16:59:52] [Server thread/INFO]: Changing view distance to 12, from 10
-[16:59:54] [Server thread/INFO]: GALAXYCOMET2002[local:E:e3542148] logged in with entity id 183 at (-168.57522015041886, 64.0, 263.80162624302585)
-[16:59:54] [Server thread/INFO]: GALAXYCOMET2002 joined the game
-[16:59:56] [Server thread/INFO]: Saving and pausing game...
-[16:59:56] [Server thread/INFO]: Saving chunks for level 'New World'/Overworld
-[16:59:57] [Server thread/INFO]: Saving chunks for level 'New World'/Nether
-[16:59:57] [Server thread/INFO]: Saving chunks for level 'New World'/The End
-[16:59:58] [Server thread/WARN]: Can't keep up! Did the system time change, or is the server overloaded? Running 4017ms behind, skipping 80 tick(s)
-[17:00:44] [Client Shutdown Thread/INFO]: Stopping server
+[18:12:38] [main/INFO]: Logging in with username & password
+[18:12:42] [Client thread/INFO]: Setting user: GALAXYCOMET2002
+[18:12:47] [Client thread/WARN]: Skipping bad option: lastServer:
+[18:12:47] [Client thread/INFO]: LWJGL Version: 2.9.2
+[18:12:50] [Client thread/INFO]: Reloading ResourceManager: Default, FMLFileResourcePack:Forge Mod Loader, FMLFileResourcePack:Minecraft Forge, FMLFileResourcePack:innovativetransport
+[18:12:53] [Sound Library Loader/INFO]: Starting up SoundSystem...
+[18:12:53] [Thread-6/INFO]: Initializing LWJGL OpenAL
+[18:12:53] [Thread-6/INFO]: (The LWJGL binding of OpenAL.  For more information, see http://www.lwjgl.org)
+[18:12:53] [Thread-6/INFO]: OpenAL initialized.
+[18:12:53] [Sound Library Loader/INFO]: Sound engine started
+[18:12:55] [Client thread/INFO]: Created: 16x16 textures-atlas
+[18:12:57] [Client thread/INFO]: Reloading ResourceManager: Default, FMLFileResourcePack:Forge Mod Loader, FMLFileResourcePack:Minecraft Forge, FMLFileResourcePack:innovativetransport
+[18:12:59] [Client thread/INFO]: SoundSystem shutting down...
+[18:12:59] [Client thread/WARN]: Author: Paul Lamb, www.paulscode.com
+[18:12:59] [Sound Library Loader/INFO]: Starting up SoundSystem...
+[18:12:59] [Thread-8/INFO]: Initializing LWJGL OpenAL
+[18:12:59] [Thread-8/INFO]: (The LWJGL binding of OpenAL.  For more information, see http://www.lwjgl.org)
+[18:12:59] [Thread-8/INFO]: OpenAL initialized.
+[18:12:59] [Sound Library Loader/INFO]: Sound engine started
+[18:13:01] [Client thread/INFO]: Created: 512x512 textures-atlas
+[18:13:02] [Client thread/WARN]: Skipping bad option: lastServer:
+[18:14:01] [Server thread/INFO]: Starting integrated minecraft server version 1.10.2
+[18:14:01] [Server thread/INFO]: Generating keypair
+[18:14:02] [Server thread/INFO]: Preparing start region for level 0
+[18:14:03] [Server thread/INFO]: Preparing spawn area: 40%
+[18:14:03] [Server thread/INFO]: Changing view distance to 12, from 10
+[18:14:05] [Server thread/INFO]: GALAXYCOMET2002[local:E:40a4c063] logged in with entity id 182 at (-166.44823567600122, 64.0, 261.45034254566326)
+[18:14:05] [Server thread/INFO]: GALAXYCOMET2002 joined the game
+[18:14:07] [Server thread/INFO]: Saving and pausing game...
+[18:14:07] [Server thread/INFO]: Saving chunks for level 'New World'/Overworld
+[18:14:07] [Server thread/INFO]: Saving chunks for level 'New World'/Nether
+[18:14:07] [Server thread/INFO]: Saving chunks for level 'New World'/The End
+[18:14:26] [Server thread/INFO]: Saving and pausing game...
+[18:14:26] [Server thread/INFO]: Saving chunks for level 'New World'/Overworld
+[18:14:26] [Server thread/INFO]: Saving chunks for level 'New World'/Nether
+[18:14:26] [Server thread/INFO]: Saving chunks for level 'New World'/The End

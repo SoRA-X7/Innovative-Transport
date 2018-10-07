@@ -21,11 +21,17 @@ public class InnovativeTransport {
             return Items.ARROW;
         }
     };
-    public static final Block[] blocks = {new BlockPipe()};
+    public static final Block[] blocks = {
+            new BlockPipe()
+    };
+    public static final Item[] items = {
+            new Debugger()
+    };
 
     @EventHandler
     public void preInit(FMLPreInitializationEvent event) {
         InnovativeTransportRegisterBlocks.registerBlocks(blocks,event.getSide().isClient());
         GameRegistry.registerTileEntity(TilePipe.class,MODID + ":transportpipe");
+        InnovativeTransportRegisterItems.registerItems(items,event.getSide().isClient());
     }
 }
