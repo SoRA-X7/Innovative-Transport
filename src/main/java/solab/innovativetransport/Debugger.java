@@ -28,60 +28,60 @@ public class Debugger extends Item {
         if(entity.isSneaking()){
             if(world.getBlockState(pos).getBlock() == InnovativeTransport.blocks[0] && world.isRemote){
                 TilePipe me = (TilePipe) world.getTileEntity(pos);
-                mc.thePlayer.addChatMessage(new TextComponentTranslation("CLIENT-----------------"));
+                mc.thePlayer.addChatMessage(new TextComponentTranslation("§aCLIENT-----------------"));
                 if(me.connection.get(EnumFacing.UP) != null){
-                    mc.thePlayer.addChatMessage(new TextComponentTranslation("UP"));
+                    mc.thePlayer.addChatMessage(new TextComponentTranslation("§aUP"));
                 }
                 if(me.connection.get(EnumFacing.DOWN) != null){
-                    mc.thePlayer.addChatMessage(new TextComponentTranslation("DOWN"));
+                    mc.thePlayer.addChatMessage(new TextComponentTranslation("§aDOWN"));
                 }
                 if(me.connection.get(EnumFacing.NORTH) != null){
-                    mc.thePlayer.addChatMessage(new TextComponentTranslation("NORTH"));
+                    mc.thePlayer.addChatMessage(new TextComponentTranslation("§aNORTH"));
                 }
                 if(me.connection.get(EnumFacing.SOUTH) != null){
-                    mc.thePlayer.addChatMessage(new TextComponentTranslation("SOUTH"));
+                    mc.thePlayer.addChatMessage(new TextComponentTranslation("§aSOUTH"));
                 }
                 if(me.connection.get(EnumFacing.EAST) != null){
-                    mc.thePlayer.addChatMessage(new TextComponentTranslation("EAST"));
+                    mc.thePlayer.addChatMessage(new TextComponentTranslation("§aEAST"));
                 }
                 if(me.connection.get(EnumFacing.WEST) != null){
-                    mc.thePlayer.addChatMessage(new TextComponentTranslation("WEST"));
+                    mc.thePlayer.addChatMessage(new TextComponentTranslation("§aWEST"));
                 }
             }else if(world.getBlockState(pos).getBlock() == InnovativeTransport.blocks[0] &! world.isRemote){
                 TilePipe me = (TilePipe) world.getTileEntity(pos);
-                mc.thePlayer.addChatMessage(new TextComponentTranslation("SERVER-----------------"));
+                mc.thePlayer.addChatMessage(new TextComponentTranslation("§cSERVER-----------------"));
                 if(me.connection.get(EnumFacing.UP) != null){
-                    mc.thePlayer.addChatMessage(new TextComponentTranslation("UP"));
+                    mc.thePlayer.addChatMessage(new TextComponentTranslation("§cUP"));
                 }
                 if(me.connection.get(EnumFacing.DOWN) != null){
-                    mc.thePlayer.addChatMessage(new TextComponentTranslation("DOWN"));
+                    mc.thePlayer.addChatMessage(new TextComponentTranslation("§cDOWN"));
                 }
                 if(me.connection.get(EnumFacing.NORTH) != null){
-                    mc.thePlayer.addChatMessage(new TextComponentTranslation("NORTH"));
+                    mc.thePlayer.addChatMessage(new TextComponentTranslation("§cNORTH"));
                 }
                 if(me.connection.get(EnumFacing.SOUTH) != null){
-                    mc.thePlayer.addChatMessage(new TextComponentTranslation("SOUTH"));
+                    mc.thePlayer.addChatMessage(new TextComponentTranslation("§cSOUTH"));
                 }
                 if(me.connection.get(EnumFacing.EAST) != null){
-                    mc.thePlayer.addChatMessage(new TextComponentTranslation("EAST"));
+                    mc.thePlayer.addChatMessage(new TextComponentTranslation("§cEAST"));
                 }
                 if(me.connection.get(EnumFacing.WEST) != null){
-                    mc.thePlayer.addChatMessage(new TextComponentTranslation("WEST"));
+                    mc.thePlayer.addChatMessage(new TextComponentTranslation("§cWEST"));
                 }
                 mc.thePlayer.addChatMessage(new TextComponentTranslation("-----------------------"));
             }
         }else{
             if(world.getBlockState(pos).getBlock() == InnovativeTransport.blocks[0] && world.isRemote){
                 TilePipe me = (TilePipe) world.getTileEntity(pos);
-                mc.thePlayer.addChatMessage(new TextComponentTranslation("CLIENT-----------------"));
-                mc.thePlayer.addChatMessage(new TextComponentTranslation(pos.toString()));
-                mc.thePlayer.addChatMessage(new TextComponentTranslation(me.connection.toString()));
+                mc.thePlayer.addChatMessage(new TextComponentTranslation("§aCLIENT-----------------"));
+                mc.thePlayer.addChatMessage(new TextComponentTranslation("§a"+pos.toString()));
+                mc.thePlayer.addChatMessage(new TextComponentTranslation("§a"+me.connection.toString()));
 
             }else if(world.getBlockState(pos).getBlock() == InnovativeTransport.blocks[0] &! world.isRemote){
                 TilePipe me = (TilePipe) world.getTileEntity(pos);
-                mc.thePlayer.addChatMessage(new TextComponentTranslation("SERVER-----------------"));
-                mc.thePlayer.addChatMessage(new TextComponentTranslation(pos.toString()));
-                mc.thePlayer.addChatMessage(new TextComponentTranslation(me.connection.toString()));
+                mc.thePlayer.addChatMessage(new TextComponentTranslation("§cSERVER-----------------"));
+                mc.thePlayer.addChatMessage(new TextComponentTranslation("§c"+pos.toString()));
+                mc.thePlayer.addChatMessage(new TextComponentTranslation("§c"+me.connection.toString()));
                 mc.thePlayer.addChatMessage(new TextComponentTranslation("-----------------------"));
             }
         }
