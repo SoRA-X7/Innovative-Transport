@@ -95,7 +95,7 @@ public class BlockPipe extends BlockContainer {
     public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
 
         for (Map.Entry<EnumFacing,EnumConnectionType> entry:((TilePipe)worldIn.getTileEntity(pos)).connection.entrySet()) {
-            if (entry.getValue() != EnumConnectionType.none) {
+            if (entry.getValue() == EnumConnectionType.pipe) {
                 TilePipe tilePipe = (TilePipe)worldIn.getTileEntity(pos.offset(entry.getKey()));
                 tilePipe.disconnect(entry.getKey().getOpposite());
             }
