@@ -17,7 +17,7 @@ public class ItemCardSlot extends Item {
     public ItemCardSlot() {
         super();
         setCreativeTab(InnovativeTransport.tab);
-        setRegistryName(InnovativeTransport.MODID,"itemcardslot");
+        setRegistryName("itemcardslot");
         setUnlocalizedName("itemcardslot");
     }
 
