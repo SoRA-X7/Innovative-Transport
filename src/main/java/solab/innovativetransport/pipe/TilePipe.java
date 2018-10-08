@@ -32,12 +32,12 @@ public class TilePipe extends TileEntity implements ITickable {
     boolean first = true;
 
     public TilePipe() {
-        connection.put(EnumFacing.UP,null);
-        connection.put(EnumFacing.DOWN,null);
-        connection.put(EnumFacing.NORTH,null);
-        connection.put(EnumFacing.SOUTH,null);
-        connection.put(EnumFacing.WEST,null);
-        connection.put(EnumFacing.EAST,null);
+        connection.put(EnumFacing.UP,EnumConnectionType.none);
+        connection.put(EnumFacing.DOWN,EnumConnectionType.none);
+        connection.put(EnumFacing.NORTH,EnumConnectionType.none);
+        connection.put(EnumFacing.SOUTH,EnumConnectionType.none);
+        connection.put(EnumFacing.WEST,EnumConnectionType.none);
+        connection.put(EnumFacing.EAST,EnumConnectionType.none);
     }
 
     void setBlockStatus(EnumFacing facing,EnumConnectionType v) {
@@ -68,8 +68,6 @@ public class TilePipe extends TileEntity implements ITickable {
         if (to != null) {
             setBlockStatus(to,EnumConnectionType.pipe);
             connection.put(to,EnumConnectionType.pipe);
-//        System.out.println(connection.toString());
-//        System.out.println(worldObj.getBlockState(pos));
             markDirty();
             worldObj.notifyBlockUpdate(pos,worldObj.getBlockState(pos),worldObj.getBlockState(pos),2);
         }
@@ -77,13 +75,9 @@ public class TilePipe extends TileEntity implements ITickable {
     }
 
     public void disconnect(EnumFacing to) {
-        for (Map.Entry<EnumFacing,EnumConnectionType> entry:
-             connection.entrySet()) {
-            if (entry.getKey() == to) {
-                connection.put(entry.getKey(),EnumConnectionType.none);
-                setBlockStatus(entry.getKey(),EnumConnectionType.none);
-            }
-        }
+        connection.put(to,EnumConnectionType.none);
+        setBlockStatus(to,EnumConnectionType.none);
+
         worldObj.markBlockRangeForRenderUpdate(pos, pos);
         worldObj.notifyBlockUpdate(pos,worldObj.getBlockState(pos),worldObj.getBlockState(pos),2);
         worldObj.scheduleBlockUpdate(pos,this.getBlockType(),0,0);
@@ -102,15 +96,12 @@ public class TilePipe extends TileEntity implements ITickable {
     }
     public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
         nbt = super.writeToNBT(nbt);
-        System.out.println(connection.toString());
-//        IBlockState state = worldObj.getBlockState(pos);
         nbt.setString("connection_up",connection.get(EnumFacing.UP).getName());
         nbt.setString("connection_down",connection.get(EnumFacing.DOWN).getName());
         nbt.setString("connection_north",connection.get(EnumFacing.NORTH).getName());
         nbt.setString("connection_south",connection.get(EnumFacing.SOUTH).getName());
         nbt.setString("connection_east",connection.get(EnumFacing.EAST).getName());
         nbt.setString("connection_west",connection.get(EnumFacing.WEST).getName());
-        System.out.println(nbt.toString());
         return nbt;
     }
 
