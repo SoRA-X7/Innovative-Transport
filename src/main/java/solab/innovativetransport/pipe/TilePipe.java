@@ -65,8 +65,8 @@ public class TilePipe extends TileEntity {
         EnumFacing facing = EnumFacing.getFacingFromVector(
                 hispos.getX() - pos.getX(),hispos.getY() - pos.getY(),hispos.getZ() - pos.getZ()
         );
-        connection.put(facing,to);
         setBlockStatus(facing,true);
+        connection.put(facing,to);
 //        System.out.println(connection.toString());
 //        System.out.println(worldObj.getBlockState(pos));
         markDirty();
@@ -90,7 +90,7 @@ public class TilePipe extends TileEntity {
 
     public void readFromNBT(NBTTagCompound nbt) {
         super.readFromNBT(nbt);
-//        System.out.println(nbt.toString());
+        System.out.println(nbt.toString());
         if (nbt.getBoolean("connection_up")) {
             connect((TilePipe)worldObj.getTileEntity(pos.up()));
 //            setBlockStatus(EnumFacing.UP,true);
@@ -99,42 +99,42 @@ public class TilePipe extends TileEntity {
 //            setBlockStatus(EnumFacing.UP,false);
         }
         if (nbt.getBoolean("connection_down")) {
-            connect((TilePipe)worldObj.getTileEntity(pos.up()));
+            connect((TilePipe)worldObj.getTileEntity(pos.down()));
 //            setBlockStatus(EnumFacing.DOWN,true);
         } else {
 //            connection.put(EnumFacing.DOWN,null);
 //            setBlockStatus(EnumFacing.DOWN,false);
         }
         if (nbt.getBoolean("connection_north")) {
-            connect((TilePipe)worldObj.getTileEntity(pos.up()));
+            connect((TilePipe)worldObj.getTileEntity(pos.north()));
 //            setBlockStatus(EnumFacing.NORTH,true);
         } else {
 //            connection.put(EnumFacing.NORTH,null);
 //            setBlockStatus(EnumFacing.NORTH,false);
         }
         if (nbt.getBoolean("connection_south")) {
-            connect((TilePipe)worldObj.getTileEntity(pos.up()));
+            connect((TilePipe)worldObj.getTileEntity(pos.south()));
 //            setBlockStatus(EnumFacing.SOUTH,true);
         } else {
 //            connection.put(EnumFacing.SOUTH,null);
 //            setBlockStatus(EnumFacing.SOUTH,false);
         }
         if (nbt.getBoolean("connection_east")) {
-            connect((TilePipe)worldObj.getTileEntity(pos.up()));
+            connect((TilePipe)worldObj.getTileEntity(pos.east()));
 //            setBlockStatus(EnumFacing.EAST,true);
         } else {
 //            connection.put(EnumFacing.EAST,null);
 //            setBlockStatus(EnumFacing.EAST,false);
         }
         if (nbt.getBoolean("connection_west")) {
-            connect((TilePipe)worldObj.getTileEntity(pos.up()));
+            connect((TilePipe)worldObj.getTileEntity(pos.west()));
 //            setBlockStatus(EnumFacing.WEST,true);
         } else {
 //            connection.put(EnumFacing.WEST,null);
 //            setBlockStatus(EnumFacing.WEST,false);
         }
-        markDirty();
-        worldObj.notifyBlockUpdate(pos,worldObj.getBlockState(pos),worldObj.getBlockState(pos),2);
+//        markDirty();
+//        worldObj.notifyBlockUpdate(pos,worldObj.getBlockState(pos),worldObj.getBlockState(pos),2);
     }
     public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
         nbt = super.writeToNBT(nbt);

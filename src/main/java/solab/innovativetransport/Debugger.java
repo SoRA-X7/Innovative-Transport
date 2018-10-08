@@ -19,7 +19,7 @@ import solab.innovativetransport.pipe.TilePipe;
 public class Debugger extends Item {
     public Debugger() {
         super();
-        setUnlocalizedName(InnovativeTransport.MODID + "debugger");
+        setUnlocalizedName("debugger");
         setRegistryName("debugger");
         setCreativeTab(InnovativeTransport.tab);
     }
