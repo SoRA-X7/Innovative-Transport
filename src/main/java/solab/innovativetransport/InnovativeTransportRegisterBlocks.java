@@ -14,7 +14,7 @@ public class InnovativeTransportRegisterBlocks {
             Item item = new ItemBlock(block).setRegistryName(block.getRegistryName());
             GameRegistry.register(item);
             if (isClient) {
-                ModelLoader.setCustomModelResourceLocation(item,0,new ModelResourceLocation(block.getRegistryName(),"tile"));
+                ModelLoader.setCustomModelResourceLocation(item,0,new ModelResourceLocation(block.getRegistryName(),"inventory"));
             }
         }
     }
