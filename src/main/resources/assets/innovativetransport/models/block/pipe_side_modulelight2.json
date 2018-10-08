@@ -4,6 +4,7 @@
 		{
 			"from": [6, 9, 3.7],
 			"to": [7, 10, 3.8],
+			"shade": false,
 			"faces": {
 				"north": {"uv": [0, 0, 1, 1], "texture": "#missing"},
 				"east": {"uv": [0, 0, 0.1, 1], "texture": "#missing"},
