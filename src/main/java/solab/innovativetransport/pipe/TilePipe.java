@@ -1,6 +1,6 @@
 package solab.innovativetransport.pipe;
 
-import net.minecraft.block.properties.PropertyBool;
+import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
@@ -21,13 +21,13 @@ import java.util.Map;
 public class TilePipe extends TileEntity implements ITickable {
 
     public List<Transporter> transporters = new ArrayList<Transporter>();
-    public Map<EnumFacing,TilePipe> connection = new HashMap<>();
-    static final PropertyBool stateU = PropertyBool.create("up");
-    static final PropertyBool stateD = PropertyBool.create("down");
-    static final PropertyBool stateN = PropertyBool.create("north");
-    static final PropertyBool stateS = PropertyBool.create("south");
-    static final PropertyBool stateE = PropertyBool.create("east");
-    static final PropertyBool stateW = PropertyBool.create("west");
+    public Map<EnumFacing,EnumConnectionType> connection = new HashMap<>();
+    static final PropertyEnum<EnumConnectionType> stateU = PropertyEnum.create("up",EnumConnectionType.class);
+    static final PropertyEnum<EnumConnectionType> stateD = PropertyEnum.create("down",EnumConnectionType.class);
+    static final PropertyEnum<EnumConnectionType> stateN = PropertyEnum.create("north",EnumConnectionType.class);
+    static final PropertyEnum<EnumConnectionType> stateS = PropertyEnum.create("south",EnumConnectionType.class);
+    static final PropertyEnum<EnumConnectionType> stateE = PropertyEnum.create("east",EnumConnectionType.class);
+    static final PropertyEnum<EnumConnectionType> stateW = PropertyEnum.create("west",EnumConnectionType.class);
     PipeBlockStateNBTData nbtData;
     boolean first = true;
 
@@ -40,7 +40,7 @@ public class TilePipe extends TileEntity implements ITickable {
         connection.put(EnumFacing.EAST,null);
     }
 
-    void setBlockStatus(EnumFacing facing,boolean v) {
+    void setBlockStatus(EnumFacing facing,EnumConnectionType v) {
         switch (facing) {
             case UP:
                 worldObj.setBlockState(pos,worldObj.getBlockState(pos).withProperty(stateU,v));
@@ -63,15 +63,11 @@ public class TilePipe extends TileEntity implements ITickable {
         }
     }
 
-    public void connect(TilePipe to) {
+    public void connect(EnumFacing to) {
 //        System.out.println("Connect from " + pos.toString() + " to " + to.pos.toString());
         if (to != null) {
-            BlockPos hispos = to.getPos();
-            EnumFacing facing = EnumFacing.getFacingFromVector(
-                    hispos.getX() - pos.getX(),hispos.getY() - pos.getY(),hispos.getZ() - pos.getZ()
-            );
-            setBlockStatus(facing,true);
-            connection.put(facing,to);
+            setBlockStatus(to,EnumConnectionType.pipe);
+            connection.put(to,EnumConnectionType.pipe);
 //        System.out.println(connection.toString());
 //        System.out.println(worldObj.getBlockState(pos));
             markDirty();
@@ -80,13 +76,12 @@ public class TilePipe extends TileEntity implements ITickable {
 
     }
 
-    public void disconnect(TilePipe to) {
-        System.out.println("Disconnect from " + pos.toString() + " to " + to.pos.toString());
-        for (Map.Entry<EnumFacing,TilePipe> entry:
+    public void disconnect(EnumFacing to) {
+        for (Map.Entry<EnumFacing,EnumConnectionType> entry:
              connection.entrySet()) {
-            if (entry.getValue() == to) {
-                connection.put(entry.getKey(),null);
-                setBlockStatus(entry.getKey(),false);
+            if (entry.getKey() == to) {
+                connection.put(entry.getKey(),EnumConnectionType.none);
+                setBlockStatus(entry.getKey(),EnumConnectionType.none);
             }
         }
         worldObj.markBlockRangeForRenderUpdate(pos, pos);
@@ -109,12 +104,12 @@ public class TilePipe extends TileEntity implements ITickable {
         nbt = super.writeToNBT(nbt);
         System.out.println(connection.toString());
 //        IBlockState state = worldObj.getBlockState(pos);
-        nbt.setBoolean("connection_up",connection.get(EnumFacing.UP) != null);
-        nbt.setBoolean("connection_down",connection.get(EnumFacing.DOWN) != null);
-        nbt.setBoolean("connection_north",connection.get(EnumFacing.NORTH) != null);
-        nbt.setBoolean("connection_south",connection.get(EnumFacing.SOUTH) != null);
-        nbt.setBoolean("connection_east",connection.get(EnumFacing.EAST) != null);
-        nbt.setBoolean("connection_west",connection.get(EnumFacing.WEST) != null);
+        nbt.setString("connection_up",connection.get(EnumFacing.UP).getName());
+        nbt.setString("connection_down",connection.get(EnumFacing.DOWN).getName());
+        nbt.setString("connection_north",connection.get(EnumFacing.NORTH).getName());
+        nbt.setString("connection_south",connection.get(EnumFacing.SOUTH).getName());
+        nbt.setString("connection_east",connection.get(EnumFacing.EAST).getName());
+        nbt.setString("connection_west",connection.get(EnumFacing.WEST).getName());
         System.out.println(nbt.toString());
         return nbt;
     }
@@ -124,48 +119,27 @@ public class TilePipe extends TileEntity implements ITickable {
     }
 
     void connectUsingNBT(PipeBlockStateNBTData nbtData) {
-        if (nbtData.u) {
-            connect((TilePipe)worldObj.getTileEntity(pos.up()));
-//            setBlockStatus(EnumFacing.UP,true);
-        } else {
-//            connection.put(EnumFacing.UP,null);
-//            setBlockStatus(EnumFacing.UP,false);
+        IBlockState oldBlockState = worldObj.getBlockState(pos);
+        if (EnumConnectionType.getTypeFromName(nbtData.u) == EnumConnectionType.pipe) {
+            connect(EnumFacing.UP);
         }
-        if (nbtData.d) {
-            connect((TilePipe)worldObj.getTileEntity(pos.down()));
-//            setBlockStatus(EnumFacing.DOWN,true);
-        } else {
-//            connection.put(EnumFacing.DOWN,null);
-//            setBlockStatus(EnumFacing.DOWN,false);
+        if (EnumConnectionType.getTypeFromName(nbtData.d) == EnumConnectionType.pipe) {
+            connect(EnumFacing.DOWN);
         }
-        if (nbtData.n) {
-            connect((TilePipe)worldObj.getTileEntity(pos.north()));
-//            setBlockStatus(EnumFacing.NORTH,true);
-        } else {
-//            connection.put(EnumFacing.NORTH,null);
-//            setBlockStatus(EnumFacing.NORTH,false);
+        if (EnumConnectionType.getTypeFromName(nbtData.n) == EnumConnectionType.pipe) {
+            connect(EnumFacing.NORTH);
         }
-        if (nbtData.s) {
-            connect((TilePipe)worldObj.getTileEntity(pos.south()));
-//            setBlockStatus(EnumFacing.SOUTH,true);
-        } else {
-//            connection.put(EnumFacing.SOUTH,null);
-//            setBlockStatus(EnumFacing.SOUTH,false);
+        if (EnumConnectionType.getTypeFromName(nbtData.s) == EnumConnectionType.pipe) {
+            connect(EnumFacing.SOUTH);
         }
-        if (nbtData.e) {
-            connect((TilePipe)worldObj.getTileEntity(pos.east()));
-//            setBlockStatus(EnumFacing.EAST,true);
-        } else {
-//            connection.put(EnumFacing.EAST,null);
-//            setBlockStatus(EnumFacing.EAST,false);
+        if (EnumConnectionType.getTypeFromName(nbtData.e) == EnumConnectionType.pipe) {
+            connect(EnumFacing.EAST);
         }
-        if (nbtData.w) {
-            connect((TilePipe)worldObj.getTileEntity(pos.west()));
-//            setBlockStatus(EnumFacing.WEST,true);
-        } else {
-//            connection.put(EnumFacing.WEST,null);
-//            setBlockStatus(EnumFacing.WEST,false);
+        if (EnumConnectionType.getTypeFromName(nbtData.w) == EnumConnectionType.pipe) {
+            connect(EnumFacing.WEST);
         }
+        worldObj.notifyBlockUpdate(pos,oldBlockState,worldObj.getBlockState(pos),2);
+        markDirty();
     }
 
     @Override
