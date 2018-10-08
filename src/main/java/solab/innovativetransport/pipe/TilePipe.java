@@ -65,16 +65,19 @@ public class TilePipe extends TileEntity implements ITickable {
 
     public void connect(TilePipe to) {
 //        System.out.println("Connect from " + pos.toString() + " to " + to.pos.toString());
-        BlockPos hispos = to.getPos();
-        EnumFacing facing = EnumFacing.getFacingFromVector(
-                hispos.getX() - pos.getX(),hispos.getY() - pos.getY(),hispos.getZ() - pos.getZ()
-        );
-        setBlockStatus(facing,true);
-        connection.put(facing,to);
+        if (to != null) {
+            BlockPos hispos = to.getPos();
+            EnumFacing facing = EnumFacing.getFacingFromVector(
+                    hispos.getX() - pos.getX(),hispos.getY() - pos.getY(),hispos.getZ() - pos.getZ()
+            );
+            setBlockStatus(facing,true);
+            connection.put(facing,to);
 //        System.out.println(connection.toString());
 //        System.out.println(worldObj.getBlockState(pos));
-        markDirty();
-        worldObj.notifyBlockUpdate(pos,worldObj.getBlockState(pos),worldObj.getBlockState(pos),2);
+            markDirty();
+            worldObj.notifyBlockUpdate(pos,worldObj.getBlockState(pos),worldObj.getBlockState(pos),2);
+        }
+
     }
 
     public void disconnect(TilePipe to) {
