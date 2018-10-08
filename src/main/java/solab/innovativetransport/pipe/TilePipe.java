@@ -7,8 +7,10 @@ import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.ITickable;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import solab.innovativetransport.PipeBlockStateNBTData;
 import solab.innovativetransport.transporter.Transporter;
 
 import java.util.ArrayList;
@@ -16,7 +18,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class TilePipe extends TileEntity {
+public class TilePipe extends TileEntity implements ITickable {
 
     public List<Transporter> transporters = new ArrayList<Transporter>();
     public Map<EnumFacing,TilePipe> connection = new HashMap<>();
@@ -26,6 +28,8 @@ public class TilePipe extends TileEntity {
     static final PropertyBool stateS = PropertyBool.create("south");
     static final PropertyBool stateE = PropertyBool.create("east");
     static final PropertyBool stateW = PropertyBool.create("west");
+    PipeBlockStateNBTData nbtData;
+    boolean first = true;
 
     public TilePipe() {
         connection.put(EnumFacing.UP,null);
@@ -88,50 +92,12 @@ public class TilePipe extends TileEntity {
         markDirty();
     }
 
-    public void readFromNBT(NBTTagCompound nbt) {
-        super.readFromNBT(nbt);
-        System.out.println(nbt.toString());
-        if (nbt.getBoolean("connection_up")) {
-            connect((TilePipe)worldObj.getTileEntity(pos.up()));
-//            setBlockStatus(EnumFacing.UP,true);
+    public void readFromNBT(NBTTagCompound nbtTagCompound) {
+        super.readFromNBT(nbtTagCompound);
+        if (hasWorldObj()) {
+            connectUsingNBT(new PipeBlockStateNBTData(nbtTagCompound));
         } else {
-//            connection.put(EnumFacing.UP,null);
-//            setBlockStatus(EnumFacing.UP,false);
-        }
-        if (nbt.getBoolean("connection_down")) {
-            connect((TilePipe)worldObj.getTileEntity(pos.down()));
-//            setBlockStatus(EnumFacing.DOWN,true);
-        } else {
-//            connection.put(EnumFacing.DOWN,null);
-//            setBlockStatus(EnumFacing.DOWN,false);
-        }
-        if (nbt.getBoolean("connection_north")) {
-            connect((TilePipe)worldObj.getTileEntity(pos.north()));
-//            setBlockStatus(EnumFacing.NORTH,true);
-        } else {
-//            connection.put(EnumFacing.NORTH,null);
-//            setBlockStatus(EnumFacing.NORTH,false);
-        }
-        if (nbt.getBoolean("connection_south")) {
-            connect((TilePipe)worldObj.getTileEntity(pos.south()));
-//            setBlockStatus(EnumFacing.SOUTH,true);
-        } else {
-//            connection.put(EnumFacing.SOUTH,null);
-//            setBlockStatus(EnumFacing.SOUTH,false);
-        }
-        if (nbt.getBoolean("connection_east")) {
-            connect((TilePipe)worldObj.getTileEntity(pos.east()));
-//            setBlockStatus(EnumFacing.EAST,true);
-        } else {
-//            connection.put(EnumFacing.EAST,null);
-//            setBlockStatus(EnumFacing.EAST,false);
-        }
-        if (nbt.getBoolean("connection_west")) {
-            connect((TilePipe)worldObj.getTileEntity(pos.west()));
-//            setBlockStatus(EnumFacing.WEST,true);
-        } else {
-//            connection.put(EnumFacing.WEST,null);
-//            setBlockStatus(EnumFacing.WEST,false);
+            nbtData = new PipeBlockStateNBTData(nbtTagCompound);
         }
 //        markDirty();
 //        worldObj.notifyBlockUpdate(pos,worldObj.getBlockState(pos),worldObj.getBlockState(pos),2);
@@ -152,6 +118,51 @@ public class TilePipe extends TileEntity {
 
     public boolean shouldRefresh(World world, BlockPos pos, IBlockState oldState, IBlockState newSate) {
         return oldState == newSate;
+    }
+
+    void connectUsingNBT(PipeBlockStateNBTData nbtData) {
+        if (nbtData.u) {
+            connect((TilePipe)worldObj.getTileEntity(pos.up()));
+//            setBlockStatus(EnumFacing.UP,true);
+        } else {
+//            connection.put(EnumFacing.UP,null);
+//            setBlockStatus(EnumFacing.UP,false);
+        }
+        if (nbtData.d) {
+            connect((TilePipe)worldObj.getTileEntity(pos.down()));
+//            setBlockStatus(EnumFacing.DOWN,true);
+        } else {
+//            connection.put(EnumFacing.DOWN,null);
+//            setBlockStatus(EnumFacing.DOWN,false);
+        }
+        if (nbtData.n) {
+            connect((TilePipe)worldObj.getTileEntity(pos.north()));
+//            setBlockStatus(EnumFacing.NORTH,true);
+        } else {
+//            connection.put(EnumFacing.NORTH,null);
+//            setBlockStatus(EnumFacing.NORTH,false);
+        }
+        if (nbtData.s) {
+            connect((TilePipe)worldObj.getTileEntity(pos.south()));
+//            setBlockStatus(EnumFacing.SOUTH,true);
+        } else {
+//            connection.put(EnumFacing.SOUTH,null);
+//            setBlockStatus(EnumFacing.SOUTH,false);
+        }
+        if (nbtData.e) {
+            connect((TilePipe)worldObj.getTileEntity(pos.east()));
+//            setBlockStatus(EnumFacing.EAST,true);
+        } else {
+//            connection.put(EnumFacing.EAST,null);
+//            setBlockStatus(EnumFacing.EAST,false);
+        }
+        if (nbtData.w) {
+            connect((TilePipe)worldObj.getTileEntity(pos.west()));
+//            setBlockStatus(EnumFacing.WEST,true);
+        } else {
+//            connection.put(EnumFacing.WEST,null);
+//            setBlockStatus(EnumFacing.WEST,false);
+        }
     }
 
     @Override
@@ -184,4 +195,16 @@ public class TilePipe extends TileEntity {
         readFromNBT(tag);
     }
 
+    /**
+     * Like the old updateEntity(), except more generic.
+     */
+    @Override
+    public void update() {
+        if (first) {
+            first = false;
+            if (nbtData != null) {
+                connectUsingNBT(nbtData);
+            }
+        }
+    }
 }
