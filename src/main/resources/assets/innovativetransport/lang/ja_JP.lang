@@ -5,3 +5,7 @@ tile.transportpipe.name=輸送パイプ
 
 item.debugger.name=デバッグツール
 item.itemcardslot.name=カードスロット
+item.innovativetransport_Blankcard.name=ブランクカード
+item.innovativetransport_Extractorcard.name=抽出カード
+item.innovativetransport_Providercard.name=供給カード
+item.innovativetransport_Suppliercard.name=補給カード
