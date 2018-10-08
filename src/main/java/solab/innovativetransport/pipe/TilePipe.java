@@ -201,9 +201,9 @@ public class TilePipe extends TileEntity implements ITickable {
     @Override
     public void update() {
         if (first) {
-            first = false;
             if (nbtData != null) {
                 connectUsingNBT(nbtData);
+                first = false;
             }
         }
     }
