@@ -15,6 +15,8 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import solab.innovativetransport.InnovativeTransport;
 
+import java.util.Map;
+
 public class BlockPipe extends BlockContainer {
 
     public BlockPipe() {
@@ -92,9 +94,10 @@ public class BlockPipe extends BlockContainer {
     @Override
     public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
 
-        for (EnumFacing facing:((TilePipe)worldIn.getTileEntity(pos)).connection.keySet()) {
-            if (facing != null) {
-                ((TilePipe)worldIn.getTileEntity(pos.offset(facing))).disconnect(facing.getOpposite());
+        for (Map.Entry<EnumFacing,EnumConnectionType> entry:((TilePipe)worldIn.getTileEntity(pos)).connection.entrySet()) {
+            if (entry.getValue() != EnumConnectionType.none) {
+                TilePipe tilePipe = (TilePipe)worldIn.getTileEntity(pos.offset(entry.getKey()));
+                tilePipe.disconnect(entry.getKey().getOpposite());
             }
         }
 
