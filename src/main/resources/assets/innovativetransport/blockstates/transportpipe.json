@@ -7,10 +7,10 @@
   },
   "variants": {
     "normal": [{
-      "model": "innovativetransport:block/transportpipe"
+      "model": "innovativetransport:transportpipe"
     }],
     "inventory": [{
-      "model": "innovativetransport:block/transportpipe"
+      "model": "innovativetransport:transportpipe"
     }],
     "up": {
       "pipe": {
