@@ -37,7 +37,7 @@ public class Debugger extends Item {
                         mc.thePlayer.addChatMessage(new TextComponentTranslation("§6simplemode"));
                     }else if (mode == 1) {
                         mode = 2;
-                        mc.thePlayer.addChatMessage(new TextComponentTranslation("§6matchmode"));
+                        mc.thePlayer.addChatMessage(new TextComponentTranslation("§6verysimplemode"));
                     }else if (mode == 2) {
                         mode = 0;
                         mc.thePlayer.addChatMessage(new TextComponentTranslation("§6normalmode"));
@@ -68,43 +68,43 @@ public class Debugger extends Item {
                 if(world.getBlockState(pos).getBlock() == InnovativeTransport.blocks[0] && world.isRemote){
                     TilePipe me = (TilePipe) world.getTileEntity(pos);
                     mc.thePlayer.addChatMessage(new TextComponentTranslation("§aCLIENT-----------------"));
-                    if(me.connection.get(EnumFacing.UP) != null){
+                    if(me.connection.get(EnumFacing.UP).toString() != "none"){
                         mc.thePlayer.addChatMessage(new TextComponentTranslation("§aUP"));
                     }
-                    if(me.connection.get(EnumFacing.DOWN) != null){
+                    if(me.connection.get(EnumFacing.DOWN).toString() != "none"){
                         mc.thePlayer.addChatMessage(new TextComponentTranslation("§aDOWN"));
                     }
-                    if(me.connection.get(EnumFacing.NORTH) != null){
+                    if(me.connection.get(EnumFacing.NORTH).toString() != "none"){
                         mc.thePlayer.addChatMessage(new TextComponentTranslation("§aNORTH"));
                     }
-                    if(me.connection.get(EnumFacing.SOUTH) != null){
+                    if(me.connection.get(EnumFacing.SOUTH).toString() != "none"){
                         mc.thePlayer.addChatMessage(new TextComponentTranslation("§aSOUTH"));
                     }
-                    if(me.connection.get(EnumFacing.EAST) != null){
+                    if(me.connection.get(EnumFacing.EAST).toString() != "none"){
                         mc.thePlayer.addChatMessage(new TextComponentTranslation("§aEAST"));
                     }
-                    if(me.connection.get(EnumFacing.WEST) != null){
+                    if(me.connection.get(EnumFacing.WEST).toString() != "none"){
                         mc.thePlayer.addChatMessage(new TextComponentTranslation("§aWEST"));
                     }
                 }else if(world.getBlockState(pos).getBlock() == InnovativeTransport.blocks[0] &! world.isRemote){
                     TilePipe me = (TilePipe) world.getTileEntity(pos);
                     mc.thePlayer.addChatMessage(new TextComponentTranslation("§cSERVER-----------------"));
-                    if(me.connection.get(EnumFacing.UP) != null){
+                    if(me.connection.get(EnumFacing.UP).toString() != "none"){
                         mc.thePlayer.addChatMessage(new TextComponentTranslation("§cUP"));
                     }
-                    if(me.connection.get(EnumFacing.DOWN) != null){
+                    if(me.connection.get(EnumFacing.DOWN).toString() != "none"){
                         mc.thePlayer.addChatMessage(new TextComponentTranslation("§cDOWN"));
                     }
-                    if(me.connection.get(EnumFacing.NORTH) != null){
+                    if(me.connection.get(EnumFacing.NORTH).toString() != "none"){
                         mc.thePlayer.addChatMessage(new TextComponentTranslation("§cNORTH"));
                     }
-                    if(me.connection.get(EnumFacing.SOUTH) != null){
+                    if(me.connection.get(EnumFacing.SOUTH).toString() != "none"){
                         mc.thePlayer.addChatMessage(new TextComponentTranslation("§cSOUTH"));
                     }
-                    if(me.connection.get(EnumFacing.EAST) != null){
+                    if(me.connection.get(EnumFacing.EAST).toString() != "none"){
                         mc.thePlayer.addChatMessage(new TextComponentTranslation("§cEAST"));
                     }
-                    if(me.connection.get(EnumFacing.WEST) != null){
+                    if(me.connection.get(EnumFacing.WEST).toString() != "none"){
                         mc.thePlayer.addChatMessage(new TextComponentTranslation("§cWEST"));
                     }
                     mc.thePlayer.addChatMessage(new TextComponentTranslation("-----------------------"));
@@ -114,64 +114,64 @@ public class Debugger extends Item {
                 if(world.getBlockState(pos).getBlock() == InnovativeTransport.blocks[0]){
                     TilePipe me = (TilePipe) world.getTileEntity(pos);
                     if(world.isRemote){
-                        if(me.connection.get(EnumFacing.UP) != null){
+                        if(me.connection.get(EnumFacing.UP).toString() != "none"){
                             ctex =ctex+"1";
                         }else{
                             ctex =ctex+"0";
                         }
-                        if(me.connection.get(EnumFacing.DOWN) != null){
+                        if(me.connection.get(EnumFacing.DOWN).toString() != "none"){
                             ctex =ctex+"1";
                         }else{
                             ctex =ctex+"0";
                         }
-                        if(me.connection.get(EnumFacing.NORTH) != null){
+                        if(me.connection.get(EnumFacing.NORTH).toString() != "none"){
                             ctex =ctex+"1";
                         }else{
                             ctex =ctex+"0";
                         }
-                        if(me.connection.get(EnumFacing.SOUTH) != null){
+                        if(me.connection.get(EnumFacing.SOUTH).toString() != "none"){
                             ctex =ctex+"1";
                         }else{
                             ctex =ctex+"0";
                         }
-                        if(me.connection.get(EnumFacing.EAST) != null){
+                        if(me.connection.get(EnumFacing.EAST).toString() != "none"){
                             ctex =ctex+"1";
                         }else{
                             ctex =ctex+"0";
                         }
-                        if(me.connection.get(EnumFacing.WEST) != null){
+                        if(me.connection.get(EnumFacing.WEST).toString() != "none"){
                             ctex =ctex+"1";
                         }else{
                             ctex =ctex+"0";
                         }
                     }
                     if(!world.isRemote){
-                        if(me.connection.get(EnumFacing.UP) != null){
+                        if(me.connection.get(EnumFacing.UP).toString() != "none"){
                             stex =stex+"1";
                         }else{
                             stex =stex+"0";
                         }
-                        if(me.connection.get(EnumFacing.DOWN) != null){
+                        if(me.connection.get(EnumFacing.DOWN).toString() != "none"){
                             stex =stex+"1";
                         }else{
                             stex =stex+"0";
                         }
-                        if(me.connection.get(EnumFacing.NORTH) != null){
+                        if(me.connection.get(EnumFacing.NORTH).toString() != "none"){
                             stex =stex+"1";
                         }else{
                             stex =stex+"0";
                         }
-                        if(me.connection.get(EnumFacing.SOUTH) != null){
+                        if(me.connection.get(EnumFacing.SOUTH).toString() != "none"){
                             stex =stex+"1";
                         }else{
                             stex =stex+"0";
                         }
-                        if(me.connection.get(EnumFacing.EAST) != null){
+                        if(me.connection.get(EnumFacing.EAST).toString() != "none"){
                             stex =stex+"1";
                         }else{
                             stex =stex+"0";
                         }
-                        if(me.connection.get(EnumFacing.WEST) != null){
+                        if(me.connection.get(EnumFacing.WEST).toString() != "none"){
                             stex =stex+"1";
                         }else{
                             stex =stex+"0";
