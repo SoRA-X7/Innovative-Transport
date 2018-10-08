@@ -28,6 +28,16 @@ public class TilePipe extends TileEntity implements ITickable {
     static final PropertyEnum<EnumConnectionType> stateS = PropertyEnum.create("south",EnumConnectionType.class);
     static final PropertyEnum<EnumConnectionType> stateE = PropertyEnum.create("east",EnumConnectionType.class);
     static final PropertyEnum<EnumConnectionType> stateW = PropertyEnum.create("west",EnumConnectionType.class);
+    public static final Map<EnumFacing,PropertyEnum<EnumConnectionType>> states = new HashMap<EnumFacing, PropertyEnum<EnumConnectionType>>() {
+        {
+            put(EnumFacing.UP,stateU);
+            put(EnumFacing.DOWN,stateD);
+            put(EnumFacing.NORTH,stateN);
+            put(EnumFacing.SOUTH,stateS);
+            put(EnumFacing.EAST,stateE);
+            put(EnumFacing.WEST,stateW);
+        }
+    };
     PipeBlockStateNBTData nbtData;
     boolean first = true;
 
@@ -78,10 +88,10 @@ public class TilePipe extends TileEntity implements ITickable {
         connection.put(to,EnumConnectionType.none);
         setBlockStatus(to,EnumConnectionType.none);
 
+        markDirty();
         worldObj.markBlockRangeForRenderUpdate(pos, pos);
         worldObj.notifyBlockUpdate(pos,worldObj.getBlockState(pos),worldObj.getBlockState(pos),2);
         worldObj.scheduleBlockUpdate(pos,this.getBlockType(),0,0);
-        markDirty();
     }
 
     public void readFromNBT(NBTTagCompound nbtTagCompound) {
