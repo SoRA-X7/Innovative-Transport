@@ -2,10 +2,16 @@ package solab.innovativetransport.pipe;
 
 import net.minecraft.util.EnumFacing;
 import net.minecraftforge.common.capabilities.Capability;
+import solab.innovativetransport.transporter.ItemTransporter;
+import solab.innovativetransport.transporter.Transporter;
 
 import javax.annotation.Nullable;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Pipe implements IPipe {
+
+    public List<ItemTransporter> items = new ArrayList<>();
     /**
      * Determines if this object has support for the capability in question on the specific side.
      * The return value of this MIGHT change during runtime if this object gains or looses support

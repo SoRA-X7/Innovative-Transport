@@ -20,6 +20,7 @@ import java.util.Map;
 
 public class TilePipe extends TileEntity implements ITickable {
 
+    public Pipe pipe;
     public List<Transporter> transporters = new ArrayList<Transporter>();
     public Map<EnumFacing,EnumConnectionType> connection = new HashMap<>();
     static final PropertyEnum<EnumConnectionType> stateU = PropertyEnum.create("up",EnumConnectionType.class);
@@ -171,6 +172,10 @@ public class TilePipe extends TileEntity implements ITickable {
         //Handle your Data
         super.readFromNBT(tag);
         readFromNBT(tag);
+    }
+
+    public TileEntity getTile(EnumFacing to) {
+        return worldObj.getTileEntity(pos.offset(to));
     }
 
     /**

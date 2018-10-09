@@ -5,7 +5,7 @@ import net.minecraft.util.IStringSerializable;
 public enum EnumConnectionType implements IStringSerializable {
     none,
     pipe,
-    tile,
+//    tile,
     slot;
 
     @Override
