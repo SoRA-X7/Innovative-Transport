@@ -5,7 +5,8 @@ tile.transportpipe.name=Transport Pipe
 
 item.debugger.name=Debugger
 item.itemcardslot.name=Cardslot
-item.innovativetransport_Blankcard.name=Blankcard
-item.innovativetransport_Extractorcard.name=Extractorcard
-item.innovativetransport_Providercard.name=Providercard
-item.innovativetransport_Suppliercard.name=Suppliercard
+item.innovativetransport_BlankCard.name=Blankcard
+item.innovativetransport_ExtractorCard.name=Extractorcard
+item.innovativetransport_ProviderCard.name=Providercard
+item.innovativetransport_SupplierCard.name=Suppliercard
+item.innovativetransport_ItemSinkCard.name=ItemSinkcard
