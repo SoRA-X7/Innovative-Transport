@@ -9,6 +9,9 @@ import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import solab.innovativetransport.card.*;
+import solab.innovativetransport.card.extractor.ItemExtractorCard;
+import solab.innovativetransport.card.provider.ItemProviderCard;
+import solab.innovativetransport.card.request.ItemSupplierCard;
 import solab.innovativetransport.pipe.BlockPipe;
 import solab.innovativetransport.pipe.TilePipe;
 
@@ -28,10 +31,10 @@ public class InnovativeTransport {
     public static final Item[] items = {
             new Debugger(),
             new ItemCardSlot(),
-            new Blankcard(),
-            new Extractorcard(),
-            new Providercard(),
-            new Suppliercard()
+            new ItemBlankCard(),
+            new ItemExtractorCard(),
+            new ItemProviderCard(),
+            new ItemSupplierCard()
     };
 
     @EventHandler

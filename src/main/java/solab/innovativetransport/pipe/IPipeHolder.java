@@ -10,7 +10,6 @@ import javax.annotation.Nullable;
 public interface IPipeHolder {
     World getWorld();
     BlockPos getPos();
-    TileEntity getTile();
     IPipe getPipe();
 
     @Nullable
