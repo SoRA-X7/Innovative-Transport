@@ -4,9 +4,14 @@ import net.minecraft.item.Item;
 import solab.innovativetransport.card.cardbase.CardBase;
 import solab.innovativetransport.card.cardbase.ICardItemSink;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 public class ItemSinkCard extends CardBase implements ICardItemSink {
+
+    public List<Item> requestedItems = new ArrayList<>();
+    public boolean defaultRoute = false;
 
     /**
      * 回収する行き先未指定アイテムを指定します。
@@ -15,7 +20,17 @@ public class ItemSinkCard extends CardBase implements ICardItemSink {
      */
     @Override
     public Collection<Item> getPassiveRequestedItems() {
-        return null;
+        return requestedItems;
+    }
+
+    /**
+     * デフォルトルート指定の場合はtrueを返して下さい。
+     *
+     * @return デフォルトルートならtrue
+     */
+    @Override
+    public boolean isDefaultRoute() {
+        return defaultRoute;
     }
 
     /**
@@ -26,6 +41,6 @@ public class ItemSinkCard extends CardBase implements ICardItemSink {
      */
     @Override
     public int getPassiveRequestOrder() {
-        return 0;
+        return 10;
     }
 }

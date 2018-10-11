@@ -12,6 +12,12 @@ public interface ICardItemSink {
     Collection<Item> getPassiveRequestedItems();
 
     /**
+     * デフォルトルート指定の場合はtrueを返して下さい。
+     * @return デフォルトルートならtrue
+     */
+    boolean isDefaultRoute();
+
+    /**
      * 行き先未指定アイテムの回収優先順位を指定します。
      * 通常のItemSinkを10としてください。
      * @return 優先順位(>0)
