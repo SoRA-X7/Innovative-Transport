@@ -2,7 +2,6 @@ package solab.innovativetransport.card.extractor;
 
 import solab.innovativetransport.card.cardbase.CardBase;
 import solab.innovativetransport.card.cardbase.ICardTickable;
-import solab.innovativetransport.pipe.Pipe;
 
 public class ExtractorCardT1 extends CardBase implements ICardTickable {
 

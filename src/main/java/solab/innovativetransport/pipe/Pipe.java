@@ -2,17 +2,31 @@ package solab.innovativetransport.pipe;
 
 import net.minecraft.util.EnumFacing;
 import net.minecraftforge.common.capabilities.Capability;
+import solab.innovativetransport.card.CardSlot;
 import solab.innovativetransport.card.cardbase.ICardBehaviour;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Pipe implements IPipe {
 
-    public boolean isCardSlotAttached;
+    protected IPipeHolder holder;
+    protected Map<EnumFacing,EnumConnectionType> connection = new HashMap<EnumFacing, EnumConnectionType>() {{
+        put(EnumFacing.UP,EnumConnectionType.none);
+        put(EnumFacing.DOWN,EnumConnectionType.none);
+        put(EnumFacing.NORTH,EnumConnectionType.none);
+        put(EnumFacing.SOUTH,EnumConnectionType.none);
+        put(EnumFacing.EAST,EnumConnectionType.none);
+        put(EnumFacing.WEST,EnumConnectionType.none);
+    }};
+    protected Map<EnumFacing,CardSlot> cardSlots = new HashMap<>();
 
-    public List<ICardBehaviour> cards = new ArrayList<>();
+    public Pipe(IPipeHolder holderIn) {
+        this.holder = holderIn;
+    }
     /**
      * Determines if this object has support for the capability in question on the specific side.
      * The return value of this MIGHT change during runtime if this object gains or looses support
@@ -48,11 +62,28 @@ public class Pipe implements IPipe {
         return null;
     }
 
+    public void update() {
+        for (CardSlot slot:
+             cardSlots.values()) {
+            slot.update();
+        }
+    }
 
     @Override
     public IPipeHolder getHolder() {
-        return null;
+        return holder;
     }
 
+    public void addCardSlot(EnumFacing facing) {
+        cardSlots.put(facing,new CardSlot());
+    }
+
+    public CardSlot getCardSlot(EnumFacing facing) {
+        return cardSlots.get(facing);
+    }
+
+    public void removeCardSlot(EnumFacing facing) {
+        cardSlots.remove(facing);
+    }
 
 }
