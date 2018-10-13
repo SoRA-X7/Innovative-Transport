@@ -13,7 +13,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 import solab.innovativetransport.pipe.EnumConnectionType;
-import solab.innovativetransport.pipe.TilePipe;
 import solab.innovativetransport.pipe.TilePipeHolder;
 
 /**
@@ -69,68 +68,68 @@ public class Debugger extends Item {
         }
         if (mode == 1) {
             if(world.getBlockState(pos).getBlock() == InnovativeTransport.blocks[0] && world.isRemote){
-                TilePipe me = (TilePipe) world.getTileEntity(pos);
+                TilePipeHolder me = (TilePipeHolder) world.getTileEntity(pos);
                 mc.thePlayer.addChatMessage(new TextComponentTranslation("§aCLIENT-----------------"));
-                    if(me.connection.get(EnumFacing.UP).toString() != "none"){
+                    if(me.getPipe().connection.get(EnumFacing.UP).toString() != "none"){
                         ctex =ctex+"U";
                     }else{
                         ctex =ctex+"n";
                     }
-                    if(me.connection.get(EnumFacing.DOWN).toString() != "none"){
+                    if(me.getPipe().connection.get(EnumFacing.DOWN).toString() != "none"){
                         ctex =ctex+"D";
                     }else{
                         ctex =ctex+"n";
                     }
-                    if(me.connection.get(EnumFacing.NORTH).toString() != "none"){
+                    if(me.getPipe().connection.get(EnumFacing.NORTH).toString() != "none"){
                         ctex =ctex+"N";
                     }else{
                         ctex =ctex+"n";
                     }
-                    if(me.connection.get(EnumFacing.SOUTH).toString() != "none"){
+                    if(me.getPipe().connection.get(EnumFacing.SOUTH).toString() != "none"){
                         ctex =ctex+"S";
                     }else{
                         ctex =ctex+"n";
                     }
-                    if(me.connection.get(EnumFacing.EAST).toString() != "none"){
+                    if(me.getPipe().connection.get(EnumFacing.EAST).toString() != "none"){
                         ctex =ctex+"E";
                     }else{
                         ctex =ctex+"n";
                     }
-                    if(me.connection.get(EnumFacing.WEST).toString() != "none"){
+                    if(me.getPipe().connection.get(EnumFacing.WEST).toString() != "none"){
                         ctex =ctex+"W";
                     }else{
                         ctex =ctex+"n";
                     }
                 mc.thePlayer.addChatMessage(new TextComponentTranslation(ctex));
             }else if(world.getBlockState(pos).getBlock() == InnovativeTransport.blocks[0] &! world.isRemote){
-                TilePipe me = (TilePipe) world.getTileEntity(pos);
+                TilePipeHolder me = (TilePipeHolder) world.getTileEntity(pos);
                 mc.thePlayer.addChatMessage(new TextComponentTranslation("§cSERVER-----------------"));
-                if(me.connection.get(EnumFacing.UP).toString() != "none"){
+                if(me.getPipe().connection.get(EnumFacing.UP).toString() != "none"){
                     stex =stex+"U";
                 }else{
                     stex =stex+"n";
                 }
-                if(me.connection.get(EnumFacing.DOWN).toString() != "none"){
+                if(me.getPipe().connection.get(EnumFacing.DOWN).toString() != "none"){
                     stex =stex+"D";
                 }else{
                     stex =stex+"n";
                 }
-                if(me.connection.get(EnumFacing.NORTH).toString() != "none"){
+                if(me.getPipe().connection.get(EnumFacing.NORTH).toString() != "none"){
                     stex =stex+"N";
                 }else{
                     stex =stex+"n";
                 }
-                if(me.connection.get(EnumFacing.SOUTH).toString() != "none"){
+                if(me.getPipe().connection.get(EnumFacing.SOUTH).toString() != "none"){
                     stex =stex+"S";
                 }else{
                     stex =stex+"n";
                 }
-                if(me.connection.get(EnumFacing.EAST).toString() != "none"){
+                if(me.getPipe().connection.get(EnumFacing.EAST).toString() != "none"){
                     stex =stex+"E";
                 }else{
                     stex =stex+"n";
                 }
-                if(me.connection.get(EnumFacing.WEST).toString() != "none"){
+                if(me.getPipe().connection.get(EnumFacing.WEST).toString() != "none"){
                     stex =stex+"W";
                 }else{
                     stex =stex+"n";
@@ -148,14 +147,14 @@ public class Debugger extends Item {
         IBlockState blockState = worldIn.getBlockState(pos);
         if (mode == 2) {
             if (blockState.getBlock() == InnovativeTransport.blocks[0]) {
-                if (blockState.getValue(TilePipe.states.get(facing)) != EnumConnectionType.none) {
+                if (blockState.getValue(TilePipeHolder.states.get(facing)) != EnumConnectionType.none) {
                     Minecraft mc = Minecraft.getMinecraft();
                     if(worldIn.isRemote){
                         mc.thePlayer.addChatMessage(new TextComponentTranslation("§aCLIENT-----------------"));
-                        mc.thePlayer.addChatMessage(new TextComponentTranslation("§a"+blockState.getValue(TilePipe.states.get(facing)).toString()));
+                        mc.thePlayer.addChatMessage(new TextComponentTranslation("§a"+blockState.getValue(TilePipeHolder.states.get(facing)).toString()));
                     }else if(!worldIn.isRemote){
                         mc.thePlayer.addChatMessage(new TextComponentTranslation("§cSERVER-----------------"));
-                        mc.thePlayer.addChatMessage(new TextComponentTranslation("§c"+blockState.getValue(TilePipe.states.get(facing)).toString()));
+                        mc.thePlayer.addChatMessage(new TextComponentTranslation("§c"+blockState.getValue(TilePipeHolder.states.get(facing)).toString()));
                         mc.thePlayer.addChatMessage(new TextComponentTranslation("-----------------------"));
                     }
                     return EnumActionResult.SUCCESS;

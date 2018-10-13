@@ -10,8 +10,6 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import solab.innovativetransport.InnovativeTransport;
-import solab.innovativetransport.pipe.EnumConnectionType;
-import solab.innovativetransport.pipe.TilePipe;
 import solab.innovativetransport.pipe.TilePipeHolder;
 
 public class ItemCardSlot extends Item {
