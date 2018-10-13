@@ -1,5 +1,6 @@
 package solab.innovativetransport;
 
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -11,7 +12,8 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
-import solab.innovativetransport.pipe.TilePipe;
+import solab.innovativetransport.pipe.EnumConnectionType;
+import solab.innovativetransport.pipe.TilePipeHolder;
 
 /**
  * Created by kirihi on 2018/10/07.
@@ -32,16 +34,16 @@ public class Debugger extends Item {
         Minecraft mc = Minecraft.getMinecraft();
         if (!worldIn.isRemote) {
             if (playerIn.isSneaking()) {
-                    if (mode == 0) {
-                        mode = 1;
-                        mc.thePlayer.addChatMessage(new TextComponentTranslation("§6simplemode"));
-                    }else if (mode == 1) {
-                        mode = 2;
-                        mc.thePlayer.addChatMessage(new TextComponentTranslation("§6verysimplemode"));
-                    }else if (mode == 2) {
-                        mode = 0;
-                        mc.thePlayer.addChatMessage(new TextComponentTranslation("§6normalmode"));
-                    }
+                if (mode == 0) {
+                    mode = 1;
+                    mc.thePlayer.addChatMessage(new TextComponentTranslation("§6simplemode"));
+                }else if (mode == 1) {
+                    mode = 2;
+                    mc.thePlayer.addChatMessage(new TextComponentTranslation("§6modulemode"));
+                }else if (mode == 2) {
+                    mode = 0;
+                    mc.thePlayer.addChatMessage(new TextComponentTranslation("§6normalmode"));
+                }
             }
         }
         return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, itemStackIn);
