@@ -33,6 +33,19 @@ public class TilePipeHolder extends TileEntity implements IPipeHolder, ITickable
         return pipe;
     }
 
+    public boolean connect(EnumFacing to) {
+        TilePipeHolder next = getNextPipeHolder(to);
+        if (next != null) {
+            if (pipe.connection.get(to) == EnumConnectionType.none) {
+                worldObj.setBlockState(pos,worldObj.getBlockState(pos).withProperty(states.get(to),EnumConnectionType.pipe));
+                pipe.connection.put(to,EnumConnectionType.pipe);
+                markDirty();
+                worldObj.notifyBlockUpdate(pos,worldObj.getBlockState(pos),worldObj.getBlockState(pos),2);
+            }
+        }
+        return false;
+    }
+
     @Nullable
     @Override
     public TileEntity getNeighborTile(EnumFacing facing) {

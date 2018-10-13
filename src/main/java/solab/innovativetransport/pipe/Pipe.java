@@ -14,7 +14,7 @@ import java.util.Map;
 public class Pipe implements IPipe {
 
     protected IPipeHolder holder;
-    protected Map<EnumFacing,EnumConnectionType> connection = new HashMap<EnumFacing, EnumConnectionType>() {{
+    public Map<EnumFacing,EnumConnectionType> connection = new HashMap<EnumFacing, EnumConnectionType>() {{
         put(EnumFacing.UP,EnumConnectionType.none);
         put(EnumFacing.DOWN,EnumConnectionType.none);
         put(EnumFacing.NORTH,EnumConnectionType.none);

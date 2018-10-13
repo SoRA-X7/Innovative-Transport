@@ -1,7 +1,6 @@
 package solab.innovativetransport.card;
 
 import solab.innovativetransport.card.cardbase.CardBase;
-import solab.innovativetransport.card.cardbase.ICardItemSink;
 import solab.innovativetransport.card.cardbase.ICardTickable;
 
 public class CardSlot {
@@ -15,9 +14,6 @@ public class CardSlot {
              cards) {
             if (card instanceof ICardTickable) {
                 ((ICardTickable) card).update();
-            }
-            if (card instanceof ICardItemSink) {
-
             }
         }
     }
