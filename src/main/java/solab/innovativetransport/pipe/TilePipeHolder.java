@@ -115,8 +115,7 @@ public class TilePipeHolder extends TileEntity implements IPipeHolder, ITickable
     }
 
     @Override
-    public void handleUpdateTag(NBTTagCompound tag)
-    {
+    public void handleUpdateTag(NBTTagCompound tag) {
         super.handleUpdateTag(tag);
         readFromNBT(tag);
     }

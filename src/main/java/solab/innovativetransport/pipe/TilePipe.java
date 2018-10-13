@@ -74,7 +74,6 @@ public class TilePipe extends TileEntity implements ITickable {
     }
 
     public void connect(EnumFacing to) {
-//        System.out.println("Connect from " + pos.toString() + " to " + to.pos.toString());
         if (to != null) {
             setBlockStatus(to,EnumConnectionType.pipe);
             connection.put(to,EnumConnectionType.pipe);
@@ -101,8 +100,6 @@ public class TilePipe extends TileEntity implements ITickable {
         } else {
             nbtData = new PipeBlockStateNBTData(nbtTagCompound);
         }
-//        markDirty();
-//        worldObj.notifyBlockUpdate(pos,worldObj.getBlockState(pos),worldObj.getBlockState(pos),2);
     }
     public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
         nbt = super.writeToNBT(nbt);
