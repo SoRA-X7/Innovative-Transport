@@ -12,6 +12,7 @@ import net.minecraft.world.World;
 import solab.innovativetransport.InnovativeTransport;
 import solab.innovativetransport.pipe.EnumConnectionType;
 import solab.innovativetransport.pipe.TilePipe;
+import solab.innovativetransport.pipe.TilePipeHolder;
 
 public class ItemCardSlot extends Item {
     public ItemCardSlot() {
@@ -25,10 +26,9 @@ public class ItemCardSlot extends Item {
     public EnumActionResult onItemUse(ItemStack stack, EntityPlayer playerIn, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
         IBlockState blockState = worldIn.getBlockState(pos);
         if (blockState.getBlock() == InnovativeTransport.blocks[0]) {
-            if (blockState.getValue(TilePipe.states.get(facing)) == EnumConnectionType.none) {
-                worldIn.setBlockState(pos,blockState.withProperty(TilePipe.states.get(facing),EnumConnectionType.slot));
-                stack.stackSize--;
-                return EnumActionResult.SUCCESS;
+            TilePipeHolder holder = (TilePipeHolder)worldIn.getTileEntity(pos);
+            if (holder != null) {
+                holder.attachCardSlot(facing);
             }
         }
         return EnumActionResult.FAIL;

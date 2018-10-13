@@ -25,17 +25,25 @@ public class BlockPipe extends BlockContainer {
         setRegistryName(InnovativeTransport.MODID,"transportpipe");
         setUnlocalizedName("transportpipe");
         setCreativeTab(InnovativeTransport.tab);
-        setDefaultState(blockState.getBaseState().withProperty(TilePipe.stateU,EnumConnectionType.none)
-                .withProperty(TilePipe.stateD,EnumConnectionType.none)
-                .withProperty(TilePipe.stateN,EnumConnectionType.none)
-                .withProperty(TilePipe.stateS,EnumConnectionType.none)
-                .withProperty(TilePipe.stateE,EnumConnectionType.none)
-                .withProperty(TilePipe.stateW,EnumConnectionType.none)
+        setDefaultState(blockState.getBaseState()
+                .withProperty(TilePipeHolder.states.get(EnumFacing.UP),EnumConnectionType.none)
+                .withProperty(TilePipeHolder.states.get(EnumFacing.DOWN),EnumConnectionType.none)
+                .withProperty(TilePipeHolder.states.get(EnumFacing.NORTH),EnumConnectionType.none)
+                .withProperty(TilePipeHolder.states.get(EnumFacing.SOUTH),EnumConnectionType.none)
+                .withProperty(TilePipeHolder.states.get(EnumFacing.EAST),EnumConnectionType.none)
+                .withProperty(TilePipeHolder.states.get(EnumFacing.WEST),EnumConnectionType.none)
         );
     }
     @Override
     protected BlockStateContainer createBlockState(){
-        return new BlockStateContainer(this,TilePipe.stateU,TilePipe.stateD,TilePipe.stateN,TilePipe.stateS,TilePipe.stateE,TilePipe.stateW);
+        return new BlockStateContainer(this,
+                TilePipeHolder.states.get(EnumFacing.UP),
+                TilePipeHolder.states.get(EnumFacing.DOWN),
+                TilePipeHolder.states.get(EnumFacing.NORTH),
+                TilePipeHolder.states.get(EnumFacing.SOUTH),
+                TilePipeHolder.states.get(EnumFacing.EAST),
+                TilePipeHolder.states.get(EnumFacing.WEST)
+        );
     }
 
     public int getMetaFromState(IBlockState state)
@@ -44,13 +52,13 @@ public class BlockPipe extends BlockContainer {
     }
 
     public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos) {
-        TilePipe tilePipe = (TilePipe)worldIn.getTileEntity(pos);
-        state.withProperty(TilePipe.stateU,tilePipe.connection.get(EnumFacing.UP))
-                .withProperty(TilePipe.stateD,tilePipe.connection.get(EnumFacing.DOWN))
-                .withProperty(TilePipe.stateN,tilePipe.connection.get(EnumFacing.NORTH))
-                .withProperty(TilePipe.stateS,tilePipe.connection.get(EnumFacing.SOUTH))
-                .withProperty(TilePipe.stateE,tilePipe.connection.get(EnumFacing.EAST))
-                .withProperty(TilePipe.stateW,tilePipe.connection.get(EnumFacing.WEST));
+        TilePipeHolder tilePipe = (TilePipeHolder) worldIn.getTileEntity(pos);
+        state.withProperty(TilePipeHolder.states.get(EnumFacing.UP),tilePipe.pipe.connection.get(EnumFacing.UP))
+                .withProperty(TilePipeHolder.states.get(EnumFacing.DOWN),tilePipe.pipe.connection.get(EnumFacing.DOWN))
+                .withProperty(TilePipeHolder.states.get(EnumFacing.NORTH),tilePipe.pipe.connection.get(EnumFacing.NORTH))
+                .withProperty(TilePipeHolder.states.get(EnumFacing.SOUTH),tilePipe.pipe.connection.get(EnumFacing.SOUTH))
+                .withProperty(TilePipeHolder.states.get(EnumFacing.EAST),tilePipe.pipe.connection.get(EnumFacing.EAST))
+                .withProperty(TilePipeHolder.states.get(EnumFacing.WEST),tilePipe.pipe.connection.get(EnumFacing.WEST));
         return state;
     }
 
@@ -59,7 +67,7 @@ public class BlockPipe extends BlockContainer {
 
     @Override
     public TileEntity createNewTileEntity(World worldIn, int meta) {
-        return new TilePipe();
+        return new TilePipeHolder();
     }
 
     @SideOnly(Side.CLIENT)
@@ -95,10 +103,12 @@ public class BlockPipe extends BlockContainer {
     @Override
     public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
 
-        for (Map.Entry<EnumFacing,EnumConnectionType> entry:((TilePipe)worldIn.getTileEntity(pos)).connection.entrySet()) {
+        for (Map.Entry<EnumFacing,EnumConnectionType> entry:((TilePipeHolder)worldIn.getTileEntity(pos)).pipe.connection.entrySet()) {
             if (entry.getValue() == EnumConnectionType.pipe) {
-                TilePipe tilePipe = (TilePipe)worldIn.getTileEntity(pos.offset(entry.getKey()));
-                tilePipe.disconnect(entry.getKey().getOpposite());
+                TilePipeHolder tilePipe = (TilePipeHolder) worldIn.getTileEntity(pos.offset(entry.getKey()));
+                if (tilePipe != null) {
+                    tilePipe.disconnect(entry.getKey().getOpposite());
+                }
             }
         }
 
@@ -109,10 +119,10 @@ public class BlockPipe extends BlockContainer {
 
     public void updateConnection(IBlockAccess world, BlockPos pos, EnumFacing facing) {
         TileEntity tile = world.getTileEntity(pos.offset(facing));
-        TilePipe me = (TilePipe) world.getTileEntity(pos);
-        if (tile instanceof TilePipe) {
-            me.connect(facing);
-            ((TilePipe)tile).connect(facing.getOpposite());
+        TilePipeHolder me = (TilePipeHolder) world.getTileEntity(pos);
+        if (tile instanceof TilePipeHolder) {
+            me.connect(facing,true);
+            ((TilePipeHolder)tile).connect(facing.getOpposite(),true);
         }
 //        System.out.println(me.connection.toString());
     }

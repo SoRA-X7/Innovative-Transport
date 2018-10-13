@@ -14,6 +14,7 @@ import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 import solab.innovativetransport.pipe.EnumConnectionType;
 import solab.innovativetransport.pipe.TilePipe;
+import solab.innovativetransport.pipe.TilePipeHolder;
 
 /**
  * Created by kirihi on 2018/10/07.
@@ -53,16 +54,16 @@ public class Debugger extends Item {
 
         if(mode == 0) {
             if (world.getBlockState(pos).getBlock() == InnovativeTransport.blocks[0] && world.isRemote) {
-                TilePipe me = (TilePipe) world.getTileEntity(pos);
+                TilePipeHolder me = (TilePipeHolder) world.getTileEntity(pos);
                 mc.thePlayer.addChatMessage(new TextComponentTranslation("§aCLIENT-----------------"));
                 mc.thePlayer.addChatMessage(new TextComponentTranslation("§a" + pos.toString()));
-                mc.thePlayer.addChatMessage(new TextComponentTranslation("§a" + me.connection.toString()));
+                mc.thePlayer.addChatMessage(new TextComponentTranslation("§a" + me.getPipe().connection.toString()));
 
             } else if (world.getBlockState(pos).getBlock() == InnovativeTransport.blocks[0] & !world.isRemote) {
-                TilePipe me = (TilePipe) world.getTileEntity(pos);
+                TilePipeHolder me = (TilePipeHolder) world.getTileEntity(pos);
                 mc.thePlayer.addChatMessage(new TextComponentTranslation("§cSERVER-----------------"));
                 mc.thePlayer.addChatMessage(new TextComponentTranslation("§c" + pos.toString()));
-                mc.thePlayer.addChatMessage(new TextComponentTranslation("§c" + me.connection.toString()));
+                mc.thePlayer.addChatMessage(new TextComponentTranslation("§c" + me.getPipe().connection.toString()));
                 mc.thePlayer.addChatMessage(new TextComponentTranslation("-----------------------"));
             }
         }

@@ -8,6 +8,8 @@ import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 import solab.innovativetransport.PipeBlockStateNBTData;
 
 import javax.annotation.Nullable;
@@ -33,21 +35,28 @@ public class TilePipeHolder extends TileEntity implements IPipeHolder, ITickable
 
     public TilePipeHolder() {
         this.pipe = new Pipe(this);
+        pipe.connection.put(EnumFacing.UP,EnumConnectionType.none);
+        pipe.connection.put(EnumFacing.DOWN,EnumConnectionType.none);
+        pipe.connection.put(EnumFacing.NORTH,EnumConnectionType.none);
+        pipe.connection.put(EnumFacing.SOUTH,EnumConnectionType.none);
+        pipe.connection.put(EnumFacing.WEST,EnumConnectionType.none);
+        pipe.connection.put(EnumFacing.EAST,EnumConnectionType.none);
     }
 
     @Override
-    public IPipe getPipe() {
+    public Pipe getPipe() {
         return pipe;
     }
 
-    public boolean connect(EnumFacing to) {
+    public boolean connect(EnumFacing to,boolean checkNext) {
         TilePipeHolder next = getNextPipeHolder(to);
-        if (next != null) {
-            if (pipe.connection.get(to) == EnumConnectionType.none) {
-                worldObj.setBlockState(pos,worldObj.getBlockState(pos).withProperty(states.get(to),EnumConnectionType.pipe));
+        if (!checkNext || next != null) {
+            if (!checkNext || ((next.pipe.connection.get(to.getOpposite()) == EnumConnectionType.none || next.pipe.connection.get(to.getOpposite()) == EnumConnectionType.pipe)) && pipe.connection.get(to) == EnumConnectionType.none) {
+                IBlockState oldState = worldObj.getBlockState(pos);
+                worldObj.setBlockState(pos,oldState.withProperty(states.get(to),EnumConnectionType.pipe));
                 pipe.connection.put(to,EnumConnectionType.pipe);
                 markDirty();
-                worldObj.notifyBlockUpdate(pos,worldObj.getBlockState(pos),worldObj.getBlockState(pos),2);
+                worldObj.notifyBlockUpdate(pos,oldState,worldObj.getBlockState(pos),2);
                 return true;
             }
         }
@@ -55,10 +64,23 @@ public class TilePipeHolder extends TileEntity implements IPipeHolder, ITickable
     }
 
     public void disconnect(EnumFacing from) {
-        pipe.connection.put(from,EnumConnectionType.none);
-        worldObj.setBlockState(pos,worldObj.getBlockState(pos).withProperty(states.get(from),EnumConnectionType.none));
-        markDirty();
-        worldObj.notifyBlockUpdate(pos,worldObj.getBlockState(pos),worldObj.getBlockState(pos),2);
+        if (pipe.connection.get(from) == EnumConnectionType.pipe) {
+            pipe.connection.put(from,EnumConnectionType.none);
+            worldObj.setBlockState(pos,worldObj.getBlockState(pos).withProperty(states.get(from),EnumConnectionType.none));
+            markDirty();
+            worldObj.notifyBlockUpdate(pos,worldObj.getBlockState(pos),worldObj.getBlockState(pos),2);
+        }
+    }
+
+    public void attachCardSlot(EnumFacing facing) {
+        if (pipe.connection.get(facing) == EnumConnectionType.none) {
+            pipe.addCardSlot(facing);
+            IBlockState oldState = worldObj.getBlockState(pos);
+            worldObj.setBlockState(pos,oldState.withProperty(states.get(facing), EnumConnectionType.slot));
+            pipe.connection.put(facing,EnumConnectionType.slot);
+            markDirty();
+            worldObj.notifyBlockUpdate(pos,oldState,worldObj.getBlockState(pos),2);
+        }
     }
 
     public void readFromNBT(NBTTagCompound nbtTagCompound) {
@@ -85,26 +107,42 @@ public class TilePipeHolder extends TileEntity implements IPipeHolder, ITickable
 
     void connectUsingNBT(PipeBlockStateNBTData nbtData) {
         IBlockState oldBlockState = worldObj.getBlockState(pos);
-        if (EnumConnectionType.getTypeFromName(nbtData.u) == EnumConnectionType.pipe) {
-            connect(EnumFacing.UP);
+        if (EnumConnectionType.valueOf(nbtData.u) == EnumConnectionType.pipe) {
+            connect(EnumFacing.UP,false);
+        } else if (EnumConnectionType.valueOf(nbtData.u) == EnumConnectionType.slot) {
+            attachCardSlot(EnumFacing.UP);
         }
-        if (EnumConnectionType.getTypeFromName(nbtData.d) == EnumConnectionType.pipe) {
-            connect(EnumFacing.DOWN);
+        if (EnumConnectionType.valueOf(nbtData.d) == EnumConnectionType.pipe) {
+            connect(EnumFacing.DOWN,false);
+        } else if (EnumConnectionType.valueOf(nbtData.d) == EnumConnectionType.slot) {
+            attachCardSlot(EnumFacing.DOWN);
         }
-        if (EnumConnectionType.getTypeFromName(nbtData.n) == EnumConnectionType.pipe) {
-            connect(EnumFacing.NORTH);
+        if (EnumConnectionType.valueOf(nbtData.n) == EnumConnectionType.pipe) {
+            connect(EnumFacing.NORTH,false);
+        } else if (EnumConnectionType.valueOf(nbtData.n) == EnumConnectionType.slot) {
+            attachCardSlot(EnumFacing.NORTH);
         }
-        if (EnumConnectionType.getTypeFromName(nbtData.s) == EnumConnectionType.pipe) {
-            connect(EnumFacing.SOUTH);
+        if (EnumConnectionType.valueOf(nbtData.s) == EnumConnectionType.pipe) {
+            connect(EnumFacing.SOUTH,false);
+        } else if (EnumConnectionType.valueOf(nbtData.s) == EnumConnectionType.slot) {
+            attachCardSlot(EnumFacing.SOUTH);
         }
-        if (EnumConnectionType.getTypeFromName(nbtData.e) == EnumConnectionType.pipe) {
-            connect(EnumFacing.EAST);
+        if (EnumConnectionType.valueOf(nbtData.e) == EnumConnectionType.pipe) {
+            connect(EnumFacing.EAST,false);
+        } else if (EnumConnectionType.valueOf(nbtData.e) == EnumConnectionType.slot) {
+            attachCardSlot(EnumFacing.EAST);
         }
-        if (EnumConnectionType.getTypeFromName(nbtData.w) == EnumConnectionType.pipe) {
-            connect(EnumFacing.WEST);
+        if (EnumConnectionType.valueOf(nbtData.w) == EnumConnectionType.pipe) {
+            connect(EnumFacing.WEST,false);
+        } else if (EnumConnectionType.valueOf(nbtData.w) == EnumConnectionType.slot) {
+            attachCardSlot(EnumFacing.WEST);
         }
         worldObj.notifyBlockUpdate(pos,oldBlockState,worldObj.getBlockState(pos),2);
         markDirty();
+    }
+
+    public boolean shouldRefresh(World world, BlockPos pos, IBlockState oldState, IBlockState newSate) {
+        return oldState == newSate;
     }
 
     @Override
