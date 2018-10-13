@@ -1,0 +1,12 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "innovativetransport:pipe_side_moduleslot"
+  },
+  "variants": {
+    "normal": [{}],
+    "inventory": [{
+
+    }]
+  }
+}

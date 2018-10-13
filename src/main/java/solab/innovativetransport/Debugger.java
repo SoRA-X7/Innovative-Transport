@@ -18,8 +18,8 @@ import solab.innovativetransport.pipe.TilePipe;
  */
 public class Debugger extends Item {
     private int mode = 0;
-    private String ctex="";
-    private String stex="";
+    private String ctex="§a";
+    private String stex="§c";
     public Debugger() {
         super();
         setUnlocalizedName("debugger");
@@ -49,147 +49,117 @@ public class Debugger extends Item {
     public EnumActionResult onItemUseFirst(ItemStack itemStack, EntityPlayer entity, World world, BlockPos pos, EnumFacing side, float hitX, float hitY, float hitZ, EnumHand hand) {
         Minecraft mc = Minecraft.getMinecraft();
 
-            if(mode == 0) {
-                if (world.getBlockState(pos).getBlock() == InnovativeTransport.blocks[0] && world.isRemote) {
-                    TilePipe me = (TilePipe) world.getTileEntity(pos);
-                    mc.thePlayer.addChatMessage(new TextComponentTranslation("§aCLIENT-----------------"));
-                    mc.thePlayer.addChatMessage(new TextComponentTranslation("§a" + pos.toString()));
-                    mc.thePlayer.addChatMessage(new TextComponentTranslation("§a" + me.connection.toString()));
+        if(mode == 0) {
+            if (world.getBlockState(pos).getBlock() == InnovativeTransport.blocks[0] && world.isRemote) {
+                TilePipeHolder me = (TilePipeHolder) world.getTileEntity(pos);
+                mc.thePlayer.addChatMessage(new TextComponentTranslation("§aCLIENT-----------------"));
+                mc.thePlayer.addChatMessage(new TextComponentTranslation("§a" + pos.toString()));
+                mc.thePlayer.addChatMessage(new TextComponentTranslation("§a" + me.getPipe().connection.toString()));
 
-                } else if (world.getBlockState(pos).getBlock() == InnovativeTransport.blocks[0] & !world.isRemote) {
-                    TilePipe me = (TilePipe) world.getTileEntity(pos);
-                    mc.thePlayer.addChatMessage(new TextComponentTranslation("§cSERVER-----------------"));
-                    mc.thePlayer.addChatMessage(new TextComponentTranslation("§c" + pos.toString()));
-                    mc.thePlayer.addChatMessage(new TextComponentTranslation("§c" + me.connection.toString()));
-                    mc.thePlayer.addChatMessage(new TextComponentTranslation("-----------------------"));
-                }
+            } else if (world.getBlockState(pos).getBlock() == InnovativeTransport.blocks[0] & !world.isRemote) {
+                TilePipeHolder me = (TilePipeHolder) world.getTileEntity(pos);
+                mc.thePlayer.addChatMessage(new TextComponentTranslation("§cSERVER-----------------"));
+                mc.thePlayer.addChatMessage(new TextComponentTranslation("§c" + pos.toString()));
+                mc.thePlayer.addChatMessage(new TextComponentTranslation("§c" + me.getPipe().connection.toString()));
+                mc.thePlayer.addChatMessage(new TextComponentTranslation("-----------------------"));
             }
-            if (mode == 1) {
-                if(world.getBlockState(pos).getBlock() == InnovativeTransport.blocks[0] && world.isRemote){
-                    TilePipe me = (TilePipe) world.getTileEntity(pos);
-                    mc.thePlayer.addChatMessage(new TextComponentTranslation("§aCLIENT-----------------"));
-                    if(me.connection.get(EnumFacing.UP).toString() != "none"){
-                        mc.thePlayer.addChatMessage(new TextComponentTranslation("§aUP"));
+        }
+        if (mode == 1) {
+            if(world.getBlockState(pos).getBlock() == InnovativeTransport.blocks[0] && world.isRemote){
+                TilePipeHolder me = (TilePipeHolder) world.getTileEntity(pos);
+                mc.thePlayer.addChatMessage(new TextComponentTranslation("§aCLIENT-----------------"));
+                    if(me.getPipe().connection.get(EnumFacing.UP).toString() != "none"){
+                        ctex =ctex+"U";
+                    }else{
+                        ctex =ctex+"n";
                     }
-                    if(me.connection.get(EnumFacing.DOWN).toString() != "none"){
-                        mc.thePlayer.addChatMessage(new TextComponentTranslation("§aDOWN"));
+                    if(me.getPipe().connection.get(EnumFacing.DOWN).toString() != "none"){
+                        ctex =ctex+"D";
+                    }else{
+                        ctex =ctex+"n";
                     }
-                    if(me.connection.get(EnumFacing.NORTH).toString() != "none"){
-                        mc.thePlayer.addChatMessage(new TextComponentTranslation("§aNORTH"));
+                    if(me.getPipe().connection.get(EnumFacing.NORTH).toString() != "none"){
+                        ctex =ctex+"N";
+                    }else{
+                        ctex =ctex+"n";
                     }
-                    if(me.connection.get(EnumFacing.SOUTH).toString() != "none"){
-                        mc.thePlayer.addChatMessage(new TextComponentTranslation("§aSOUTH"));
+                    if(me.getPipe().connection.get(EnumFacing.SOUTH).toString() != "none"){
+                        ctex =ctex+"S";
+                    }else{
+                        ctex =ctex+"n";
                     }
-                    if(me.connection.get(EnumFacing.EAST).toString() != "none"){
-                        mc.thePlayer.addChatMessage(new TextComponentTranslation("§aEAST"));
+                    if(me.getPipe().connection.get(EnumFacing.EAST).toString() != "none"){
+                        ctex =ctex+"E";
+                    }else{
+                        ctex =ctex+"n";
                     }
-                    if(me.connection.get(EnumFacing.WEST).toString() != "none"){
-                        mc.thePlayer.addChatMessage(new TextComponentTranslation("§aWEST"));
+                    if(me.getPipe().connection.get(EnumFacing.WEST).toString() != "none"){
+                        ctex =ctex+"W";
+                    }else{
+                        ctex =ctex+"n";
                     }
-                }else if(world.getBlockState(pos).getBlock() == InnovativeTransport.blocks[0] &! world.isRemote){
-                    TilePipe me = (TilePipe) world.getTileEntity(pos);
-                    mc.thePlayer.addChatMessage(new TextComponentTranslation("§cSERVER-----------------"));
-                    if(me.connection.get(EnumFacing.UP).toString() != "none"){
-                        mc.thePlayer.addChatMessage(new TextComponentTranslation("§cUP"));
-                    }
-                    if(me.connection.get(EnumFacing.DOWN).toString() != "none"){
-                        mc.thePlayer.addChatMessage(new TextComponentTranslation("§cDOWN"));
-                    }
-                    if(me.connection.get(EnumFacing.NORTH).toString() != "none"){
-                        mc.thePlayer.addChatMessage(new TextComponentTranslation("§cNORTH"));
-                    }
-                    if(me.connection.get(EnumFacing.SOUTH).toString() != "none"){
-                        mc.thePlayer.addChatMessage(new TextComponentTranslation("§cSOUTH"));
-                    }
-                    if(me.connection.get(EnumFacing.EAST).toString() != "none"){
-                        mc.thePlayer.addChatMessage(new TextComponentTranslation("§cEAST"));
-                    }
-                    if(me.connection.get(EnumFacing.WEST).toString() != "none"){
-                        mc.thePlayer.addChatMessage(new TextComponentTranslation("§cWEST"));
-                    }
-                    mc.thePlayer.addChatMessage(new TextComponentTranslation("-----------------------"));
+                mc.thePlayer.addChatMessage(new TextComponentTranslation(ctex));
+            }else if(world.getBlockState(pos).getBlock() == InnovativeTransport.blocks[0] &! world.isRemote){
+                TilePipeHolder me = (TilePipeHolder) world.getTileEntity(pos);
+                mc.thePlayer.addChatMessage(new TextComponentTranslation("§cSERVER-----------------"));
+                if(me.getPipe().connection.get(EnumFacing.UP).toString() != "none"){
+                    stex =stex+"U";
+                }else{
+                    stex =stex+"n";
                 }
-            }
-            if (mode == 2) {
-                if(world.getBlockState(pos).getBlock() == InnovativeTransport.blocks[0]){
-                    TilePipe me = (TilePipe) world.getTileEntity(pos);
-                    if(world.isRemote){
-                        if(me.connection.get(EnumFacing.UP).toString() != "none"){
-                            ctex =ctex+"1";
-                        }else{
-                            ctex =ctex+"0";
-                        }
-                        if(me.connection.get(EnumFacing.DOWN).toString() != "none"){
-                            ctex =ctex+"1";
-                        }else{
-                            ctex =ctex+"0";
-                        }
-                        if(me.connection.get(EnumFacing.NORTH).toString() != "none"){
-                            ctex =ctex+"1";
-                        }else{
-                            ctex =ctex+"0";
-                        }
-                        if(me.connection.get(EnumFacing.SOUTH).toString() != "none"){
-                            ctex =ctex+"1";
-                        }else{
-                            ctex =ctex+"0";
-                        }
-                        if(me.connection.get(EnumFacing.EAST).toString() != "none"){
-                            ctex =ctex+"1";
-                        }else{
-                            ctex =ctex+"0";
-                        }
-                        if(me.connection.get(EnumFacing.WEST).toString() != "none"){
-                            ctex =ctex+"1";
-                        }else{
-                            ctex =ctex+"0";
-                        }
-                    }
-                    if(!world.isRemote){
-                        if(me.connection.get(EnumFacing.UP).toString() != "none"){
-                            stex =stex+"1";
-                        }else{
-                            stex =stex+"0";
-                        }
-                        if(me.connection.get(EnumFacing.DOWN).toString() != "none"){
-                            stex =stex+"1";
-                        }else{
-                            stex =stex+"0";
-                        }
-                        if(me.connection.get(EnumFacing.NORTH).toString() != "none"){
-                            stex =stex+"1";
-                        }else{
-                            stex =stex+"0";
-                        }
-                        if(me.connection.get(EnumFacing.SOUTH).toString() != "none"){
-                            stex =stex+"1";
-                        }else{
-                            stex =stex+"0";
-                        }
-                        if(me.connection.get(EnumFacing.EAST).toString() != "none"){
-                            stex =stex+"1";
-                        }else{
-                            stex =stex+"0";
-                        }
-                        if(me.connection.get(EnumFacing.WEST).toString() != "none"){
-                            stex =stex+"1";
-                        }else{
-                            stex =stex+"0";
-                        }
-                        if(world.isRemote&&ctex == stex){
-                            mc.thePlayer.addChatMessage(new TextComponentTranslation("§3match"));
-                        }else if(world.isRemote&&ctex != stex){
-                            mc.thePlayer.addChatMessage(new TextComponentTranslation("§4not match"));
-                        }
-                        mc.thePlayer.addChatMessage(new TextComponentTranslation(ctex));
-                        mc.thePlayer.addChatMessage(new TextComponentTranslation(stex));
-                        stex="";
-                        ctex="";
-                    }
+                if(me.getPipe().connection.get(EnumFacing.DOWN).toString() != "none"){
+                    stex =stex+"D";
+                }else{
+                    stex =stex+"n";
                 }
-
+                if(me.getPipe().connection.get(EnumFacing.NORTH).toString() != "none"){
+                    stex =stex+"N";
+                }else{
+                    stex =stex+"n";
+                }
+                if(me.getPipe().connection.get(EnumFacing.SOUTH).toString() != "none"){
+                    stex =stex+"S";
+                }else{
+                    stex =stex+"n";
+                }
+                if(me.getPipe().connection.get(EnumFacing.EAST).toString() != "none"){
+                    stex =stex+"E";
+                }else{
+                    stex =stex+"n";
+                }
+                if(me.getPipe().connection.get(EnumFacing.WEST).toString() != "none"){
+                    stex =stex+"W";
+                }else{
+                    stex =stex+"n";
+                }
+                mc.thePlayer.addChatMessage(new TextComponentTranslation(stex));
+                mc.thePlayer.addChatMessage(new TextComponentTranslation("-----------------------"));
+                stex="§c";
+                ctex="§a";
             }
+        }
         return EnumActionResult.PASS;
+    }
+    @Override
+    public EnumActionResult onItemUse(ItemStack stack, EntityPlayer playerIn, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+        IBlockState blockState = worldIn.getBlockState(pos);
+        if (mode == 2) {
+            if (blockState.getBlock() == InnovativeTransport.blocks[0]) {
+                if (blockState.getValue(TilePipeHolder.states.get(facing)) != EnumConnectionType.none) {
+                    Minecraft mc = Minecraft.getMinecraft();
+                    if(worldIn.isRemote){
+                        mc.thePlayer.addChatMessage(new TextComponentTranslation("§aCLIENT-----------------"));
+                        mc.thePlayer.addChatMessage(new TextComponentTranslation("§a"+blockState.getValue(TilePipeHolder.states.get(facing)).toString()));
+                    }else if(!worldIn.isRemote){
+                        mc.thePlayer.addChatMessage(new TextComponentTranslation("§cSERVER-----------------"));
+                        mc.thePlayer.addChatMessage(new TextComponentTranslation("§c"+blockState.getValue(TilePipeHolder.states.get(facing)).toString()));
+                        mc.thePlayer.addChatMessage(new TextComponentTranslation("-----------------------"));
+                    }
+                    return EnumActionResult.SUCCESS;
+                }
+            }
+        }
+        return EnumActionResult.FAIL;
     }
 
 }

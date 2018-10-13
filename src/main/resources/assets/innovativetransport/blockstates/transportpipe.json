@@ -21,6 +21,10 @@
         "submodel": "innovativetransport:pipe_side_on",
         "x": 270
       },
+      "slot": {
+        "submodel": "innovativetransport:pipe_side_moduleslot",
+        "x": 270
+      },
       "none": {
         "submodel": "innovativetransport:pipe_side_off",
         "x": 270
@@ -35,6 +39,10 @@
         "submodel": "innovativetransport:pipe_side_on",
         "x": 90
       },
+      "slot": {
+        "submodel": "innovativetransport:pipe_side_moduleslot",
+        "x": 90
+      },
       "none": {
         "submodel": "innovativetransport:pipe_side_off",
         "x": 90
@@ -47,6 +55,9 @@
       "tile": {
         "submodel": "innovativetransport:pipe_side_on"
       },
+      "slot": {
+        "submodel": "innovativetransport:pipe_side_moduleslot"
+      },
       "none": {
         "submodel": "innovativetransport:pipe_side_off"
       }
@@ -58,6 +69,10 @@
       },
       "tile": {
         "submodel": "innovativetransport:pipe_side_on",
+        "y": 180
+      },
+      "slot": {
+        "submodel": "innovativetransport:pipe_side_moduleslot",
         "y": 180
       },
       "none": {
@@ -74,6 +89,10 @@
         "submodel": "innovativetransport:pipe_side_on",
         "y": 90
       },
+      "slot": {
+        "submodel": "innovativetransport:pipe_side_moduleslot",
+        "y": 90
+      },
       "none": {
         "submodel": "innovativetransport:pipe_side_off",
         "y": 90
@@ -86,6 +105,10 @@
       },
       "tile": {
         "submodel": "innovativetransport:pipe_side_on",
+        "y": 270
+      },
+      "slot": {
+        "submodel": "innovativetransport:pipe_side_moduleslot",
         "y": 270
       },
       "none": {

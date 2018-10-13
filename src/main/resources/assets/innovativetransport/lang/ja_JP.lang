@@ -4,3 +4,9 @@ itemGroup.Innovative Transport=Innovative Transport
 tile.transportpipe.name=輸送パイプ
 
 item.debugger.name=デバッグツール
+item.itemcardslot.name=カードスロット
+item.innovativetransport_BlankCard.name=ブランクカード
+item.innovativetransport_ExtractorCard.name=抽出カード
+item.innovativetransport_ProviderCard.name=供給カード
+item.innovativetransport_SupplierCard.name=補給カード
+item.innovativetransport_ItemSinkCard.name=回収カード
