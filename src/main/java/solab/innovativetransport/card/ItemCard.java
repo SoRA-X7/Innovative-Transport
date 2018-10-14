@@ -15,16 +15,17 @@ import java.util.List;
 
 public class ItemCard extends Item {
 
-    private static class Card {
-        private Class<? extends ICardBehaviour> cardClass;
-    }
+    ICardBehaviour card;
 
     public ItemCard() {
         super();
         setRegistryName(InnovativeTransport.MODID,"itemcard");
         setUnlocalizedName(InnovativeTransport.MODID + "_itemcard");
         addPropertyOverride(new ResourceLocation("cardtype"), (stack, worldIn, entityIn) -> {
-            return stack.getTagCompound().getInteger("cardtype");
+            if (stack.getTagCompound() != null) {
+                return stack.getTagCompound().getInteger("cardtype");
+            }
+            return 0;
         });
         setCreativeTab(InnovativeTransport.tab);
     }
@@ -51,7 +52,9 @@ public class ItemCard extends Item {
     @Override
     @SideOnly(Side.CLIENT)
     public void addInformation(ItemStack stack, EntityPlayer playerIn, List<String> tooltip, boolean advanced) {
-        tooltip.add(stack.getTagCompound().getInteger("cardtype") + "");
+        if (stack.getTagCompound() != null) {
+            tooltip.add(stack.getTagCompound().getInteger("cardtype") + "");
+        }
     }
 
 }
