@@ -1,5 +1,6 @@
 package solab.innovativetransport.card.cardbase;
 
+import solab.innovativetransport.card.EnumCards;
 import solab.innovativetransport.pipe.Pipe;
 
 public interface ICardBehaviour {
@@ -14,4 +15,10 @@ public interface ICardBehaviour {
      * カードが取り外された時に呼ばれます。
      */
     void onCardDetached();
+
+    /**
+     * カードの種類を返します。
+     * @return カードの種類
+     */
+    EnumCards getCardType();
 }

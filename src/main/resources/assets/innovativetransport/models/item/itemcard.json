@@ -1,0 +1,32 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "innovativetransport:item/Blankcard"
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "cardtype": 0
+      },
+      "model": "innovativetransport:item/Blankcard"
+    },
+    {
+      "predicate": {
+        "cardtype": 1
+      },
+      "model": "innovativetransport:item/Extractorcard"
+    },
+    {
+      "predicate": {
+        "cardtype": 2
+      },
+      "model": "innovativetransport:item/Providercard"
+    },
+    {
+      "predicate": {
+        "cardtype": 3
+      },
+      "model": "innovativetransport:item/Suppliercard"
+    }
+  ]
+}
