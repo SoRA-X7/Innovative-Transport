@@ -10,6 +10,7 @@ public class PipeWireframeEventHandler {
 
     @SubscribeEvent
     public void drawSelectionBox(DrawBlockHighlightEvent event) {
+        System.out.println("drawSelectionBox");
         RayTraceResult trace = event.getTarget();
         if (trace != null || trace.typeOfHit == RayTraceResult.Type.BLOCK) {
             World world = event.getPlayer().worldObj;
