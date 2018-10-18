@@ -74,6 +74,10 @@ public class Pipe implements IPipe {
         return holder;
     }
 
+    public EnumConnectionType getConnectionTypeOf(EnumFacing facing) {
+        return connection.get(facing);
+    }
+
     public void addCardSlot(EnumFacing facing) {
         cardSlots.put(facing,new CardSlot());
     }

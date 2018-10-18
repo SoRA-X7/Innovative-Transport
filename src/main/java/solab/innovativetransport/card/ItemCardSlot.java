@@ -23,7 +23,7 @@ public class ItemCardSlot extends Item {
     @Override
     public EnumActionResult onItemUse(ItemStack stack, EntityPlayer playerIn, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
         IBlockState blockState = worldIn.getBlockState(pos);
-        if (blockState.getBlock() == InnovativeTransport.blocks[0]) {
+        if (blockState.getBlock() == InnovativeTransport.ITBlocks.PIPE) {
             TilePipeHolder holder = (TilePipeHolder)worldIn.getTileEntity(pos);
             if (holder != null) {
                 holder.attachCardSlot(facing);
