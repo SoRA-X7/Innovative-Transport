@@ -1,5 +1,7 @@
 package solab.innovativetransport.pipe;
 
+import codechicken.lib.raytracer.IndexedCuboid6;
+import codechicken.lib.raytracer.RayTracer;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.BlockStateContainer;
@@ -13,6 +15,7 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
@@ -20,18 +23,21 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import solab.innovativetransport.InnovativeTransport;
 
 import javax.annotation.Nullable;
+import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
 public class BlockPipe extends BlockContainer {
 
-    private AxisAlignedBB CENTER_AABB = new AxisAlignedBB(0.25D, 0.25D, 0.25D, 0.75D, 0.75D, 0.75D);
-    private AxisAlignedBB UP_AABB = new AxisAlignedBB(0.25D, 0.75D, 0.25D, 0.75D, 1D, 0.75D);
-    private AxisAlignedBB DOWN_AABB = new AxisAlignedBB(0.25D, 0D, 0.25D, 0.75D, 0.25D, 0.75D);
-    private AxisAlignedBB NORTH_AABB = new AxisAlignedBB(0.25D, 0.25D, 0D, 0.75D, 0.75D, 0.25D);
-    private AxisAlignedBB SOUTH_AABB = new AxisAlignedBB(0.25D, 0.25D, 0.75D, 0.75D, 0.75D, 1D);
-    private AxisAlignedBB EAST_AABB = new AxisAlignedBB(0.75D, 0.25D, 0.25D, 1D, 0.75D, 0.75D);
-    private AxisAlignedBB WEST_AABB = new AxisAlignedBB(0D, 0.25D, 0.25D, 0.25D, 0.75D, 0.75D);
+    protected static final AxisAlignedBB CENTER_AABB = new AxisAlignedBB(0.25D, 0.25D, 0.25D, 0.75D, 0.75D, 0.75D);
+    protected static final AxisAlignedBB UP_AABB = new AxisAlignedBB(0.25D, 0.75D, 0.25D, 0.75D, 1D, 0.75D);
+    protected static final AxisAlignedBB DOWN_AABB = new AxisAlignedBB(0.25D, 0D, 0.25D, 0.75D, 0.25D, 0.75D);
+    protected static final AxisAlignedBB NORTH_AABB = new AxisAlignedBB(0.25D, 0.25D, 0D, 0.75D, 0.75D, 0.25D);
+    protected static final AxisAlignedBB SOUTH_AABB = new AxisAlignedBB(0.25D, 0.25D, 0.75D, 0.75D, 0.75D, 1D);
+    protected static final AxisAlignedBB EAST_AABB = new AxisAlignedBB(0.75D, 0.25D, 0.25D, 1D, 0.75D, 0.75D);
+    protected static final AxisAlignedBB WEST_AABB = new AxisAlignedBB(0D, 0.25D, 0.25D, 0.25D, 0.75D, 0.75D);
+    protected static final AxisAlignedBB[] BOX_FACES = {DOWN_AABB , UP_AABB, NORTH_AABB, SOUTH_AABB, WEST_AABB, EAST_AABB };
 
     public BlockPipe() {
         super(Material.CIRCUITS);
@@ -144,14 +150,49 @@ public class BlockPipe extends BlockContainer {
     {
         return EnumBlockRenderType.MODEL;
     }
+
     @Override
     public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
-        return CENTER_AABB;
+        RayTraceResult trace = Minecraft.getMinecraft().objectMouseOver;
+        if (trace == null || trace.subHit < 0 || !pos.equals(trace.getBlockPos())) {
+            // Perhaps we aren't the object the mouse is over
+            return FULL_BLOCK_AABB;
+        }
+        int part = trace.subHit;
+        AxisAlignedBB aabb = CENTER_AABB;
+        switch (part) {
+            case 0:
+                aabb.union(CENTER_AABB);
+                break;
+            case 1:
+                aabb.union(UP_AABB);
+                break;
+            case 2:
+                aabb.union(DOWN_AABB);
+                break;
+            case 3:
+                aabb.union(NORTH_AABB);
+                break;
+            case 4:
+                aabb.union(SOUTH_AABB);
+                break;
+            case 5:
+                aabb.union(EAST_AABB);
+                break;
+            case 6:
+                aabb.union(WEST_AABB);
+                break;
+        }
+        return aabb;
     }
 
     @Override
     @SideOnly(Side.CLIENT)
     public AxisAlignedBB getSelectedBoundingBox(IBlockState state, World world, BlockPos pos) {
+        TilePipeHolder tile = (TilePipeHolder)world.getTileEntity(pos);
+        if (tile == null) {
+            return FULL_BLOCK_AABB;
+        }
         RayTraceResult trace = Minecraft.getMinecraft().objectMouseOver;
         if (trace == null || trace.subHit < 0 || !pos.equals(trace.getBlockPos())) {
             // Perhaps we aren't the object the mouse is over
@@ -159,29 +200,19 @@ public class BlockPipe extends BlockContainer {
         }
         int part = trace.subHit;
         AxisAlignedBB aabb = FULL_BLOCK_AABB;
-        switch (part) {
-            case 0:
-                aabb = CENTER_AABB;
-                break;
-            case 1:
-                aabb = UP_AABB;
-                break;
-            case 2:
-                aabb = DOWN_AABB;
-                break;
-            case 3:
-                aabb = NORTH_AABB;
-                break;
-            case 4:
-                aabb = SOUTH_AABB;
-                break;
-            case 5:
-                aabb = EAST_AABB;
-                break;
-            case 6:
-                aabb = WEST_AABB;
-                break;
+        System.out.println(part);
+
+        if (part == 0) {
+            aabb = CENTER_AABB;
+        } else if (part < 1 + 6) {
+            aabb = BOX_FACES[part - 1];
+            Pipe pipe = tile.getPipe();
+            if (pipe != null) {
+                EnumFacing face = EnumFacing.VALUES[part - 1];
+                EnumConnectionType con = pipe.getConnectionTypeOf(face);
+            }
         }
+
         return aabb;
     }
 
@@ -195,5 +226,21 @@ public class BlockPipe extends BlockContainer {
         if ((state.getValue(TilePipeHolder.states.get(EnumFacing.SOUTH)) == EnumConnectionType.pipe)) addCollisionBoxToList(pos,entityBox,collidingBoxes,SOUTH_AABB);
         if ((state.getValue(TilePipeHolder.states.get(EnumFacing.EAST)) == EnumConnectionType.pipe)) addCollisionBoxToList(pos,entityBox,collidingBoxes,EAST_AABB);
         if ((state.getValue(TilePipeHolder.states.get(EnumFacing.WEST)) == EnumConnectionType.pipe)) addCollisionBoxToList(pos,entityBox,collidingBoxes,WEST_AABB);
+    }
+
+    @Override
+    public RayTraceResult collisionRayTrace(IBlockState blockState, World worldIn, BlockPos pos, Vec3d start, Vec3d end) {
+        if (blockState.getBlock() == InnovativeTransport.ITBlocks.PIPE) {
+            List<IndexedCuboid6> cuboids = new ArrayList<>();
+            cuboids.add(new IndexedCuboid6(0,CENTER_AABB));
+            if ((blockState.getValue(TilePipeHolder.states.get(EnumFacing.DOWN)) == EnumConnectionType.pipe)) cuboids.add(new IndexedCuboid6(1,DOWN_AABB));
+            if ((blockState.getValue(TilePipeHolder.states.get(EnumFacing.UP)) == EnumConnectionType.pipe)) cuboids.add(new IndexedCuboid6(2,UP_AABB));
+            if ((blockState.getValue(TilePipeHolder.states.get(EnumFacing.NORTH)) == EnumConnectionType.pipe)) cuboids.add(new IndexedCuboid6(3,NORTH_AABB));
+            if ((blockState.getValue(TilePipeHolder.states.get(EnumFacing.SOUTH)) == EnumConnectionType.pipe)) cuboids.add(new IndexedCuboid6(4,SOUTH_AABB));
+            if ((blockState.getValue(TilePipeHolder.states.get(EnumFacing.WEST)) == EnumConnectionType.pipe)) cuboids.add(new IndexedCuboid6(5,WEST_AABB));
+            if ((blockState.getValue(TilePipeHolder.states.get(EnumFacing.EAST)) == EnumConnectionType.pipe)) cuboids.add(new IndexedCuboid6(6,EAST_AABB));
+            return RayTracer.rayTraceCuboidsClosest(start, end, cuboids, pos);
+        }
+        return null;
     }
 }

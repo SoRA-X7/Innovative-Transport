@@ -76,3 +76,14 @@ processResources
         exclude 'mcmod.info'
     }
 }
+
+repositories {
+    maven {
+        name = "ChickenBones Maven"
+        url = "http://chickenbones.net/maven/"
+    }
+}
+
+dependencies {
+    deobfCompile "codechicken:CodeChickenLib:1.10.2-2.5.9.320:universal"
+}
