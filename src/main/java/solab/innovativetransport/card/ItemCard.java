@@ -29,6 +29,7 @@ public class ItemCard extends Item {
         });
         setCreativeTab(InnovativeTransport.tab);
     }
+    public static final ItemCard INSTANCE = new ItemCard();
 
     @Override
     @SideOnly(Side.CLIENT)

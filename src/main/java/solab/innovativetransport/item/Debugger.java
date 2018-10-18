@@ -1,4 +1,4 @@
-package solab.innovativetransport;
+package solab.innovativetransport.item;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
@@ -12,6 +12,8 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
+import solab.innovativetransport.InnovativeTransport;
+import solab.innovativetransport.pipe.BlockPipe;
 import solab.innovativetransport.pipe.EnumConnectionType;
 import solab.innovativetransport.pipe.TilePipeHolder;
 
@@ -28,6 +30,7 @@ public class Debugger extends Item {
         setRegistryName("debugger");
         setCreativeTab(InnovativeTransport.tab);
     }
+    public static final Debugger INSTANCE = new Debugger();
 
     @Override
     public ActionResult<ItemStack> onItemRightClick(ItemStack itemStackIn, World worldIn, EntityPlayer playerIn, EnumHand hand){
@@ -46,19 +49,19 @@ public class Debugger extends Item {
                 }
             }
         }
-        return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, itemStackIn);
+        return new ActionResult<>(EnumActionResult.SUCCESS, itemStackIn);
     }
     public EnumActionResult onItemUseFirst(ItemStack itemStack, EntityPlayer entity, World world, BlockPos pos, EnumFacing side, float hitX, float hitY, float hitZ, EnumHand hand) {
         Minecraft mc = Minecraft.getMinecraft();
 
         if(mode == 0) {
-            if (world.getBlockState(pos).getBlock() == InnovativeTransport.ITBlocks.PIPE && world.isRemote) {
+            if (world.getBlockState(pos).getBlock() == BlockPipe.INSTANCE && world.isRemote) {
                 TilePipeHolder me = (TilePipeHolder) world.getTileEntity(pos);
                 mc.thePlayer.addChatMessage(new TextComponentTranslation("§aCLIENT-----------------"));
                 mc.thePlayer.addChatMessage(new TextComponentTranslation("§a" + pos.toString()));
                 mc.thePlayer.addChatMessage(new TextComponentTranslation("§a" + me.getPipe().connection.toString()));
 
-            } else if (world.getBlockState(pos).getBlock() == InnovativeTransport.ITBlocks.PIPE & !world.isRemote) {
+            } else if (world.getBlockState(pos).getBlock() == BlockPipe.INSTANCE & !world.isRemote) {
                 TilePipeHolder me = (TilePipeHolder) world.getTileEntity(pos);
                 mc.thePlayer.addChatMessage(new TextComponentTranslation("§cSERVER-----------------"));
                 mc.thePlayer.addChatMessage(new TextComponentTranslation("§c" + pos.toString()));
@@ -67,7 +70,7 @@ public class Debugger extends Item {
             }
         }
         if (mode == 1) {
-            if(world.getBlockState(pos).getBlock() == InnovativeTransport.ITBlocks.PIPE && world.isRemote){
+            if(world.getBlockState(pos).getBlock() == BlockPipe.INSTANCE && world.isRemote){
                 TilePipeHolder me = (TilePipeHolder) world.getTileEntity(pos);
                 mc.thePlayer.addChatMessage(new TextComponentTranslation("§aCLIENT-----------------"));
                     if(me.getPipe().connection.get(EnumFacing.UP).toString() != "none"){
@@ -101,7 +104,7 @@ public class Debugger extends Item {
                         ctex =ctex+"n";
                     }
                 mc.thePlayer.addChatMessage(new TextComponentTranslation(ctex));
-            }else if(world.getBlockState(pos).getBlock() == InnovativeTransport.ITBlocks.PIPE &! world.isRemote){
+            }else if(world.getBlockState(pos).getBlock() == BlockPipe.INSTANCE &! world.isRemote){
                 TilePipeHolder me = (TilePipeHolder) world.getTileEntity(pos);
                 mc.thePlayer.addChatMessage(new TextComponentTranslation("§cSERVER-----------------"));
                 if(me.getPipe().connection.get(EnumFacing.UP).toString() != "none"){
@@ -146,13 +149,13 @@ public class Debugger extends Item {
     public EnumActionResult onItemUse(ItemStack stack, EntityPlayer playerIn, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
         IBlockState blockState = worldIn.getBlockState(pos);
         if (mode == 2) {
-            if (blockState.getBlock() == InnovativeTransport.ITBlocks.PIPE) {
+            if (blockState.getBlock() == BlockPipe.INSTANCE) {
                 if (blockState.getValue(TilePipeHolder.states.get(facing)) != EnumConnectionType.none) {
                     Minecraft mc = Minecraft.getMinecraft();
-                    if(worldIn.isRemote){
+                    if (worldIn.isRemote) {
                         mc.thePlayer.addChatMessage(new TextComponentTranslation("§aCLIENT-----------------"));
                         mc.thePlayer.addChatMessage(new TextComponentTranslation("§a"+blockState.getValue(TilePipeHolder.states.get(facing)).toString()));
-                    }else if(!worldIn.isRemote){
+                    } else {
                         mc.thePlayer.addChatMessage(new TextComponentTranslation("§cSERVER-----------------"));
                         mc.thePlayer.addChatMessage(new TextComponentTranslation("§c"+blockState.getValue(TilePipeHolder.states.get(facing)).toString()));
                         mc.thePlayer.addChatMessage(new TextComponentTranslation("-----------------------"));

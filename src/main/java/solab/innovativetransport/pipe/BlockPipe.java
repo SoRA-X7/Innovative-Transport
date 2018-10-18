@@ -38,6 +38,7 @@ public class BlockPipe extends BlockContainer {
     protected static final AxisAlignedBB EAST_AABB = new AxisAlignedBB(0.75D, 0.25D, 0.25D, 1D, 0.75D, 0.75D);
     protected static final AxisAlignedBB WEST_AABB = new AxisAlignedBB(0D, 0.25D, 0.25D, 0.25D, 0.75D, 0.75D);
     protected static final AxisAlignedBB[] BOX_FACES = {DOWN_AABB , UP_AABB, NORTH_AABB, SOUTH_AABB, WEST_AABB, EAST_AABB };
+    public static final BlockPipe INSTANCE = new BlockPipe();
 
     public BlockPipe() {
         super(Material.CIRCUITS);
@@ -230,7 +231,7 @@ public class BlockPipe extends BlockContainer {
 
     @Override
     public RayTraceResult collisionRayTrace(IBlockState blockState, World worldIn, BlockPos pos, Vec3d start, Vec3d end) {
-        if (blockState.getBlock() == InnovativeTransport.ITBlocks.PIPE) {
+        if (blockState.getBlock() == INSTANCE) {
             List<IndexedCuboid6> cuboids = new ArrayList<>();
             cuboids.add(new IndexedCuboid6(0,CENTER_AABB));
             if ((blockState.getValue(TilePipeHolder.states.get(EnumFacing.DOWN)) == EnumConnectionType.pipe)) cuboids.add(new IndexedCuboid6(1,DOWN_AABB));
