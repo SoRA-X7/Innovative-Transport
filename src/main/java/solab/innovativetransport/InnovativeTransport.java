@@ -1,8 +1,11 @@
 package solab.innovativetransport;
 
 import net.minecraft.block.Block;
+import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemBlock;
+import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
@@ -37,14 +40,33 @@ public class InnovativeTransport {
     public static Block[] getBlocks() {
         return blocks;
     }
+    public static void registerBlocks(Block[] blocks,boolean isClient) {
+        for (Block block:blocks) {
+            GameRegistry.register(block);
+            Item item = new ItemBlock(block).setRegistryName(block.getRegistryName());
+            GameRegistry.register(item);
+            if (isClient) {
+                ModelLoader.setCustomModelResourceLocation(item,0,new ModelResourceLocation(block.getRegistryName(),"inventory"));
+            }
+        }
+    }
+
     public static Item[] getItems() {
         return items;
+    }
+    public static void registerItems(Item[] items, boolean isClient) {
+        for (Item item:items) {
+            GameRegistry.register(item);
+            if (isClient) {
+                ModelLoader.setCustomModelResourceLocation(item,0,new ModelResourceLocation(item.getRegistryName(),"inventory"));
+            }
+        }
     }
 
     @EventHandler
     public void preInit(FMLPreInitializationEvent event) {
-        InnovativeTransportRegisterBlocks.registerBlocks(getBlocks(),event.getSide().isClient());
+        registerBlocks(getBlocks(),event.getSide().isClient());
         GameRegistry.registerTileEntity(TilePipeHolder.class,MODID + ":transportpipe");
-        InnovativeTransportRegisterItems.registerItems(getItems(),event.getSide().isClient());
+        registerItems(getItems(),event.getSide().isClient());
     }
 }
