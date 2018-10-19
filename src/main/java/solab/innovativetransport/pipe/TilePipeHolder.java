@@ -1,6 +1,5 @@
 package solab.innovativetransport.pipe;
 
-import codechicken.lib.raytracer.IndexedCuboid6;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.nbt.NBTTagCompound;
@@ -11,12 +10,15 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import solab.innovativetransport.InnovativeTransport;
+import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.items.CapabilityItemHandler;
+import net.minecraftforge.items.IItemHandler;
+import net.minecraftforge.items.ItemStackHandler;
 import solab.innovativetransport.PipeBlockStateNBTData;
+import solab.innovativetransport.transporter.Transporter;
 
 import javax.annotation.Nullable;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class TilePipeHolder extends TileEntity implements IPipeHolder, ITickable {
@@ -84,6 +86,11 @@ public class TilePipeHolder extends TileEntity implements IPipeHolder, ITickable
             markDirty();
             worldObj.notifyBlockUpdate(pos,oldState,worldObj.getBlockState(pos),2);
         }
+    }
+
+    public boolean inject(Transporter transporter) {
+        pipe.transporters.add(transporter);
+        return true;
     }
 
     public void readFromNBT(NBTTagCompound nbtTagCompound) {
