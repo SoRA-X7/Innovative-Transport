@@ -6,6 +6,7 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraftforge.client.model.ModelLoader;
+import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
@@ -14,6 +15,7 @@ import solab.innovativetransport.card.ItemCard;
 import solab.innovativetransport.card.ItemCardSlot;
 import solab.innovativetransport.item.Debugger;
 import solab.innovativetransport.pipe.BlockPipe;
+import solab.innovativetransport.pipe.PipeTESR;
 import solab.innovativetransport.pipe.TilePipeHolder;
 
 @Mod(modid = InnovativeTransport.MODID,dependencies = InnovativeTransport.DEPENDENCIES)
@@ -67,6 +69,9 @@ public class InnovativeTransport {
     public void preInit(FMLPreInitializationEvent event) {
         registerBlocks(getBlocks(),event.getSide().isClient());
         GameRegistry.registerTileEntity(TilePipeHolder.class,MODID + ":transportpipe");
+        if (event.getSide().isClient()) {
+            ClientRegistry.bindTileEntitySpecialRenderer(TilePipeHolder.class,new PipeTESR());
+        }
         registerItems(getItems(),event.getSide().isClient());
     }
 }
