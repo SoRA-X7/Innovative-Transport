@@ -14,7 +14,6 @@ import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 import solab.innovativetransport.InnovativeTransport;
 import solab.innovativetransport.pipe.BlockPipe;
-import solab.innovativetransport.pipe.EnumConnectionType;
 import solab.innovativetransport.pipe.TilePipeHolder;
 
 /**
@@ -150,7 +149,7 @@ public class Debugger extends Item {
         IBlockState blockState = worldIn.getBlockState(pos);
         if (mode == 2) {
             if (blockState.getBlock() == BlockPipe.INSTANCE) {
-                if (blockState.getValue(TilePipeHolder.states.get(facing)) != EnumConnectionType.none) {
+                if (blockState.getValue(TilePipeHolder.states.get(facing))) {
                     Minecraft mc = Minecraft.getMinecraft();
                     if (worldIn.isRemote) {
                         mc.thePlayer.addChatMessage(new TextComponentTranslation("§aCLIENT-----------------"));

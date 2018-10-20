@@ -46,12 +46,12 @@ public class BlockPipe extends BlockContainer {
         setUnlocalizedName("transportpipe");
         setCreativeTab(InnovativeTransport.tab);
         setDefaultState(blockState.getBaseState()
-                .withProperty(TilePipeHolder.states.get(EnumFacing.UP),EnumConnectionType.none)
-                .withProperty(TilePipeHolder.states.get(EnumFacing.DOWN),EnumConnectionType.none)
-                .withProperty(TilePipeHolder.states.get(EnumFacing.NORTH),EnumConnectionType.none)
-                .withProperty(TilePipeHolder.states.get(EnumFacing.SOUTH),EnumConnectionType.none)
-                .withProperty(TilePipeHolder.states.get(EnumFacing.EAST),EnumConnectionType.none)
-                .withProperty(TilePipeHolder.states.get(EnumFacing.WEST),EnumConnectionType.none)
+                .withProperty(TilePipeHolder.states.get(EnumFacing.UP),false)
+                .withProperty(TilePipeHolder.states.get(EnumFacing.DOWN),false)
+                .withProperty(TilePipeHolder.states.get(EnumFacing.NORTH),false)
+                .withProperty(TilePipeHolder.states.get(EnumFacing.SOUTH),false)
+                .withProperty(TilePipeHolder.states.get(EnumFacing.EAST),false)
+                .withProperty(TilePipeHolder.states.get(EnumFacing.WEST),false)
         );
     }
     @Override
@@ -73,12 +73,12 @@ public class BlockPipe extends BlockContainer {
 
     public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos) {
         TilePipeHolder tilePipe = (TilePipeHolder) worldIn.getTileEntity(pos);
-        state.withProperty(TilePipeHolder.states.get(EnumFacing.UP),tilePipe.pipe.connection.get(EnumFacing.UP))
-                .withProperty(TilePipeHolder.states.get(EnumFacing.DOWN),tilePipe.pipe.connection.get(EnumFacing.DOWN))
-                .withProperty(TilePipeHolder.states.get(EnumFacing.NORTH),tilePipe.pipe.connection.get(EnumFacing.NORTH))
-                .withProperty(TilePipeHolder.states.get(EnumFacing.SOUTH),tilePipe.pipe.connection.get(EnumFacing.SOUTH))
-                .withProperty(TilePipeHolder.states.get(EnumFacing.EAST),tilePipe.pipe.connection.get(EnumFacing.EAST))
-                .withProperty(TilePipeHolder.states.get(EnumFacing.WEST),tilePipe.pipe.connection.get(EnumFacing.WEST));
+        state.withProperty(TilePipeHolder.states.get(EnumFacing.UP),tilePipe.pipe.connection.get(EnumFacing.UP) == EnumConnectionType.pipe)
+                .withProperty(TilePipeHolder.states.get(EnumFacing.DOWN),tilePipe.pipe.connection.get(EnumFacing.DOWN) == EnumConnectionType.pipe)
+                .withProperty(TilePipeHolder.states.get(EnumFacing.NORTH),tilePipe.pipe.connection.get(EnumFacing.NORTH) == EnumConnectionType.pipe)
+                .withProperty(TilePipeHolder.states.get(EnumFacing.SOUTH),tilePipe.pipe.connection.get(EnumFacing.SOUTH) == EnumConnectionType.pipe)
+                .withProperty(TilePipeHolder.states.get(EnumFacing.EAST),tilePipe.pipe.connection.get(EnumFacing.EAST) == EnumConnectionType.pipe)
+                .withProperty(TilePipeHolder.states.get(EnumFacing.WEST),tilePipe.pipe.connection.get(EnumFacing.WEST) == EnumConnectionType.pipe);
         return state;
     }
 
@@ -221,12 +221,12 @@ public class BlockPipe extends BlockContainer {
     public void addCollisionBoxToList(IBlockState state, World worldIn, BlockPos pos, AxisAlignedBB entityBox, List<AxisAlignedBB> collidingBoxes, @Nullable Entity entityIn) {
         state = state.getActualState(worldIn, pos);
         addCollisionBoxToList(pos,entityBox,collidingBoxes,CENTER_AABB);
-        if ((state.getValue(TilePipeHolder.states.get(EnumFacing.UP)) == EnumConnectionType.pipe)) addCollisionBoxToList(pos,entityBox,collidingBoxes,UP_AABB);
-        if ((state.getValue(TilePipeHolder.states.get(EnumFacing.DOWN)) == EnumConnectionType.pipe)) addCollisionBoxToList(pos,entityBox,collidingBoxes,DOWN_AABB);
-        if ((state.getValue(TilePipeHolder.states.get(EnumFacing.NORTH)) == EnumConnectionType.pipe)) addCollisionBoxToList(pos,entityBox,collidingBoxes,NORTH_AABB);
-        if ((state.getValue(TilePipeHolder.states.get(EnumFacing.SOUTH)) == EnumConnectionType.pipe)) addCollisionBoxToList(pos,entityBox,collidingBoxes,SOUTH_AABB);
-        if ((state.getValue(TilePipeHolder.states.get(EnumFacing.EAST)) == EnumConnectionType.pipe)) addCollisionBoxToList(pos,entityBox,collidingBoxes,EAST_AABB);
-        if ((state.getValue(TilePipeHolder.states.get(EnumFacing.WEST)) == EnumConnectionType.pipe)) addCollisionBoxToList(pos,entityBox,collidingBoxes,WEST_AABB);
+        if (state.getValue(TilePipeHolder.states.get(EnumFacing.UP))) addCollisionBoxToList(pos,entityBox,collidingBoxes,UP_AABB);
+        if (state.getValue(TilePipeHolder.states.get(EnumFacing.DOWN))) addCollisionBoxToList(pos,entityBox,collidingBoxes,DOWN_AABB);
+        if (state.getValue(TilePipeHolder.states.get(EnumFacing.NORTH))) addCollisionBoxToList(pos,entityBox,collidingBoxes,NORTH_AABB);
+        if (state.getValue(TilePipeHolder.states.get(EnumFacing.SOUTH))) addCollisionBoxToList(pos,entityBox,collidingBoxes,SOUTH_AABB);
+        if (state.getValue(TilePipeHolder.states.get(EnumFacing.EAST))) addCollisionBoxToList(pos,entityBox,collidingBoxes,EAST_AABB);
+        if (state.getValue(TilePipeHolder.states.get(EnumFacing.WEST))) addCollisionBoxToList(pos,entityBox,collidingBoxes,WEST_AABB);
     }
 
     @Override
@@ -234,12 +234,12 @@ public class BlockPipe extends BlockContainer {
         if (blockState.getBlock() == INSTANCE) {
             List<IndexedCuboid6> cuboids = new ArrayList<>();
             cuboids.add(new IndexedCuboid6(0,CENTER_AABB));
-            if ((blockState.getValue(TilePipeHolder.states.get(EnumFacing.DOWN)) == EnumConnectionType.pipe)) cuboids.add(new IndexedCuboid6(1,DOWN_AABB));
-            if ((blockState.getValue(TilePipeHolder.states.get(EnumFacing.UP)) == EnumConnectionType.pipe)) cuboids.add(new IndexedCuboid6(2,UP_AABB));
-            if ((blockState.getValue(TilePipeHolder.states.get(EnumFacing.NORTH)) == EnumConnectionType.pipe)) cuboids.add(new IndexedCuboid6(3,NORTH_AABB));
-            if ((blockState.getValue(TilePipeHolder.states.get(EnumFacing.SOUTH)) == EnumConnectionType.pipe)) cuboids.add(new IndexedCuboid6(4,SOUTH_AABB));
-            if ((blockState.getValue(TilePipeHolder.states.get(EnumFacing.WEST)) == EnumConnectionType.pipe)) cuboids.add(new IndexedCuboid6(5,WEST_AABB));
-            if ((blockState.getValue(TilePipeHolder.states.get(EnumFacing.EAST)) == EnumConnectionType.pipe)) cuboids.add(new IndexedCuboid6(6,EAST_AABB));
+            if (blockState.getValue(TilePipeHolder.states.get(EnumFacing.DOWN))) cuboids.add(new IndexedCuboid6(1,DOWN_AABB));
+            if (blockState.getValue(TilePipeHolder.states.get(EnumFacing.UP))) cuboids.add(new IndexedCuboid6(2,UP_AABB));
+            if (blockState.getValue(TilePipeHolder.states.get(EnumFacing.NORTH))) cuboids.add(new IndexedCuboid6(3,NORTH_AABB));
+            if (blockState.getValue(TilePipeHolder.states.get(EnumFacing.SOUTH))) cuboids.add(new IndexedCuboid6(4,SOUTH_AABB));
+            if (blockState.getValue(TilePipeHolder.states.get(EnumFacing.WEST))) cuboids.add(new IndexedCuboid6(5,WEST_AABB));
+            if (blockState.getValue(TilePipeHolder.states.get(EnumFacing.EAST))) cuboids.add(new IndexedCuboid6(6,EAST_AABB));
             return RayTracer.rayTraceCuboidsClosest(start, end, cuboids, pos);
         }
         return null;

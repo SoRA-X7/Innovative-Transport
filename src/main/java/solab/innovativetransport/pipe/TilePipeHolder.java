@@ -1,5 +1,6 @@
 package solab.innovativetransport.pipe;
 
+import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.nbt.NBTTagCompound;
@@ -27,14 +28,14 @@ public class TilePipeHolder extends TileEntity implements IPipeHolder, ITickable
     PipeBlockStateNBTData nbtData;
     boolean first = true;
 
-    public static final Map<EnumFacing,PropertyEnum<EnumConnectionType>> states = new HashMap<EnumFacing, PropertyEnum<EnumConnectionType>>() {
+    public static final Map<EnumFacing,PropertyBool> states = new HashMap<EnumFacing, PropertyBool>() {
         {
-            put(EnumFacing.UP,PropertyEnum.create("up",EnumConnectionType.class));
-            put(EnumFacing.DOWN,PropertyEnum.create("down",EnumConnectionType.class));
-            put(EnumFacing.NORTH,PropertyEnum.create("north",EnumConnectionType.class));
-            put(EnumFacing.SOUTH,PropertyEnum.create("south",EnumConnectionType.class));
-            put(EnumFacing.EAST,PropertyEnum.create("east",EnumConnectionType.class));
-            put(EnumFacing.WEST,PropertyEnum.create("west",EnumConnectionType.class));
+            put(EnumFacing.UP,PropertyBool.create("up"));
+            put(EnumFacing.DOWN,PropertyBool.create("down"));
+            put(EnumFacing.NORTH,PropertyBool.create("north"));
+            put(EnumFacing.SOUTH,PropertyBool.create("south"));
+            put(EnumFacing.EAST,PropertyBool.create("east"));
+            put(EnumFacing.WEST,PropertyBool.create("west"));
         }
     };
 
@@ -58,7 +59,7 @@ public class TilePipeHolder extends TileEntity implements IPipeHolder, ITickable
         if (!checkNext || next != null) {
             if (!checkNext || ((next.pipe.connection.get(to.getOpposite()) == EnumConnectionType.none || next.pipe.connection.get(to.getOpposite()) == EnumConnectionType.pipe)) && pipe.connection.get(to) == EnumConnectionType.none) {
                 IBlockState oldState = worldObj.getBlockState(pos);
-                worldObj.setBlockState(pos,oldState.withProperty(states.get(to),EnumConnectionType.pipe));
+                worldObj.setBlockState(pos,oldState.withProperty(states.get(to),true));
                 pipe.connection.put(to,EnumConnectionType.pipe);
                 markDirty();
                 worldObj.notifyBlockUpdate(pos,oldState,worldObj.getBlockState(pos),2);
@@ -71,7 +72,7 @@ public class TilePipeHolder extends TileEntity implements IPipeHolder, ITickable
     public void disconnect(EnumFacing from) {
         if (pipe.connection.get(from) == EnumConnectionType.pipe) {
             pipe.connection.put(from,EnumConnectionType.none);
-            worldObj.setBlockState(pos,worldObj.getBlockState(pos).withProperty(states.get(from),EnumConnectionType.none));
+            worldObj.setBlockState(pos,worldObj.getBlockState(pos).withProperty(states.get(from),false));
             markDirty();
             worldObj.notifyBlockUpdate(pos,worldObj.getBlockState(pos),worldObj.getBlockState(pos),2);
         }
@@ -81,7 +82,7 @@ public class TilePipeHolder extends TileEntity implements IPipeHolder, ITickable
         if (pipe.connection.get(facing) == EnumConnectionType.none) {
             pipe.addCardSlot(facing);
             IBlockState oldState = worldObj.getBlockState(pos);
-            worldObj.setBlockState(pos,oldState.withProperty(states.get(facing), EnumConnectionType.slot));
+//            worldObj.setBlockState(pos,oldState.withProperty(states.get(facing), EnumConnectionType.slot));
             pipe.connection.put(facing,EnumConnectionType.slot);
             markDirty();
             worldObj.notifyBlockUpdate(pos,oldState,worldObj.getBlockState(pos),2);

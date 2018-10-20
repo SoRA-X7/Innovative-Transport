@@ -1,16 +1,20 @@
 package solab.innovativetransport;
 
 import net.minecraft.block.Block;
+import net.minecraft.client.renderer.block.model.ModelBakery;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+import solab.innovativetransport.card.BlockDummyCardSlot;
 import solab.innovativetransport.card.ItemCard;
 import solab.innovativetransport.card.ItemCardSlot;
 import solab.innovativetransport.item.Debugger;
@@ -38,6 +42,7 @@ public class InnovativeTransport {
             ItemCard.INSTANCE,
             ItemCardSlot.INSTANCE
     };
+    public static final BlockDummyCardSlot dummyCardSlot = new BlockDummyCardSlot();
 
     public static Block[] getBlocks() {
         return blocks;
@@ -67,6 +72,7 @@ public class InnovativeTransport {
 
     @EventHandler
     public void preInit(FMLPreInitializationEvent event) {
+        GameRegistry.register(dummyCardSlot);
         registerBlocks(getBlocks(),event.getSide().isClient());
         GameRegistry.registerTileEntity(TilePipeHolder.class,MODID + ":transportpipe");
         if (event.getSide().isClient()) {
