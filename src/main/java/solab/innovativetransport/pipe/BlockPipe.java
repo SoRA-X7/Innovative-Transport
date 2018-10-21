@@ -157,7 +157,7 @@ public class BlockPipe extends BlockContainer {
         RayTraceResult trace = Minecraft.getMinecraft().objectMouseOver;
         if (trace == null || trace.subHit < 0 || !pos.equals(trace.getBlockPos())) {
             // Perhaps we aren't the object the mouse is over
-            return FULL_BLOCK_AABB;
+            return CENTER_AABB;
         }
         int part = trace.subHit;
         AxisAlignedBB aabb = CENTER_AABB;

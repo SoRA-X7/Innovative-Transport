@@ -122,31 +122,43 @@ public class TilePipeHolder extends TileEntity implements IPipeHolder, ITickable
             connect(EnumFacing.UP,false);
         } else if (EnumConnectionType.valueOf(nbtData.u) == EnumConnectionType.slot) {
             attachCardSlot(EnumFacing.UP);
+        } else if (EnumConnectionType.valueOf(nbtData.u) == EnumConnectionType.none) {
+            disconnect(EnumFacing.UP);
         }
         if (EnumConnectionType.valueOf(nbtData.d) == EnumConnectionType.pipe) {
             connect(EnumFacing.DOWN,false);
         } else if (EnumConnectionType.valueOf(nbtData.d) == EnumConnectionType.slot) {
             attachCardSlot(EnumFacing.DOWN);
+        } else if (EnumConnectionType.valueOf(nbtData.d) == EnumConnectionType.none) {
+            disconnect(EnumFacing.DOWN);
         }
         if (EnumConnectionType.valueOf(nbtData.n) == EnumConnectionType.pipe) {
             connect(EnumFacing.NORTH,false);
         } else if (EnumConnectionType.valueOf(nbtData.n) == EnumConnectionType.slot) {
             attachCardSlot(EnumFacing.NORTH);
+        } else if (EnumConnectionType.valueOf(nbtData.n) == EnumConnectionType.none) {
+            disconnect(EnumFacing.NORTH);
         }
         if (EnumConnectionType.valueOf(nbtData.s) == EnumConnectionType.pipe) {
             connect(EnumFacing.SOUTH,false);
         } else if (EnumConnectionType.valueOf(nbtData.s) == EnumConnectionType.slot) {
             attachCardSlot(EnumFacing.SOUTH);
+        } else if (EnumConnectionType.valueOf(nbtData.s) == EnumConnectionType.none) {
+            disconnect(EnumFacing.SOUTH);
         }
         if (EnumConnectionType.valueOf(nbtData.e) == EnumConnectionType.pipe) {
             connect(EnumFacing.EAST,false);
         } else if (EnumConnectionType.valueOf(nbtData.e) == EnumConnectionType.slot) {
             attachCardSlot(EnumFacing.EAST);
+        } else if (EnumConnectionType.valueOf(nbtData.e) == EnumConnectionType.none) {
+            disconnect(EnumFacing.EAST);
         }
         if (EnumConnectionType.valueOf(nbtData.w) == EnumConnectionType.pipe) {
             connect(EnumFacing.WEST,false);
         } else if (EnumConnectionType.valueOf(nbtData.w) == EnumConnectionType.slot) {
             attachCardSlot(EnumFacing.WEST);
+        } else if (EnumConnectionType.valueOf(nbtData.w) == EnumConnectionType.none) {
+            disconnect(EnumFacing.WEST);
         }
         worldObj.notifyBlockUpdate(pos,oldBlockState,worldObj.getBlockState(pos),2);
         markDirty();
