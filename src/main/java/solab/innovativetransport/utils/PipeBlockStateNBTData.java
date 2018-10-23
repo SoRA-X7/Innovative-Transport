@@ -1,4 +1,4 @@
-package solab.innovativetransport;
+package solab.innovativetransport.utils;
 
 import net.minecraft.nbt.NBTTagCompound;
 

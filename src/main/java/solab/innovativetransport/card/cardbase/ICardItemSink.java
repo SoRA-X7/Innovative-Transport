@@ -20,7 +20,7 @@ public interface ICardItemSink {
     /**
      * 行き先未指定アイテムの回収優先順位を指定します。
      * 通常のItemSinkを10としてください。
-     * @return 優先順位(>0)
+     * @return 優先順位(0以上)
      */
     int getPassiveRequestOrder();
 }

@@ -13,6 +13,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 import solab.innovativetransport.InnovativeTransport;
+import solab.innovativetransport.card.cardbase.CardBase;
 import solab.innovativetransport.pipe.BlockPipe;
 import solab.innovativetransport.pipe.EnumConnectionType;
 import solab.innovativetransport.pipe.TilePipeHolder;
@@ -76,32 +77,32 @@ public class Debugger extends Item {
                     if(me.getPipe().connection.get(EnumFacing.UP).toString() != "none"){
                         ctex =ctex+"U";
                     }else{
-                        ctex =ctex+"n";
+                        ctex =ctex+"_";
                     }
                     if(me.getPipe().connection.get(EnumFacing.DOWN).toString() != "none"){
                         ctex =ctex+"D";
                     }else{
-                        ctex =ctex+"n";
+                        ctex =ctex+"_";
                     }
                     if(me.getPipe().connection.get(EnumFacing.NORTH).toString() != "none"){
                         ctex =ctex+"N";
                     }else{
-                        ctex =ctex+"n";
+                        ctex =ctex+"_";
                     }
                     if(me.getPipe().connection.get(EnumFacing.SOUTH).toString() != "none"){
                         ctex =ctex+"S";
                     }else{
-                        ctex =ctex+"n";
+                        ctex =ctex+"_";
                     }
                     if(me.getPipe().connection.get(EnumFacing.EAST).toString() != "none"){
                         ctex =ctex+"E";
                     }else{
-                        ctex =ctex+"n";
+                        ctex =ctex+"_";
                     }
                     if(me.getPipe().connection.get(EnumFacing.WEST).toString() != "none"){
                         ctex =ctex+"W";
                     }else{
-                        ctex =ctex+"n";
+                        ctex =ctex+"_";
                     }
                 mc.thePlayer.addChatMessage(new TextComponentTranslation(ctex));
             }else if(world.getBlockState(pos).getBlock() == BlockPipe.INSTANCE &! world.isRemote){
@@ -150,14 +151,18 @@ public class Debugger extends Item {
         IBlockState blockState = worldIn.getBlockState(pos);
         if (mode == 2) {
             if (blockState.getBlock() == BlockPipe.INSTANCE) {
-                if (blockState.getValue(TilePipeHolder.states.get(facing)) != EnumConnectionType.none) {
+                if (!blockState.getValue(TilePipeHolder.states.get(facing)) && ((TilePipeHolder)worldIn.getTileEntity(pos)).getPipe().getCardSlot(facing) != null) {
                     Minecraft mc = Minecraft.getMinecraft();
                     if (worldIn.isRemote) {
                         mc.thePlayer.addChatMessage(new TextComponentTranslation("§aCLIENT-----------------"));
-                        mc.thePlayer.addChatMessage(new TextComponentTranslation("§a"+blockState.getValue(TilePipeHolder.states.get(facing)).toString()));
+                        for (CardBase card: ((TilePipeHolder)worldIn.getTileEntity(pos)).getPipe().getCardSlot(facing).getCards()) {
+                            mc.thePlayer.addChatMessage(new TextComponentTranslation("§a"+"1"));
+                        }
                     } else {
                         mc.thePlayer.addChatMessage(new TextComponentTranslation("§cSERVER-----------------"));
-                        mc.thePlayer.addChatMessage(new TextComponentTranslation("§c"+blockState.getValue(TilePipeHolder.states.get(facing)).toString()));
+                        for (CardBase card: ((TilePipeHolder)worldIn.getTileEntity(pos)).getPipe().getCardSlot(facing).getCards()) {
+                            mc.thePlayer.addChatMessage(new TextComponentTranslation("§a"+"1"));
+                        }
                         mc.thePlayer.addChatMessage(new TextComponentTranslation("-----------------------"));
                     }
                     return EnumActionResult.SUCCESS;

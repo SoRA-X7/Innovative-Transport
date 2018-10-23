@@ -1,9 +1,11 @@
 package solab.innovativetransport.card.cardbase;
 
 import solab.innovativetransport.card.EnumCards;
+import solab.innovativetransport.card.extractor.ExtractorCardMk1;
+import solab.innovativetransport.card.itemsink.ItemSinkCard;
 import solab.innovativetransport.pipe.Pipe;
 
-public class CardBase implements ICardBehaviour {
+public abstract class CardBase implements ICardBehaviour {
 
     public Pipe pipe;
 
@@ -31,7 +33,16 @@ public class CardBase implements ICardBehaviour {
      * @return カードの種類
      */
     @Override
-    public EnumCards getCardType() {
-        return EnumCards.ItemSink;
+    public abstract EnumCards getCardType();
+
+    public static CardBase getCardFromType(EnumCards type) {
+        switch (type) {
+            case ItemSink:
+                return new ItemSinkCard();
+            case Extractor:
+                return new ExtractorCardMk1();
+                default:
+                    return null;
+        }
     }
 }

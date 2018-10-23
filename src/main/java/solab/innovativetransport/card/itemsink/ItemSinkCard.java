@@ -1,6 +1,7 @@
 package solab.innovativetransport.card.itemsink;
 
 import net.minecraft.item.Item;
+import solab.innovativetransport.card.EnumCards;
 import solab.innovativetransport.card.cardbase.CardBase;
 import solab.innovativetransport.card.cardbase.ICardItemSink;
 
@@ -37,10 +38,20 @@ public class ItemSinkCard extends CardBase implements ICardItemSink {
      * 行き先未指定アイテムの回収優先順位を指定します。
      * 通常のItemSinkを10としてください。
      *
-     * @return 優先順位(> 0)
+     * @return 優先順位(0以上)
      */
     @Override
     public int getPassiveRequestOrder() {
         return 10;
+    }
+
+    /**
+     * カードの種類を返します。
+     *
+     * @return カードの種類
+     */
+    @Override
+    public EnumCards getCardType() {
+        return EnumCards.ItemSink;
     }
 }

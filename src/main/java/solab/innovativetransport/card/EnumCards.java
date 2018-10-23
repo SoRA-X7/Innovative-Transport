@@ -1,6 +1,8 @@
 package solab.innovativetransport.card;
 
-public enum EnumCards {
+import net.minecraft.util.IStringSerializable;
+
+public enum EnumCards implements IStringSerializable {
     ItemSink,
     Extractor,
     Provider,
@@ -8,5 +10,10 @@ public enum EnumCards {
 
     public static int maxLength() {
         return 4;
+    }
+
+    @Override
+    public String getName() {
+        return this.name();
     }
 }
