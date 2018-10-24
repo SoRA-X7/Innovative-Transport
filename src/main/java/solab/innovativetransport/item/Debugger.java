@@ -15,7 +15,6 @@ import net.minecraft.world.World;
 import solab.innovativetransport.InnovativeTransport;
 import solab.innovativetransport.card.cardbase.CardBase;
 import solab.innovativetransport.pipe.BlockPipe;
-import solab.innovativetransport.pipe.EnumConnectionType;
 import solab.innovativetransport.pipe.TilePipeHolder;
 
 /**

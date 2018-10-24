@@ -11,7 +11,7 @@ import solab.innovativetransport.utils.ModuleInventoryAccessHelper;
 public class ExtractorCardMk1 extends CardBase implements ICardTickable {
 
     private int timer = 0;
-    private int interval = 20;
+    private int interval = 10;
     /**
      * 毎Tick呼び出されます。
      */

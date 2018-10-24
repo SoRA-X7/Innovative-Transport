@@ -41,6 +41,10 @@ public class Pipe implements IPipe {
              cardSlots.values()) {
             slot.update();
         }
+        for (Transporter tra:
+             transporters) {
+
+        }
 
         Iterator<Transporter> i = transporters.iterator();
         while (i.hasNext()) {

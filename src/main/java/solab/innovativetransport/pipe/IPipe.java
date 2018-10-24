@@ -6,10 +6,7 @@ import solab.innovativetransport.transporter.Transporter;
 import java.util.ArrayList;
 import java.util.List;
 
-public interface IPipe extends ICapabilityProvider {
+public interface IPipe {
     IPipeHolder getHolder();
     List<Transporter> transporters = new ArrayList<>();
-
-
-
 }
