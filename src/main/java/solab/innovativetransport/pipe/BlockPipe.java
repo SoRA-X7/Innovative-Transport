@@ -24,23 +24,23 @@ import solab.innovativetransport.InnovativeTransport;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 public class BlockPipe extends BlockContainer {
 
-    protected static final AxisAlignedBB CENTER_AABB = new AxisAlignedBB(0.25D, 0.25D, 0.25D, 0.75D, 0.75D, 0.75D);
-    protected static final AxisAlignedBB UP_AABB = new AxisAlignedBB(0.25D, 0.75D, 0.25D, 0.75D, 1D, 0.75D);
-    protected static final AxisAlignedBB DOWN_AABB = new AxisAlignedBB(0.25D, 0D, 0.25D, 0.75D, 0.25D, 0.75D);
-    protected static final AxisAlignedBB NORTH_AABB = new AxisAlignedBB(0.25D, 0.25D, 0D, 0.75D, 0.75D, 0.25D);
-    protected static final AxisAlignedBB SOUTH_AABB = new AxisAlignedBB(0.25D, 0.25D, 0.75D, 0.75D, 0.75D, 1D);
-    protected static final AxisAlignedBB EAST_AABB = new AxisAlignedBB(0.75D, 0.25D, 0.25D, 1D, 0.75D, 0.75D);
-    protected static final AxisAlignedBB WEST_AABB = new AxisAlignedBB(0D, 0.25D, 0.25D, 0.25D, 0.75D, 0.75D);
-    protected static final AxisAlignedBB[] BOX_FACES = {DOWN_AABB , UP_AABB, NORTH_AABB, SOUTH_AABB, WEST_AABB, EAST_AABB };
+    private static final AxisAlignedBB CENTER_AABB = new AxisAlignedBB(0.25D, 0.25D, 0.25D, 0.75D, 0.75D, 0.75D);
+    private static final AxisAlignedBB UP_AABB = new AxisAlignedBB(0.25D, 0.75D, 0.25D, 0.75D, 1D, 0.75D);
+    private static final AxisAlignedBB DOWN_AABB = new AxisAlignedBB(0.25D, 0D, 0.25D, 0.75D, 0.25D, 0.75D);
+    private static final AxisAlignedBB NORTH_AABB = new AxisAlignedBB(0.25D, 0.25D, 0D, 0.75D, 0.75D, 0.25D);
+    private static final AxisAlignedBB SOUTH_AABB = new AxisAlignedBB(0.25D, 0.25D, 0.75D, 0.75D, 0.75D, 1D);
+    private static final AxisAlignedBB EAST_AABB = new AxisAlignedBB(0.75D, 0.25D, 0.25D, 1D, 0.75D, 0.75D);
+    private static final AxisAlignedBB WEST_AABB = new AxisAlignedBB(0D, 0.25D, 0.25D, 0.25D, 0.75D, 0.75D);
+    private static final AxisAlignedBB[] BOX_FACES = {DOWN_AABB , UP_AABB, NORTH_AABB, SOUTH_AABB, WEST_AABB, EAST_AABB };
     public static final BlockPipe INSTANCE = new BlockPipe();
 
-    public BlockPipe() {
+    private BlockPipe() {
         super(Material.CIRCUITS);
         setRegistryName(InnovativeTransport.MODID,"transportpipe");
         setUnlocalizedName("transportpipe");
@@ -73,12 +73,14 @@ public class BlockPipe extends BlockContainer {
 
     public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos) {
         TilePipeHolder tilePipe = (TilePipeHolder) worldIn.getTileEntity(pos);
-        state.withProperty(TilePipeHolder.states.get(EnumFacing.UP),tilePipe.pipe.connection.get(EnumFacing.UP) == EnumConnectionType.pipe)
-                .withProperty(TilePipeHolder.states.get(EnumFacing.DOWN),tilePipe.pipe.connection.get(EnumFacing.DOWN) == EnumConnectionType.pipe)
-                .withProperty(TilePipeHolder.states.get(EnumFacing.NORTH),tilePipe.pipe.connection.get(EnumFacing.NORTH) == EnumConnectionType.pipe)
-                .withProperty(TilePipeHolder.states.get(EnumFacing.SOUTH),tilePipe.pipe.connection.get(EnumFacing.SOUTH) == EnumConnectionType.pipe)
-                .withProperty(TilePipeHolder.states.get(EnumFacing.EAST),tilePipe.pipe.connection.get(EnumFacing.EAST) == EnumConnectionType.pipe)
-                .withProperty(TilePipeHolder.states.get(EnumFacing.WEST),tilePipe.pipe.connection.get(EnumFacing.WEST) == EnumConnectionType.pipe);
+        if (tilePipe != null) {
+            state.withProperty(TilePipeHolder.states.get(EnumFacing.UP),tilePipe.pipe.connection.get(EnumFacing.UP) == EnumConnectionType.pipe)
+                    .withProperty(TilePipeHolder.states.get(EnumFacing.DOWN),tilePipe.pipe.connection.get(EnumFacing.DOWN) == EnumConnectionType.pipe)
+                    .withProperty(TilePipeHolder.states.get(EnumFacing.NORTH),tilePipe.pipe.connection.get(EnumFacing.NORTH) == EnumConnectionType.pipe)
+                    .withProperty(TilePipeHolder.states.get(EnumFacing.SOUTH),tilePipe.pipe.connection.get(EnumFacing.SOUTH) == EnumConnectionType.pipe)
+                    .withProperty(TilePipeHolder.states.get(EnumFacing.EAST),tilePipe.pipe.connection.get(EnumFacing.EAST) == EnumConnectionType.pipe)
+                    .withProperty(TilePipeHolder.states.get(EnumFacing.WEST),tilePipe.pipe.connection.get(EnumFacing.WEST) == EnumConnectionType.pipe);
+        }
         return state;
     }
 
@@ -123,7 +125,7 @@ public class BlockPipe extends BlockContainer {
     @Override
     public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
 
-        for (Map.Entry<EnumFacing,EnumConnectionType> entry:((TilePipeHolder)worldIn.getTileEntity(pos)).pipe.connection.entrySet()) {
+        for (Map.Entry<EnumFacing,EnumConnectionType> entry:((TilePipeHolder) Objects.requireNonNull(worldIn.getTileEntity(pos))).pipe.connection.entrySet()) {
             if (entry.getValue() == EnumConnectionType.pipe) {
                 TilePipeHolder holder = (TilePipeHolder) worldIn.getTileEntity(pos.offset(entry.getKey()));
                 if (holder != null) {
@@ -133,18 +135,15 @@ public class BlockPipe extends BlockContainer {
         }
 
         worldIn.removeTileEntity(pos);
-//        worldIn.markBlockRangeForRenderUpdate(pos, pos);
-//        worldIn.notifyBlockUpdate(pos,worldIn.getBlockState(pos),worldIn.getBlockState(pos),2);
     }
 
-    public void updateConnection(IBlockAccess world, BlockPos pos, EnumFacing facing) {
+    private void updateConnection(IBlockAccess world, BlockPos pos, EnumFacing facing) {
         TileEntity tile = world.getTileEntity(pos.offset(facing));
         TilePipeHolder me = (TilePipeHolder) world.getTileEntity(pos);
-        if (tile instanceof TilePipeHolder) {
-            me.connect(facing,true);
+        if (tile instanceof TilePipeHolder && me != null) {
+            me.connect(facing, true);
             ((TilePipeHolder)tile).connect(facing.getOpposite(),true);
         }
-//        System.out.println(me.connection.toString());
     }
 
     public EnumBlockRenderType getRenderType(IBlockState state)

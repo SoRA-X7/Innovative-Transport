@@ -11,8 +11,8 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import solab.innovativetransport.transporter.ItemTransporter;
 import solab.innovativetransport.utils.PipeBlockStateNBTData;
-import solab.innovativetransport.transporter.Transporter;
 
 import javax.annotation.Nullable;
 import java.util.HashMap;
@@ -21,8 +21,8 @@ import java.util.Map;
 public class TilePipeHolder extends TileEntity implements IPipeHolder, ITickable {
 
     protected final Pipe pipe;
-    PipeBlockStateNBTData nbtData;
-    boolean first = true;
+    private PipeBlockStateNBTData nbtData;
+    private boolean first = true;
 
     public static final Map<EnumFacing,PropertyBool> states = new HashMap<EnumFacing, PropertyBool>() {
         {
@@ -50,7 +50,7 @@ public class TilePipeHolder extends TileEntity implements IPipeHolder, ITickable
         return pipe;
     }
 
-    public boolean connect(EnumFacing to,boolean checkNext) {
+    boolean connect(EnumFacing to, boolean checkNext) {
         TilePipeHolder next = getNextPipeHolder(to);
         if (!checkNext || next != null) {
             if (!checkNext || ((next.pipe.connection.get(to.getOpposite()) == EnumConnectionType.none || next.pipe.connection.get(to.getOpposite()) == EnumConnectionType.pipe)) && pipe.connection.get(to) == EnumConnectionType.none) {
@@ -65,7 +65,7 @@ public class TilePipeHolder extends TileEntity implements IPipeHolder, ITickable
         return false;
     }
 
-    public void disconnect(EnumFacing from) {
+    void disconnect(EnumFacing from) {
         if (pipe.connection.get(from) == EnumConnectionType.pipe) {
             pipe.connection.put(from,EnumConnectionType.none);
             worldObj.setBlockState(pos,worldObj.getBlockState(pos).withProperty(states.get(from),false));
@@ -85,8 +85,8 @@ public class TilePipeHolder extends TileEntity implements IPipeHolder, ITickable
         }
     }
 
-    public boolean inject(Transporter transporter) {
-        pipe.transporters.add(transporter);
+    public boolean inject(ItemTransporter transporter) {
+        pipe.items.add(transporter);
         markDirty();
         worldObj.notifyBlockUpdate(pos,worldObj.getBlockState(pos),worldObj.getBlockState(pos),2);
         return true;
@@ -116,7 +116,7 @@ public class TilePipeHolder extends TileEntity implements IPipeHolder, ITickable
         return nbt;
     }
 
-    void connectUsingNBT(PipeBlockStateNBTData nbtData) {
+    private void connectUsingNBT(PipeBlockStateNBTData nbtData) {
         IBlockState oldBlockState = worldObj.getBlockState(pos);
         if (EnumConnectionType.valueOf(nbtData.u) == EnumConnectionType.pipe) {
             connect(EnumFacing.UP,false);
@@ -205,7 +205,8 @@ public class TilePipeHolder extends TileEntity implements IPipeHolder, ITickable
         } else return null;
     }
 
-    public TilePipeHolder getNextPipeHolder(EnumFacing facing) {
+    @Nullable
+    TilePipeHolder getNextPipeHolder(EnumFacing facing) {
         TileEntity tile = getNeighborTile(facing);
         if (tile instanceof TilePipeHolder) {
             return (TilePipeHolder)tile;
@@ -213,7 +214,8 @@ public class TilePipeHolder extends TileEntity implements IPipeHolder, ITickable
         return null;
     }
 
-    public IInventory getNeighborInventory() {
+    @Nullable
+    IInventory getNeighborInventory() {
         for (EnumFacing facing:
              EnumFacing.VALUES) {
             if (pipe.connection.get(facing) == EnumConnectionType.tile) {
@@ -223,11 +225,11 @@ public class TilePipeHolder extends TileEntity implements IPipeHolder, ITickable
         for (EnumFacing facing:
                 EnumFacing.VALUES) {
             if (pipe.connection.get(facing) == EnumConnectionType.none) {
-                IInventory inventory = (IInventory) getNeighborTile(facing);
-                if (inventory != null) {
-//                    System.out.println("Inventory Found: " + inventory.toString());
-                    return inventory;
+                TileEntity tile = getNeighborTile(facing);
+                if (tile instanceof IInventory) {
+                    return (IInventory) tile;
                 }
+
             }
         }
         System.out.println("404");

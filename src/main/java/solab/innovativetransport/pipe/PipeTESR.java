@@ -24,7 +24,6 @@ public class PipeTESR extends TileEntitySpecialRenderer<TilePipeHolder> {
         GlStateManager.pushMatrix();
 
         // Translate to the location of our tile entity
-        GlStateManager.translate(x, y, z);
         GlStateManager.disableRescaleNormal();
         this.bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
 
@@ -41,6 +40,7 @@ public class PipeTESR extends TileEntitySpecialRenderer<TilePipeHolder> {
         GlStateManager.pushMatrix();
         GlStateManager.enableLighting();
         RenderHelper.disableStandardItemLighting();
+        GlStateManager.translate(x, y, z);
         GlStateManager.translate(-te.getPos().getX(), -te.getPos().getY(), -te.getPos().getZ());
         if (Minecraft.isAmbientOcclusionEnabled()) {
             GlStateManager.shadeModel(GL11.GL_SMOOTH);
@@ -70,14 +70,14 @@ public class PipeTESR extends TileEntitySpecialRenderer<TilePipeHolder> {
 //        System.out.println("Render Transporters");
         RenderHelper.enableStandardItemLighting();
         GlStateManager.enableLighting();
-        System.out.println(te.pipe.transporters);
 
         for (Transporter tra:
-             te.pipe.transporters) {
+             te.pipe.items) {
             GlStateManager.pushMatrix();
+
+            GlStateManager.translate(x, y, z);
 //            GlStateManager.translate(te.getPos().getX(), te.getPos().getY(), te.getPos().getZ());
-            GlStateManager.translate(0.5f,0.4f,0.5f);
-            System.out.println(tra.progress);
+            GlStateManager.translate(0.5f,0.5f,0.5f);
             if (tra.progress < 0.5f) {
                 switch (tra.in) {
                     case DOWN:
@@ -87,10 +87,10 @@ public class PipeTESR extends TileEntitySpecialRenderer<TilePipeHolder> {
                         GlStateManager.translate(0,0.5-tra.progress,0);
                         break;
                     case NORTH:
-                        GlStateManager.translate(0,0,0.5-tra.progress);
+                        GlStateManager.translate(0,0,-0.5+tra.progress);
                         break;
                     case SOUTH:
-                        GlStateManager.translate(0,0,-0.5+tra.progress);
+                        GlStateManager.translate(0,0,0.5-tra.progress);
                         break;
                     case WEST:
                         GlStateManager.translate(-0.5+tra.progress,0,0);
@@ -100,7 +100,7 @@ public class PipeTESR extends TileEntitySpecialRenderer<TilePipeHolder> {
                         break;
                 }
             } else {
-                switch (tra.in) {
+                switch (tra.out) {
                     case DOWN:
                         GlStateManager.translate(0,0.5-tra.progress,0);
                         break;
@@ -108,10 +108,10 @@ public class PipeTESR extends TileEntitySpecialRenderer<TilePipeHolder> {
                         GlStateManager.translate(0,-0.5+tra.progress,0);
                         break;
                     case NORTH:
-                        GlStateManager.translate(0,0,-0.5+tra.progress);
+                        GlStateManager.translate(0,0,0.5-tra.progress);
                         break;
                     case SOUTH:
-                        GlStateManager.translate(0,0,0.5-tra.progress);
+                        GlStateManager.translate(0,0,-0.5+tra.progress);
                         break;
                     case WEST:
                         GlStateManager.translate(0.5-tra.progress,0,0);
@@ -121,7 +121,7 @@ public class PipeTESR extends TileEntitySpecialRenderer<TilePipeHolder> {
                         break;
                 }
             }
-            GlStateManager.scale(0.75f,0.75f,0.75f);
+            GlStateManager.scale(0.25f,0.25f,0.25f);
             if (tra instanceof ItemTransporter) {
                 ItemTransporter itemTransporter = (ItemTransporter)tra;
                 Minecraft.getMinecraft().getRenderItem().renderItem(itemTransporter.item, ItemCameraTransforms.TransformType.NONE);

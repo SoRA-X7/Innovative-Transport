@@ -6,38 +6,38 @@ import solab.innovativetransport.pipe.TilePipeHolder;
 
 public class Transporter {
     private static int nextFreeId = 0;
-    public int id;
+    private int id;
     public float progress = 0;
     public EnumFacing in;
     public EnumFacing out;
     public TilePipeHolder current;
     public TilePipeHolder next;
-    public float speed = 0.01f;
+    public float speed = 0.08f;
 
-    public Transporter(TilePipeHolder current, EnumFacing in, EnumFacing out) {
+    Transporter(TilePipeHolder current, EnumFacing in, EnumFacing out) {
         this.id = getNextFreeId();
         this.current = current;
         this.in = in;
         this.out = out;
-        this.next = this.current.getNextPipeHolder(this.out);
+        this.next = null;
     }
 
-    public Transporter(TilePipeHolder current, NBTTagCompound childCompound) {
+    Transporter(TilePipeHolder current, NBTTagCompound childCompound) {
         this.readFromNBT(childCompound);
         this.id = getNextFreeId();
         this.current = current;
-        this.next = this.current.getNextPipeHolder(this.out);
+        this.next = null;
     }
 
-    public static int getNextFreeId() {
+    private static int getNextFreeId() {
         return ++Transporter.nextFreeId;
     }
 
     public NBTTagCompound writeToNBT(NBTTagCompound compound) {
         compound.setFloat("IT_Tra_progress",progress);
         compound.setFloat("IT_Tra_speed",speed);
-        compound.setByte("IT_Tra_in",(byte)in.ordinal());
-        compound.setByte("IT_Tra_out",(byte)out.ordinal());
+        compound.setByte("IT_Tra_in",(byte)in.getIndex());
+        compound.setByte("IT_Tra_out",(byte)out.getIndex());
         return compound;
     }
     public void readFromNBT(NBTTagCompound compound) {

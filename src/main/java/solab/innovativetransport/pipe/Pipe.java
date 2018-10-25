@@ -9,13 +9,12 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.common.util.Constants;
 import solab.innovativetransport.card.CardSlot;
 import solab.innovativetransport.transporter.ItemTransporter;
-import solab.innovativetransport.transporter.Transporter;
 
 import java.util.*;
 
 public class Pipe implements IPipe {
 
-    protected final TilePipeHolder holder;
+    private final TilePipeHolder holder;
     public EnumMap<EnumFacing,EnumConnectionType> connection = new EnumMap<EnumFacing, EnumConnectionType>(EnumFacing.class) {{
         put(EnumFacing.UP,EnumConnectionType.none);
         put(EnumFacing.DOWN,EnumConnectionType.none);
@@ -24,50 +23,61 @@ public class Pipe implements IPipe {
         put(EnumFacing.EAST,EnumConnectionType.none);
         put(EnumFacing.WEST,EnumConnectionType.none);
     }};
-    protected Map<EnumFacing,CardSlot> cardSlots = new HashMap<>();
-    public List<Transporter> transporters = new ArrayList<>();
+    private Map<EnumFacing,CardSlot> cardSlots = new HashMap<>();
+    List<ItemTransporter> items = new ArrayList<>();
     public IInventory managedInventory;
     public Pipe(TilePipeHolder holderIn) {
         this.holder = holderIn;
     }
 
-    public void update() {
+    void update() {
+
         boolean changed = false;
         if (!cardSlots.isEmpty() && managedInventory == null) {
             managedInventory = holder.getNeighborInventory();
             changed = managedInventory != null;
         }
         for (CardSlot slot:
-             cardSlots.values()) {
+                cardSlots.values()) {
             slot.update();
         }
-        for (Transporter tra:
-             transporters) {
 
-        }
-
-        Iterator<Transporter> i = transporters.iterator();
+        Iterator<ItemTransporter> i = items.iterator();
         while (i.hasNext()) {
-            changed = true;
-            Transporter tra = i.next();
+            ItemTransporter tra = i.next();
+            if (tra.next == null) {
+                tra.next = tra.current.getNextPipeHolder(tra.out);
+                changed = true;
+            }
             tra.progress += tra.speed;
-            if (tra.progress >= 1f) {
-                System.out.println("next");
-                tra.current = tra.next;
-                tra.in = tra.out.getOpposite();
-                tra.out = tra.current.getPipe().getRandomExit(tra.in);
-                if (tra.out == null) {
-                    if (tra instanceof ItemTransporter && !tra.current.getWorld().isRemote) {
+
+            if (!holder.getWorld().isRemote) {
+                if (tra.next == null && tra.progress > 0.7f) {
+                    if (tra.current.hasWorldObj() && !tra.current.getWorld().isRemote) {
+                        changed = true;
                         BlockPos pos = tra.current.getPos().offset(tra.in.getOpposite());
-                        tra.current.getWorld().spawnEntityInWorld(new EntityItem(tra.current.getWorld(),pos.getX(),pos.getY(),pos.getZ(),((ItemTransporter)tra).item));
+                        tra.current.getWorld().spawnEntityInWorld(new EntityItem(tra.current.getWorld(),pos.getX(),pos.getY(),pos.getZ(), tra.item));
                         i.remove();
                         continue;
                     }
                 }
-                tra.next = tra.current.getNextPipeHolder(tra.out);
-                tra.current.inject(tra);
-                i.remove();
-                tra.progress -= 1f;
+
+                if (tra.progress >= 1f) {
+                    changed = true;
+                    tra.in = tra.out.getOpposite();
+                    EnumFacing rndOut = tra.next != null ? tra.next.getPipe().getRandomExit(tra.in) : null;
+                    if (rndOut != null) {
+                        tra.out = rndOut;
+                    } else {
+                        tra.out = tra.in.getOpposite();
+                    }
+                    assert tra.next != null;
+                    tra.next.inject(tra);
+                    i.remove();
+                    tra.progress -= 1f;
+                    tra.current = tra.next;
+                    tra.next = tra.next.getNextPipeHolder(tra.out);
+                }
             }
         }
         if (changed) {
@@ -81,11 +91,11 @@ public class Pipe implements IPipe {
         return holder;
     }
 
-    public EnumConnectionType getConnectionTypeOf(EnumFacing facing) {
+    EnumConnectionType getConnectionTypeOf(EnumFacing facing) {
         return connection.get(facing);
     }
 
-    public void addCardSlot(EnumFacing facing) {
+    void addCardSlot(EnumFacing facing) {
         cardSlots.put(facing,new CardSlot(this));
     }
 
@@ -103,7 +113,7 @@ public class Pipe implements IPipe {
     public EnumFacing getRandomExit(EnumFacing in) {
         List<EnumFacing> available = new ArrayList<>();
         for (EnumMap.Entry<EnumFacing,EnumConnectionType> entry:
-             connection.entrySet()) {
+                connection.entrySet()) {
             if (entry.getValue() == EnumConnectionType.pipe || entry.getValue() == EnumConnectionType.tile) {
                 if (entry.getKey() != in) {
                     available.add(entry.getKey());
@@ -111,28 +121,27 @@ public class Pipe implements IPipe {
             }
         }
         if (available.isEmpty()) {
-            System.out.println("503");
             return null;
         }
         return available.get(new Random().nextInt(available.size()));
     }
 
-    public NBTTagCompound writeToNBT(NBTTagCompound compound) {
+    NBTTagCompound writeToNBT(NBTTagCompound compound) {
         NBTTagList list = new NBTTagList();
-        for (int i=0;i<transporters.size();i++) {
+        for (ItemTransporter transporter : items) {
             NBTTagCompound childCompound = new NBTTagCompound();
-            childCompound = transporters.get(i).writeToNBT(childCompound);
+            childCompound = transporter.writeToNBT(childCompound);
             list.appendTag(childCompound);
         }
-        compound.setTag("transporters",list);
+        compound.setTag("items",list);
         return compound;
     }
-    public void readFromNBT(NBTTagCompound compound) {
-        NBTTagList list = compound.getTagList("transporters", Constants.NBT.TAG_COMPOUND);
-        transporters.clear();
+    void readFromNBT(NBTTagCompound compound) {
+        NBTTagList list = compound.getTagList("items", Constants.NBT.TAG_COMPOUND);
+        items.clear();
         for (int i=0; i<list.tagCount(); i++) {
             NBTTagCompound childCompound = list.getCompoundTagAt(i);
-            transporters.add(new Transporter(holder,childCompound));
+            items.add(new ItemTransporter(holder,childCompound));
         }
     }
 

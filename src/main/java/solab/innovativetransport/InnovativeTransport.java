@@ -1,13 +1,10 @@
 package solab.innovativetransport;
 
 import net.minecraft.block.Block;
-import net.minecraft.client.renderer.block.model.ModelBakery;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
-import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.common.Mod;
@@ -25,7 +22,7 @@ import solab.innovativetransport.pipe.TilePipeHolder;
 @Mod(modid = InnovativeTransport.MODID,dependencies = InnovativeTransport.DEPENDENCIES)
 public class InnovativeTransport {
     public static final String MODID = "innovativetransport";
-    public static final String DEPENDENCIES = "required-after:CodeChickenLib";
+    static final String DEPENDENCIES = "required-after:CodeChickenLib";
 
     public static final CreativeTabs tab = new CreativeTabs("Innovative Transport") {
         @Override
@@ -44,10 +41,10 @@ public class InnovativeTransport {
     };
     public static final BlockDummyCardSlot dummyCardSlot = new BlockDummyCardSlot();
 
-    public static Block[] getBlocks() {
+    private static Block[] getBlocks() {
         return blocks;
     }
-    public static void registerBlocks(Block[] blocks,boolean isClient) {
+    private static void registerBlocks(Block[] blocks, boolean isClient) {
         for (Block block:blocks) {
             GameRegistry.register(block);
             Item item = new ItemBlock(block).setRegistryName(block.getRegistryName());
@@ -58,10 +55,10 @@ public class InnovativeTransport {
         }
     }
 
-    public static Item[] getItems() {
+    private static Item[] getItems() {
         return items;
     }
-    public static void registerItems(Item[] items, boolean isClient) {
+    private static void registerItems(Item[] items, boolean isClient) {
         for (Item item:items) {
             GameRegistry.register(item);
             if (isClient) {

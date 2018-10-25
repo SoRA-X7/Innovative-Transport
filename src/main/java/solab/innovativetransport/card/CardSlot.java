@@ -9,14 +9,14 @@ import java.util.List;
 
 public class CardSlot {
 
-    List<CardBase> cards = new ArrayList<>(4);
-    Pipe pipe;
+    private List<CardBase> cards = new ArrayList<>(4);
+    private Pipe pipe;
 
     public CardSlot(Pipe pipeIn) {
         pipe = pipeIn;
     }
 
-    public boolean insert(CardBase newCard) {
+    boolean insert(CardBase newCard) {
         boolean success = cards.add(newCard);
         if (success) {
             cards.get(cards.size()-1).onCardInserted(pipe);
