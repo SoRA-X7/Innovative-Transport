@@ -12,6 +12,10 @@ import solab.innovativetransport.transporter.ItemTransporter;
 
 import java.util.*;
 
+/**
+ * アイテム輸送管としてのパイプの機能
+ * （まだ分離しきれていない）
+ */
 public class Pipe implements IPipe {
 
     private final TilePipeHolder holder;
@@ -26,6 +30,7 @@ public class Pipe implements IPipe {
     private Map<EnumFacing,CardSlot> cardSlots = new HashMap<>();
     List<ItemTransporter> items = new ArrayList<>();
     public IInventory managedInventory;
+
     public Pipe(TilePipeHolder holderIn) {
         this.holder = holderIn;
     }
@@ -134,10 +139,11 @@ public class Pipe implements IPipe {
         compound.setTag("items",list);
         return compound;
     }
+
     void readFromNBT(NBTTagCompound compound) {
         NBTTagList list = compound.getTagList("items", Constants.NBT.TAG_COMPOUND);
         items.clear();
-        for (int i=0; i<list.tagCount(); i++) {
+        for (int i = 0; i<list.tagCount(); i++) {
             NBTTagCompound childCompound = list.getCompoundTagAt(i);
             items.add(new ItemTransporter(holder,childCompound));
         }

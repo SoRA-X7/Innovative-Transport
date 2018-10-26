@@ -18,9 +18,16 @@ import javax.annotation.Nullable;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * パイプ、カードスロット等のTileEntity
+ */
 public class TilePipeHolder extends TileEntity implements IPipeHolder, ITickable {
 
+    /**
+     * 自身のPipe
+     */
     protected final Pipe pipe;
+
     private PipeBlockStateNBTData nbtData;
     private boolean first = true;
 
@@ -50,6 +57,13 @@ public class TilePipeHolder extends TileEntity implements IPipeHolder, ITickable
         return pipe;
     }
 
+    /**
+     * 隣接したTilePipeHolderと接続します。
+     *
+     * @param to        　接続する方向（自分から見て）
+     * @param checkNext falseの場合、接続先がTilePipeHolderでなくてもその方角を接続状態にします。
+     * @return 接続に成功したらtrue
+     */
     boolean connect(EnumFacing to, boolean checkNext) {
         TilePipeHolder next = getNextPipeHolder(to);
         if (!checkNext || next != null) {
@@ -65,31 +79,50 @@ public class TilePipeHolder extends TileEntity implements IPipeHolder, ITickable
         return false;
     }
 
+    /**
+     * 指定した方向のパイプと切断します。
+     * 自分にしか効果を及ぼさないため、相手先でも同じメソッドを呼んでください。
+     *
+     * @param from 切断するパイプの方向
+     */
     void disconnect(EnumFacing from) {
         if (pipe.connection.get(from) == EnumConnectionType.pipe) {
             pipe.connection.put(from,EnumConnectionType.none);
             worldObj.setBlockState(pos,worldObj.getBlockState(pos).withProperty(states.get(from),false));
             markDirty();
-            worldObj.notifyBlockUpdate(pos,worldObj.getBlockState(pos),worldObj.getBlockState(pos),2);
+            worldObj.notifyBlockUpdate(pos, worldObj.getBlockState(pos), worldObj.getBlockState(pos), 2);
         }
     }
 
-    public void attachCardSlot(EnumFacing facing) {
+    /**
+     * カードスロットを装着します。
+     *
+     * @param facing 装着する方向
+     * @return 装着に成功したらtrue
+     */
+    public boolean attachCardSlot(EnumFacing facing) {
         if (pipe.connection.get(facing) == EnumConnectionType.none) {
             pipe.addCardSlot(facing);
             IBlockState oldState = worldObj.getBlockState(pos);
 //            worldObj.setBlockState(pos,oldState.withProperty(states.get(facing), EnumConnectionType.slot));
             pipe.connection.put(facing,EnumConnectionType.slot);
             markDirty();
-            worldObj.notifyBlockUpdate(pos,oldState,worldObj.getBlockState(pos),2);
+            worldObj.notifyBlockUpdate(pos, oldState, worldObj.getBlockState(pos), 2);
+            return true;
         }
+        return false;
     }
 
-    public boolean inject(ItemTransporter transporter) {
+    /**
+     * ItemTransporterをこのパイプに挿入します。
+     *
+     * @param transporter 挿入するItemTransporter
+     * @see ItemTransporter
+     */
+    public void inject(ItemTransporter transporter) {
         pipe.items.add(transporter);
         markDirty();
         worldObj.notifyBlockUpdate(pos,worldObj.getBlockState(pos),worldObj.getBlockState(pos),2);
-        return true;
     }
 
     public void readFromNBT(NBTTagCompound nbtTagCompound) {
@@ -100,8 +133,6 @@ public class TilePipeHolder extends TileEntity implements IPipeHolder, ITickable
         } else {
             nbtData = new PipeBlockStateNBTData(nbtTagCompound);
         }
-//        markDirty();
-//        worldObj.notifyBlockUpdate(pos,worldObj.getBlockState(pos),worldObj.getBlockState(pos),2);
     }
 
     public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
@@ -197,27 +228,37 @@ public class TilePipeHolder extends TileEntity implements IPipeHolder, ITickable
         readFromNBT(tag);
     }
 
+    /** 隣接TileEntityを取得します。
+     * @param facing TileEntityの方角
+     * @return 指定した方向のTileEntity、存在しなければnull
+     */
     @Nullable
-    @Override
     public TileEntity getNeighborTile(EnumFacing facing) {
         if (hasWorldObj() && facing != null) {
             return getWorld().getTileEntity(getPos().offset(facing));
         } else return null;
     }
 
+    /** 指定した方角のTilePipeHolderを取得します。
+     * @param facing TilePipeHolderの方角
+     * @return 指定した方向のTilePipeHolder、存在しなければnull
+     */
     @Nullable
     TilePipeHolder getNextPipeHolder(EnumFacing facing) {
         TileEntity tile = getNeighborTile(facing);
         if (tile instanceof TilePipeHolder) {
-            return (TilePipeHolder)tile;
+            return (TilePipeHolder) tile;
         }
         return null;
     }
 
+    /** 指定した方角のIInventoryを取得します。
+     * @return 指定した方角のIInventory、存在しなければnull
+     */
     @Nullable
     IInventory getNeighborInventory() {
-        for (EnumFacing facing:
-             EnumFacing.VALUES) {
+        for (EnumFacing facing :
+                EnumFacing.VALUES) {
             if (pipe.connection.get(facing) == EnumConnectionType.tile) {
                 return (IInventory) getNeighborTile(facing);
             }
@@ -232,7 +273,6 @@ public class TilePipeHolder extends TileEntity implements IPipeHolder, ITickable
 
             }
         }
-        System.out.println("404");
         return null;
     }
 

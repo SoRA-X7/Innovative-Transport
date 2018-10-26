@@ -14,7 +14,7 @@ import solab.innovativetransport.pipe.BlockPipe;
 import solab.innovativetransport.pipe.TilePipeHolder;
 
 public class ItemCardSlot extends Item {
-    public ItemCardSlot() {
+    private ItemCardSlot() {
         super();
         setCreativeTab(InnovativeTransport.tab);
         setRegistryName("itemcardslot");
@@ -28,7 +28,10 @@ public class ItemCardSlot extends Item {
         if (blockState.getBlock() == BlockPipe.INSTANCE) {
             TilePipeHolder holder = (TilePipeHolder)worldIn.getTileEntity(pos);
             if (holder != null) {
-                holder.attachCardSlot(facing);
+                if (holder.attachCardSlot(facing)) {
+                    stack.stackSize--;
+                    return EnumActionResult.SUCCESS;
+                }
             }
         }
         return EnumActionResult.FAIL;
