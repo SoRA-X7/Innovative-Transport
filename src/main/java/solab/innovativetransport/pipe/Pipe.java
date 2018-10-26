@@ -47,14 +47,13 @@ public class Pipe implements IPipe {
             ItemTransporter tra = i.next();
             if (tra.next == null) {
                 tra.next = tra.current.getNextPipeHolder(tra.out);
-                changed = true;
             }
-            tra.progress += tra.speed;
 
+            tra.progress += tra.speed;
             if (!holder.getWorld().isRemote) {
+                changed = true;
                 if (tra.next == null && tra.progress > 0.7f) {
                     if (tra.current.hasWorldObj() && !tra.current.getWorld().isRemote) {
-                        changed = true;
                         BlockPos pos = tra.current.getPos().offset(tra.in.getOpposite());
                         tra.current.getWorld().spawnEntityInWorld(new EntityItem(tra.current.getWorld(),pos.getX(),pos.getY(),pos.getZ(), tra.item));
                         i.remove();
@@ -63,7 +62,6 @@ public class Pipe implements IPipe {
                 }
 
                 if (tra.progress >= 1f) {
-                    changed = true;
                     tra.in = tra.out.getOpposite();
                     EnumFacing rndOut = tra.next != null ? tra.next.getPipe().getRandomExit(tra.in) : null;
                     if (rndOut != null) {
