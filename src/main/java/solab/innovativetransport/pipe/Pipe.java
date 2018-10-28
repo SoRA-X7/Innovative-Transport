@@ -56,8 +56,8 @@ public class Pipe implements IPipe {
 
             tra.progress += tra.speed;
             if (!holder.getWorld().isRemote) {
-                changed = true;
                 if (tra.next == null && tra.progress > 0.7f) {
+                    changed = true;
                     if (tra.current.hasWorldObj() && !tra.current.getWorld().isRemote) {
                         BlockPos pos = tra.current.getPos().offset(tra.in.getOpposite());
                         tra.current.getWorld().spawnEntityInWorld(new EntityItem(tra.current.getWorld(),pos.getX(),pos.getY(),pos.getZ(), tra.item));
@@ -67,6 +67,7 @@ public class Pipe implements IPipe {
                 }
 
                 if (tra.progress >= 1f) {
+                    changed = true;
                     tra.in = tra.out.getOpposite();
                     EnumFacing rndOut = tra.next != null ? tra.next.getPipe().getRandomExit(tra.in) : null;
                     if (rndOut != null) {
@@ -98,8 +99,21 @@ public class Pipe implements IPipe {
         return connection.get(facing);
     }
 
-    void addCardSlot(EnumFacing facing) {
-        cardSlots.put(facing,new CardSlot(this));
+    /**
+     * スロットが存在しない場合、インスタンス化してそれを返します。
+     * スロットがすでにある場合、そのスロットを返します。
+     * @param facing スロットを設置する方向
+     * @return 最終的にfacingにあるスロット
+     */
+    CardSlot addCardSlotNonOverride(EnumFacing facing) {
+        if (cardSlots.get(facing) == null) {
+            CardSlot slot = new CardSlot(this);
+            cardSlots.put(facing,slot);
+            connection.put(facing,EnumConnectionType.slot);
+            return slot;
+        } else {
+            return cardSlots.get(facing);
+        }
     }
 
     public CardSlot getCardSlot(EnumFacing facing) {

@@ -11,12 +11,15 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import solab.innovativetransport.card.CardSlot;
 import solab.innovativetransport.transporter.ItemTransporter;
 import solab.innovativetransport.utils.PipeBlockStateNBTData;
 
 import javax.annotation.Nullable;
 import java.util.HashMap;
 import java.util.Map;
+
+import static net.minecraftforge.common.util.Constants.NBT.TAG_COMPOUND;
 
 /**
  * パイプ、カードスロット等のTileEntity
@@ -102,10 +105,9 @@ public class TilePipeHolder extends TileEntity implements IPipeHolder, ITickable
      */
     public boolean attachCardSlot(EnumFacing facing) {
         if (pipe.connection.get(facing) == EnumConnectionType.none) {
-            pipe.addCardSlot(facing);
+            pipe.addCardSlotNonOverride(facing);
             IBlockState oldState = worldObj.getBlockState(pos);
 //            worldObj.setBlockState(pos,oldState.withProperty(states.get(facing), EnumConnectionType.slot));
-            pipe.connection.put(facing,EnumConnectionType.slot);
             markDirty();
             worldObj.notifyBlockUpdate(pos, oldState, worldObj.getBlockState(pos), 2);
             return true;
@@ -128,6 +130,14 @@ public class TilePipeHolder extends TileEntity implements IPipeHolder, ITickable
     public void readFromNBT(NBTTagCompound nbtTagCompound) {
         super.readFromNBT(nbtTagCompound);
         pipe.readFromNBT(nbtTagCompound);
+
+        for (EnumFacing facing : EnumFacing.VALUES) {
+            if (nbtTagCompound.hasKey("cardslot_" + facing.getName(), TAG_COMPOUND)) {
+                System.out.println(nbtTagCompound.getCompoundTag("cardslot_" + facing.getName()).toString());
+                pipe.addCardSlotNonOverride(facing).readFromNBT(nbtTagCompound.getCompoundTag("cardslot_" + facing.getName()));
+            }
+        }
+
         if (hasWorldObj()) {
             connectUsingNBT(new PipeBlockStateNBTData(nbtTagCompound));
         } else {
@@ -138,6 +148,15 @@ public class TilePipeHolder extends TileEntity implements IPipeHolder, ITickable
     public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
         nbt = super.writeToNBT(nbt);
         nbt = pipe.writeToNBT(nbt);
+
+        for (EnumFacing facing:
+             EnumFacing.VALUES) {
+            CardSlot slot = pipe.getCardSlot(facing);
+            if (slot != null) {
+                nbt.setTag("cardslot_"+facing.getName(),slot.writeToNBT(new NBTTagCompound()));
+            }
+        }
+
         nbt.setString("connection_up",pipe.connection.get(EnumFacing.UP).getName());
         nbt.setString("connection_down",pipe.connection.get(EnumFacing.DOWN).getName());
         nbt.setString("connection_north",pipe.connection.get(EnumFacing.NORTH).getName());
@@ -149,54 +168,60 @@ public class TilePipeHolder extends TileEntity implements IPipeHolder, ITickable
 
     private void connectUsingNBT(PipeBlockStateNBTData nbtData) {
         IBlockState oldBlockState = worldObj.getBlockState(pos);
-        if (EnumConnectionType.valueOf(nbtData.u) == EnumConnectionType.pipe) {
-            connect(EnumFacing.UP,false);
-        } else if (EnumConnectionType.valueOf(nbtData.u) == EnumConnectionType.slot) {
-            attachCardSlot(EnumFacing.UP);
-        } else if (EnumConnectionType.valueOf(nbtData.u) == EnumConnectionType.none) {
-            disconnect(EnumFacing.UP);
+        switch (EnumConnectionType.valueOf(nbtData.u)) {
+            case pipe:
+                connect(EnumFacing.UP, false);
+                break;
+            case none:
+                disconnect(EnumFacing.UP);
+                break;
         }
-        if (EnumConnectionType.valueOf(nbtData.d) == EnumConnectionType.pipe) {
-            connect(EnumFacing.DOWN,false);
-        } else if (EnumConnectionType.valueOf(nbtData.d) == EnumConnectionType.slot) {
-            attachCardSlot(EnumFacing.DOWN);
-        } else if (EnumConnectionType.valueOf(nbtData.d) == EnumConnectionType.none) {
-            disconnect(EnumFacing.DOWN);
+        switch (EnumConnectionType.valueOf(nbtData.d)) {
+            case pipe:
+                connect(EnumFacing.DOWN, false);
+                break;
+            case none:
+                disconnect(EnumFacing.DOWN);
+                break;
         }
-        if (EnumConnectionType.valueOf(nbtData.n) == EnumConnectionType.pipe) {
-            connect(EnumFacing.NORTH,false);
-        } else if (EnumConnectionType.valueOf(nbtData.n) == EnumConnectionType.slot) {
-            attachCardSlot(EnumFacing.NORTH);
-        } else if (EnumConnectionType.valueOf(nbtData.n) == EnumConnectionType.none) {
-            disconnect(EnumFacing.NORTH);
+        switch (EnumConnectionType.valueOf(nbtData.n)) {
+            case pipe:
+                connect(EnumFacing.NORTH, false);
+                break;
+            case none:
+                disconnect(EnumFacing.NORTH);
+                break;
         }
-        if (EnumConnectionType.valueOf(nbtData.s) == EnumConnectionType.pipe) {
-            connect(EnumFacing.SOUTH,false);
-        } else if (EnumConnectionType.valueOf(nbtData.s) == EnumConnectionType.slot) {
-            attachCardSlot(EnumFacing.SOUTH);
-        } else if (EnumConnectionType.valueOf(nbtData.s) == EnumConnectionType.none) {
-            disconnect(EnumFacing.SOUTH);
+        switch (EnumConnectionType.valueOf(nbtData.s)) {
+            case pipe:
+                connect(EnumFacing.SOUTH, false);
+                break;
+            case none:
+                disconnect(EnumFacing.SOUTH);
+                break;
         }
-        if (EnumConnectionType.valueOf(nbtData.e) == EnumConnectionType.pipe) {
-            connect(EnumFacing.EAST,false);
-        } else if (EnumConnectionType.valueOf(nbtData.e) == EnumConnectionType.slot) {
-            attachCardSlot(EnumFacing.EAST);
-        } else if (EnumConnectionType.valueOf(nbtData.e) == EnumConnectionType.none) {
-            disconnect(EnumFacing.EAST);
+        switch (EnumConnectionType.valueOf(nbtData.e)) {
+            case pipe:
+                connect(EnumFacing.EAST, false);
+                break;
+            case none:
+                disconnect(EnumFacing.EAST);
+                break;
         }
-        if (EnumConnectionType.valueOf(nbtData.w) == EnumConnectionType.pipe) {
-            connect(EnumFacing.WEST,false);
-        } else if (EnumConnectionType.valueOf(nbtData.w) == EnumConnectionType.slot) {
-            attachCardSlot(EnumFacing.WEST);
-        } else if (EnumConnectionType.valueOf(nbtData.w) == EnumConnectionType.none) {
-            disconnect(EnumFacing.WEST);
+        switch (EnumConnectionType.valueOf(nbtData.w)) {
+            case pipe:
+                connect(EnumFacing.WEST, false);
+                break;
+            case none:
+                disconnect(EnumFacing.WEST);
+                break;
         }
         worldObj.notifyBlockUpdate(pos,oldBlockState,worldObj.getBlockState(pos),2);
         markDirty();
     }
 
     public boolean shouldRefresh(World world, BlockPos pos, IBlockState oldState, IBlockState newSate) {
-        return oldState == newSate;
+        return (oldState.getBlock() != newSate.getBlock()) && !first;
     }
 
     @Override
@@ -224,11 +249,11 @@ public class TilePipeHolder extends TileEntity implements IPipeHolder, ITickable
     public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity pkt){
         NBTTagCompound tag = pkt.getNbtCompound();
         //Handle your Data
-        super.readFromNBT(tag);
         readFromNBT(tag);
     }
 
-    /** 隣接TileEntityを取得します。
+    /**
+     * 隣接TileEntityを取得します。
      * @param facing TileEntityの方角
      * @return 指定した方向のTileEntity、存在しなければnull
      */
@@ -239,7 +264,8 @@ public class TilePipeHolder extends TileEntity implements IPipeHolder, ITickable
         } else return null;
     }
 
-    /** 指定した方角のTilePipeHolderを取得します。
+    /**
+     * 指定した方角のTilePipeHolderを取得します。
      * @param facing TilePipeHolderの方角
      * @return 指定した方向のTilePipeHolder、存在しなければnull
      */
@@ -252,7 +278,8 @@ public class TilePipeHolder extends TileEntity implements IPipeHolder, ITickable
         return null;
     }
 
-    /** 指定した方角のIInventoryを取得します。
+    /**
+     * 指定した方角のIInventoryを取得します。
      * @return 指定した方角のIInventory、存在しなければnull
      */
     @Nullable

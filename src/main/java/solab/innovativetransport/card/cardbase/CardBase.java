@@ -1,13 +1,17 @@
 package solab.innovativetransport.card.cardbase;
 
+import net.minecraft.nbt.NBTTagCompound;
 import solab.innovativetransport.card.EnumCards;
-import solab.innovativetransport.card.extractor.ExtractorCardMk1;
+import solab.innovativetransport.card.extractor.ExtractorCard;
 import solab.innovativetransport.card.itemsink.ItemSinkCard;
 import solab.innovativetransport.pipe.Pipe;
 
 public abstract class CardBase implements ICardBehaviour {
 
     public Pipe pipe;
+    protected int tier;
+    protected int maxStackSize;
+    protected static int[] acceptedTiers = {1};
 
     /**
      * カードがセットされた時に呼び出されます。
@@ -35,14 +39,34 @@ public abstract class CardBase implements ICardBehaviour {
     @Override
     public abstract EnumCards getCardType();
 
-    public static CardBase getCardFromType(EnumCards type) {
+    /**
+     * Tierの範囲を返します。
+     * @return Tierの範囲を返します。
+     */
+    public abstract int[] getAcceptedTiers();
+
+    public static CardBase getCardFromType(EnumCards type, int mk) {
         switch (type) {
             case ItemSink:
                 return new ItemSinkCard();
             case Extractor:
-                return new ExtractorCardMk1();
+                return new ExtractorCard(mk);
                 default:
                     return null;
         }
+    }
+
+    public abstract NBTTagCompound writeToNBT(NBTTagCompound compound);
+
+    public abstract void readFromNBT(NBTTagCompound compound);
+
+    protected NBTTagCompound writeToNBTShared(NBTTagCompound compound) {
+        compound.setInteger("IT_Card_Tier",tier);
+        compound.setInteger("IT_Card_Type",getCardType().ordinal());
+        return compound;
+    }
+
+    protected void readFromNBTShared(NBTTagCompound compound) {
+        tier = compound.getInteger("IT_Card_Tier");
     }
 }

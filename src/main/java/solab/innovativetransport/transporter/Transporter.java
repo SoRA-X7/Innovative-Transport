@@ -37,7 +37,7 @@ public class Transporter {
         compound.setFloat("IT_Tra_progress",progress);
         compound.setFloat("IT_Tra_speed",speed);
         compound.setByte("IT_Tra_in",(byte)in.getIndex());
-        compound.setByte("IT_Tra_out",(byte)out.getIndex());
+        compound.setByte("IT_Tra_out",(out != null) ? (byte)out.getIndex() : (byte) in.getOpposite().getIndex());
         return compound;
     }
     public void readFromNBT(NBTTagCompound compound) {

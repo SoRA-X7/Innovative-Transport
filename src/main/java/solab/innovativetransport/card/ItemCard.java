@@ -42,13 +42,20 @@ public class ItemCard extends Item {
     @SideOnly(Side.CLIENT)
     public void getSubItems(Item itemIn, CreativeTabs tab, List<ItemStack> subItems)
     {
-        for (int i=0;i<EnumCards.maxLength();i++) {
-            ItemStack stack = new ItemStack(itemIn);
-            NBTTagCompound compound1 = new NBTTagCompound();
-            compound1.setInteger("cardtype",i);
-            stack.setTagCompound(compound1);
-            subItems.add(stack);
-        }
+        setSubItems(itemIn,subItems,EnumCards.ItemSink,1);
+        setSubItems(itemIn,subItems,EnumCards.Extractor,1);
+        setSubItems(itemIn,subItems,EnumCards.Extractor,2);
+        setSubItems(itemIn,subItems,EnumCards.Extractor,3);
+        setSubItems(itemIn,subItems,EnumCards.Provider,1);
+        setSubItems(itemIn,subItems,EnumCards.Supplier,1);
+    }
+    private void setSubItems(Item itemIn, List<ItemStack> subItems, EnumCards type, int tier) {
+        ItemStack stack = new ItemStack(itemIn);
+        NBTTagCompound compound1 = new NBTTagCompound();
+        compound1.setInteger("cardtype",type.ordinal());
+        compound1.setInteger("cardtier",tier);
+        stack.setTagCompound(compound1);
+        subItems.add(stack);
     }
 
     @Override
@@ -67,7 +74,7 @@ public class ItemCard extends Item {
 
     @Override
     public EnumActionResult onItemUse(ItemStack stack, EntityPlayer playerIn, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
-        card = CardBase.getCardFromType(EnumCards.values()[stack.getTagCompound().getInteger("cardtype")]);
+        card = CardBase.getCardFromType(EnumCards.values()[stack.getTagCompound().getInteger("cardtype")],stack.getTagCompound().getInteger("cardtier"));
         if (worldIn.getBlockState(pos).getBlock() == BlockPipe.INSTANCE) {
             TilePipeHolder holder = (TilePipeHolder) worldIn.getTileEntity(pos);
             if (holder != null && holder.getPipe().getCardSlot(facing) != null) {
