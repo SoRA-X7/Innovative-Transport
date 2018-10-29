@@ -1,4 +1,4 @@
-package solab.innovativetransport.pipe;
+package solab.innovativetransport.pipe.normal;
 
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.inventory.IInventory;
@@ -7,7 +7,8 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.common.util.Constants;
-import solab.innovativetransport.card.CardSlot;
+import solab.innovativetransport.pipe.attachment.cardslot.CardSlot;
+import solab.innovativetransport.pipe.base.IPipe;
 import solab.innovativetransport.transporter.ItemTransporter;
 
 import java.util.*;
@@ -19,13 +20,13 @@ import java.util.*;
 public class Pipe implements IPipe {
 
     private final TilePipeHolder holder;
-    public EnumMap<EnumFacing,EnumConnectionType> connection = new EnumMap<EnumFacing, EnumConnectionType>(EnumFacing.class) {{
-        put(EnumFacing.UP,EnumConnectionType.none);
-        put(EnumFacing.DOWN,EnumConnectionType.none);
-        put(EnumFacing.NORTH,EnumConnectionType.none);
-        put(EnumFacing.SOUTH,EnumConnectionType.none);
-        put(EnumFacing.EAST,EnumConnectionType.none);
-        put(EnumFacing.WEST,EnumConnectionType.none);
+    public EnumMap<EnumFacing, solab.innovativetransport.utils.Constants.EnumConnectionType> connection = new EnumMap<EnumFacing, solab.innovativetransport.utils.Constants.EnumConnectionType>(EnumFacing.class) {{
+        put(EnumFacing.UP, solab.innovativetransport.utils.Constants.EnumConnectionType.none);
+        put(EnumFacing.DOWN, solab.innovativetransport.utils.Constants.EnumConnectionType.none);
+        put(EnumFacing.NORTH, solab.innovativetransport.utils.Constants.EnumConnectionType.none);
+        put(EnumFacing.SOUTH, solab.innovativetransport.utils.Constants.EnumConnectionType.none);
+        put(EnumFacing.EAST, solab.innovativetransport.utils.Constants.EnumConnectionType.none);
+        put(EnumFacing.WEST, solab.innovativetransport.utils.Constants.EnumConnectionType.none);
     }};
     private Map<EnumFacing,CardSlot> cardSlots = new HashMap<>();
     List<ItemTransporter> items = new ArrayList<>();
@@ -90,12 +91,15 @@ public class Pipe implements IPipe {
         }
     }
 
+    public List<ItemTransporter> getItems() {return items;}
+
     @Override
     public TilePipeHolder getHolder() {
         return holder;
     }
 
-    EnumConnectionType getConnectionTypeOf(EnumFacing facing) {
+    @Override
+    public solab.innovativetransport.utils.Constants.EnumConnectionType getConnectionTypeOf(EnumFacing facing) {
         return connection.get(facing);
     }
 
@@ -109,7 +113,7 @@ public class Pipe implements IPipe {
         if (cardSlots.get(facing) == null) {
             CardSlot slot = new CardSlot(this);
             cardSlots.put(facing,slot);
-            connection.put(facing,EnumConnectionType.slot);
+            connection.put(facing, solab.innovativetransport.utils.Constants.EnumConnectionType.slot);
             return slot;
         } else {
             return cardSlots.get(facing);
@@ -129,9 +133,9 @@ public class Pipe implements IPipe {
 
     public EnumFacing getRandomExit(EnumFacing in) {
         List<EnumFacing> available = new ArrayList<>();
-        for (EnumMap.Entry<EnumFacing,EnumConnectionType> entry:
+        for (EnumMap.Entry<EnumFacing, solab.innovativetransport.utils.Constants.EnumConnectionType> entry:
                 connection.entrySet()) {
-            if (entry.getValue() == EnumConnectionType.pipe || entry.getValue() == EnumConnectionType.tile) {
+            if (entry.getValue() == solab.innovativetransport.utils.Constants.EnumConnectionType.pipe || entry.getValue() == solab.innovativetransport.utils.Constants.EnumConnectionType.tile) {
                 if (entry.getKey() != in) {
                     available.add(entry.getKey());
                 }

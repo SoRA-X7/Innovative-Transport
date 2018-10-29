@@ -5,7 +5,7 @@ import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
-import solab.innovativetransport.pipe.TilePipeHolder;
+import solab.innovativetransport.pipe.normal.TilePipeHolder;
 
 public class ItemTransporter extends Transporter {
     public ItemStack item;

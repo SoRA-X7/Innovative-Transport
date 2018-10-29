@@ -1,4 +1,4 @@
-package solab.innovativetransport.pipe;
+package solab.innovativetransport.pipe.render;
 
 import codechicken.lib.render.block.CCBlockRendererDispatcher;
 import net.minecraft.client.Minecraft;
@@ -12,8 +12,10 @@ import net.minecraft.util.EnumFacing;
 import org.lwjgl.opengl.GL11;
 import solab.innovativetransport.InnovativeTransport;
 import solab.innovativetransport.card.BlockDummyCardSlot;
+import solab.innovativetransport.pipe.normal.TilePipeHolder;
 import solab.innovativetransport.transporter.ItemTransporter;
 import solab.innovativetransport.transporter.Transporter;
+import solab.innovativetransport.utils.Constants;
 
 import java.util.Map;
 
@@ -51,9 +53,9 @@ public class PipeTESR extends TileEntitySpecialRenderer<TilePipeHolder> {
             GlStateManager.shadeModel(GL11.GL_FLAT);
         }
 
-        for (Map.Entry<EnumFacing,EnumConnectionType> entry:
+        for (Map.Entry<EnumFacing, Constants.EnumConnectionType> entry:
              te.getPipe().connection.entrySet()) {
-            if (entry.getValue() == EnumConnectionType.slot) {
+            if (entry.getValue() == Constants.EnumConnectionType.slot) {
                 Tessellator tessellator = Tessellator.getInstance();
                 VertexBuffer buffer = tessellator.getBuffer();
                 buffer.begin(GL11.GL_QUADS, DefaultVertexFormats.BLOCK);
@@ -73,7 +75,7 @@ public class PipeTESR extends TileEntitySpecialRenderer<TilePipeHolder> {
         RenderItem renderer = Minecraft.getMinecraft().getRenderItem();
 
         for (Transporter tra:
-             te.pipe.items) {
+             te.pipe.getItems()) {
             // 毎Tickの位置にTime.deltaTime的な奴を足す
             float dVal = tra.progress + tra.speed * partialTicks;
             GlStateManager.pushMatrix();

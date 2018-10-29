@@ -1,4 +1,4 @@
-package solab.innovativetransport.pipe;
+package solab.innovativetransport.pipe.base;
 
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;

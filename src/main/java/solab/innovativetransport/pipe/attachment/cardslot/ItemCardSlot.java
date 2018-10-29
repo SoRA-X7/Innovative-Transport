@@ -1,4 +1,4 @@
-package solab.innovativetransport.card;
+package solab.innovativetransport.pipe.attachment.cardslot;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
@@ -10,8 +10,8 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import solab.innovativetransport.InnovativeTransport;
-import solab.innovativetransport.pipe.BlockPipe;
-import solab.innovativetransport.pipe.TilePipeHolder;
+import solab.innovativetransport.pipe.normal.BlockPipe;
+import solab.innovativetransport.pipe.normal.TilePipeHolder;
 
 public class ItemCardSlot extends Item {
     private ItemCardSlot() {

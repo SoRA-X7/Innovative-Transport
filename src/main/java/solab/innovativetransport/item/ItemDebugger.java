@@ -14,23 +14,23 @@ import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 import solab.innovativetransport.InnovativeTransport;
 import solab.innovativetransport.card.cardbase.CardBase;
-import solab.innovativetransport.pipe.BlockPipe;
-import solab.innovativetransport.pipe.TilePipeHolder;
+import solab.innovativetransport.pipe.normal.BlockPipe;
+import solab.innovativetransport.pipe.normal.TilePipeHolder;
 
 /**
  * Created by kirihi on 2018/10/07.
  */
-public class Debugger extends Item {
+public class ItemDebugger extends Item {
     private int mode = 0;
     private String ctex="§a";
     private String stex="§c";
-    public Debugger() {
+    public ItemDebugger() {
         super();
         setUnlocalizedName("debugger");
         setRegistryName("debugger");
         setCreativeTab(InnovativeTransport.tab);
     }
-    public static final Debugger INSTANCE = new Debugger();
+    public static final ItemDebugger INSTANCE = new ItemDebugger();
 
     @Override
     public ActionResult<ItemStack> onItemRightClick(ItemStack itemStackIn, World worldIn, EntityPlayer playerIn, EnumHand hand){

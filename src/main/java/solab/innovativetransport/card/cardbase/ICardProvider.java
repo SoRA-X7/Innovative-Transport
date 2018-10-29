@@ -1,6 +1,6 @@
 package solab.innovativetransport.card.cardbase;
 
-import solab.innovativetransport.pipe.Pipe;
+import solab.innovativetransport.pipe.normal.Pipe;
 import solab.innovativetransport.utils.RequestItemStack;
 
 public interface ICardProvider {

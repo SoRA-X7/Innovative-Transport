@@ -1,4 +1,4 @@
-package solab.innovativetransport.pipe;
+package solab.innovativetransport.pipe.normal;
 
 import codechicken.lib.raytracer.IndexedCuboid6;
 import codechicken.lib.raytracer.RayTracer;
@@ -21,6 +21,8 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import solab.innovativetransport.InnovativeTransport;
+import solab.innovativetransport.pipe.base.IBlockPipe;
+import solab.innovativetransport.utils.Constants;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
@@ -28,7 +30,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
-public class BlockPipe extends BlockContainer {
+public class BlockPipe extends BlockContainer implements IBlockPipe {
 
     private static final AxisAlignedBB CENTER_AABB = new AxisAlignedBB(0.25D, 0.25D, 0.25D, 0.75D, 0.75D, 0.75D);
     private static final AxisAlignedBB UP_AABB = new AxisAlignedBB(0.25D, 0.75D, 0.25D, 0.75D, 1D, 0.75D);
@@ -74,12 +76,12 @@ public class BlockPipe extends BlockContainer {
     public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos) {
         TilePipeHolder tilePipe = (TilePipeHolder) worldIn.getTileEntity(pos);
         if (tilePipe != null) {
-            state.withProperty(TilePipeHolder.states.get(EnumFacing.UP),tilePipe.pipe.connection.get(EnumFacing.UP) == EnumConnectionType.pipe)
-                    .withProperty(TilePipeHolder.states.get(EnumFacing.DOWN),tilePipe.pipe.connection.get(EnumFacing.DOWN) == EnumConnectionType.pipe)
-                    .withProperty(TilePipeHolder.states.get(EnumFacing.NORTH),tilePipe.pipe.connection.get(EnumFacing.NORTH) == EnumConnectionType.pipe)
-                    .withProperty(TilePipeHolder.states.get(EnumFacing.SOUTH),tilePipe.pipe.connection.get(EnumFacing.SOUTH) == EnumConnectionType.pipe)
-                    .withProperty(TilePipeHolder.states.get(EnumFacing.EAST),tilePipe.pipe.connection.get(EnumFacing.EAST) == EnumConnectionType.pipe)
-                    .withProperty(TilePipeHolder.states.get(EnumFacing.WEST),tilePipe.pipe.connection.get(EnumFacing.WEST) == EnumConnectionType.pipe);
+            state.withProperty(TilePipeHolder.states.get(EnumFacing.UP),tilePipe.pipe.connection.get(EnumFacing.UP) == Constants.EnumConnectionType.pipe)
+                    .withProperty(TilePipeHolder.states.get(EnumFacing.DOWN),tilePipe.pipe.connection.get(EnumFacing.DOWN) == Constants.EnumConnectionType.pipe)
+                    .withProperty(TilePipeHolder.states.get(EnumFacing.NORTH),tilePipe.pipe.connection.get(EnumFacing.NORTH) == Constants.EnumConnectionType.pipe)
+                    .withProperty(TilePipeHolder.states.get(EnumFacing.SOUTH),tilePipe.pipe.connection.get(EnumFacing.SOUTH) == Constants.EnumConnectionType.pipe)
+                    .withProperty(TilePipeHolder.states.get(EnumFacing.EAST),tilePipe.pipe.connection.get(EnumFacing.EAST) == Constants.EnumConnectionType.pipe)
+                    .withProperty(TilePipeHolder.states.get(EnumFacing.WEST),tilePipe.pipe.connection.get(EnumFacing.WEST) == Constants.EnumConnectionType.pipe);
         }
         return state;
     }
@@ -125,8 +127,8 @@ public class BlockPipe extends BlockContainer {
     @Override
     public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
 
-        for (Map.Entry<EnumFacing,EnumConnectionType> entry:((TilePipeHolder) Objects.requireNonNull(worldIn.getTileEntity(pos))).pipe.connection.entrySet()) {
-            if (entry.getValue() == EnumConnectionType.pipe) {
+        for (Map.Entry<EnumFacing, Constants.EnumConnectionType> entry:((TilePipeHolder) Objects.requireNonNull(worldIn.getTileEntity(pos))).pipe.connection.entrySet()) {
+            if (entry.getValue() == Constants.EnumConnectionType.pipe) {
                 TilePipeHolder holder = (TilePipeHolder) worldIn.getTileEntity(pos.offset(entry.getKey()));
                 if (holder != null) {
                     holder.disconnect(entry.getKey().getOpposite());
@@ -209,7 +211,7 @@ public class BlockPipe extends BlockContainer {
             Pipe pipe = tile.getPipe();
             if (pipe != null) {
                 EnumFacing face = EnumFacing.VALUES[part - 1];
-                EnumConnectionType con = pipe.getConnectionTypeOf(face);
+                Constants.EnumConnectionType con = pipe.getConnectionTypeOf(face);
             }
         }
 

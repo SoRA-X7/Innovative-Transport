@@ -5,6 +5,7 @@ import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
+import net.minecraft.util.IStringSerializable;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.common.Mod;
@@ -13,11 +14,11 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import solab.innovativetransport.card.BlockDummyCardSlot;
 import solab.innovativetransport.card.ItemCard;
-import solab.innovativetransport.card.ItemCardSlot;
-import solab.innovativetransport.item.Debugger;
-import solab.innovativetransport.pipe.BlockPipe;
-import solab.innovativetransport.pipe.PipeTESR;
-import solab.innovativetransport.pipe.TilePipeHolder;
+import solab.innovativetransport.item.ItemDebugger;
+import solab.innovativetransport.pipe.attachment.cardslot.ItemCardSlot;
+import solab.innovativetransport.pipe.normal.BlockPipe;
+import solab.innovativetransport.pipe.normal.TilePipeHolder;
+import solab.innovativetransport.pipe.render.PipeTESR;
 
 @Mod(modid = InnovativeTransport.MODID,dependencies = InnovativeTransport.DEPENDENCIES)
 public class InnovativeTransport {
@@ -35,7 +36,7 @@ public class InnovativeTransport {
             BlockPipe.INSTANCE
     };
     private static Item items[] = {
-            Debugger.INSTANCE,
+            ItemDebugger.INSTANCE,
             ItemCard.INSTANCE,
             ItemCardSlot.INSTANCE
     };
@@ -76,5 +77,21 @@ public class InnovativeTransport {
             ClientRegistry.bindTileEntitySpecialRenderer(TilePipeHolder.class,new PipeTESR());
         }
         registerItems(getItems(),event.getSide().isClient());
+    }
+
+    public enum EnumCards implements IStringSerializable {
+        ItemSink,
+        Extractor,
+        Provider,
+        Supplier;
+
+        public static int maxLength() {
+            return 4;
+        }
+
+        @Override
+        public String getName() {
+            return this.name();
+        }
     }
 }

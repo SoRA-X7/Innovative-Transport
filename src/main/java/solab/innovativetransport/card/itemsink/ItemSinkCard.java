@@ -2,7 +2,7 @@ package solab.innovativetransport.card.itemsink;
 
 import net.minecraft.item.Item;
 import net.minecraft.nbt.NBTTagCompound;
-import solab.innovativetransport.card.EnumCards;
+import solab.innovativetransport.InnovativeTransport;
 import solab.innovativetransport.card.cardbase.CardBase;
 import solab.innovativetransport.card.cardbase.ICardItemSink;
 
@@ -52,8 +52,8 @@ public class ItemSinkCard extends CardBase implements ICardItemSink {
      * @return カードの種類
      */
     @Override
-    public EnumCards getCardType() {
-        return EnumCards.ItemSink;
+    public InnovativeTransport.EnumCards getCardType() {
+        return InnovativeTransport.EnumCards.ItemSink;
     }
 
     /**

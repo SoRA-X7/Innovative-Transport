@@ -2,7 +2,7 @@ package solab.innovativetransport.transporter;
 
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
-import solab.innovativetransport.pipe.TilePipeHolder;
+import solab.innovativetransport.pipe.normal.TilePipeHolder;
 
 public class Transporter {
     private static int nextFreeId = 0;
