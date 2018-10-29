@@ -107,7 +107,6 @@ public class TilePipeHolder extends TileEntity implements IPipeHolder, ITickable
         if (pipe.connection.get(facing) == EnumConnectionType.none) {
             pipe.addCardSlotNonOverride(facing);
             IBlockState oldState = worldObj.getBlockState(pos);
-//            worldObj.setBlockState(pos,oldState.withProperty(states.get(facing), EnumConnectionType.slot));
             markDirty();
             worldObj.notifyBlockUpdate(pos, oldState, worldObj.getBlockState(pos), 2);
             return true;
@@ -133,7 +132,6 @@ public class TilePipeHolder extends TileEntity implements IPipeHolder, ITickable
 
         for (EnumFacing facing : EnumFacing.VALUES) {
             if (nbtTagCompound.hasKey("cardslot_" + facing.getName(), TAG_COMPOUND)) {
-                System.out.println(nbtTagCompound.getCompoundTag("cardslot_" + facing.getName()).toString());
                 pipe.addCardSlotNonOverride(facing).readFromNBT(nbtTagCompound.getCompoundTag("cardslot_" + facing.getName()));
             }
         }
@@ -221,7 +219,7 @@ public class TilePipeHolder extends TileEntity implements IPipeHolder, ITickable
     }
 
     public boolean shouldRefresh(World world, BlockPos pos, IBlockState oldState, IBlockState newSate) {
-        return (oldState.getBlock() != newSate.getBlock()) && !first;
+        return (oldState.getBlock() != newSate.getBlock());
     }
 
     @Override

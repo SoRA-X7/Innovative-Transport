@@ -44,9 +44,7 @@ public class CardSlot {
 
     public NBTTagCompound writeToNBT(NBTTagCompound compound) {
         NBTTagList tagList = new NBTTagList();
-        System.out.println(cards.toString());
         for (CardBase card:cards) {
-//            System.out.println("Write:" + card.writeToNBT(new NBTTagCompound()).toString());
             tagList.appendTag(card.writeToNBT(new NBTTagCompound()));
         }
         compound.setTag("IT_CardSlot_Cards",tagList);
@@ -58,12 +56,12 @@ public class CardSlot {
         NBTTagList tagList = compound.getTagList("IT_CardSlot_Cards", TAG_COMPOUND);
         for (int i=0; i<tagList.tagCount(); i++) {
             NBTTagCompound compound1 = tagList.getCompoundTagAt(i);
-//            System.out.println("Read:" + compound1.toString());
             CardBase card = CardBase.getCardFromType(EnumCards.values()[compound1.getInteger("IT_Card_Type")],compound1.getInteger("IT_Card_Tier"));
-            card.readFromNBT(compound1);
-            card.onCardInserted(pipe);
-            cards.add(card);
+            if (card != null) {
+                card.readFromNBT(compound1);
+                card.onCardInserted(pipe);
+                cards.add(card);
+            }
         }
-        System.out.println(cards.toString());
     }
 }

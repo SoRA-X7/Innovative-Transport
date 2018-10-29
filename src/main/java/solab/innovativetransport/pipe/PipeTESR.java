@@ -38,10 +38,11 @@ public class PipeTESR extends TileEntitySpecialRenderer<TilePipeHolder> {
     }
 
     private void renderCardSlots(TilePipeHolder te, double x, double y, double z) {
-//        System.out.println("Render Card Slots");
         GlStateManager.pushMatrix();
         GlStateManager.enableLighting();
         RenderHelper.disableStandardItemLighting();
+        BlockRendererDispatcher dispatcher = Minecraft.getMinecraft().getBlockRendererDispatcher();
+        CCBlockRendererDispatcher renderer = new CCBlockRendererDispatcher(dispatcher, BlockColors.init());
         GlStateManager.translate(x, y, z);
         GlStateManager.translate(-te.getPos().getX(), -te.getPos().getY(), -te.getPos().getZ());
         if (Minecraft.isAmbientOcclusionEnabled()) {
@@ -57,8 +58,6 @@ public class PipeTESR extends TileEntitySpecialRenderer<TilePipeHolder> {
                 VertexBuffer buffer = tessellator.getBuffer();
                 buffer.begin(GL11.GL_QUADS, DefaultVertexFormats.BLOCK);
 
-                BlockRendererDispatcher dispatcher = Minecraft.getMinecraft().getBlockRendererDispatcher();
-                CCBlockRendererDispatcher renderer = new CCBlockRendererDispatcher(dispatcher,BlockColors.init());
                 renderer.renderBlock(InnovativeTransport.dummyCardSlot.getDefaultState().withProperty(BlockDummyCardSlot.propertyFacing,entry.getKey()),te.getPos(),te.getWorld(),buffer);
                 tessellator.draw();
             }
@@ -71,6 +70,7 @@ public class PipeTESR extends TileEntitySpecialRenderer<TilePipeHolder> {
     private void renderTransporters(TilePipeHolder te, double x, double y, double z, float partialTicks) {
         RenderHelper.enableStandardItemLighting();
         GlStateManager.enableLighting();
+        RenderItem renderer = Minecraft.getMinecraft().getRenderItem();
 
         for (Transporter tra:
              te.pipe.items) {
@@ -126,7 +126,7 @@ public class PipeTESR extends TileEntitySpecialRenderer<TilePipeHolder> {
             GlStateManager.scale(0.25f,0.25f,0.25f);
             if (tra instanceof ItemTransporter) {
                 ItemTransporter itemTransporter = (ItemTransporter)tra;
-                Minecraft.getMinecraft().getRenderItem().renderItem(itemTransporter.item, ItemCameraTransforms.TransformType.NONE);
+                renderer.renderItem(itemTransporter.item, ItemCameraTransforms.TransformType.NONE);
             }
             GlStateManager.popMatrix();
         }
