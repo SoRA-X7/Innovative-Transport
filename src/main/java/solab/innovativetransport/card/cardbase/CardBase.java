@@ -1,10 +1,10 @@
 package solab.innovativetransport.card.cardbase;
 
 import net.minecraft.nbt.NBTTagCompound;
-import solab.innovativetransport.InnovativeTransport;
 import solab.innovativetransport.card.extractor.ExtractorCard;
 import solab.innovativetransport.card.itemsink.ItemSinkCard;
 import solab.innovativetransport.pipe.normal.Pipe;
+import solab.innovativetransport.utils.Constants.EnumCards;
 
 public abstract class CardBase implements ICardBehaviour {
 
@@ -37,7 +37,7 @@ public abstract class CardBase implements ICardBehaviour {
      * @return カードの種類
      */
     @Override
-    public abstract InnovativeTransport.EnumCards getCardType();
+    public abstract EnumCards getCardType();
 
     /**
      * Tierの範囲を返します。
@@ -45,7 +45,7 @@ public abstract class CardBase implements ICardBehaviour {
      */
     public abstract int[] getAcceptedTiers();
 
-    public static CardBase getCardFromType(InnovativeTransport.EnumCards type, int mk) {
+    public static CardBase getCardFromType(EnumCards type, int mk) {
         switch (type) {
             case ItemSink:
                 return new ItemSinkCard();

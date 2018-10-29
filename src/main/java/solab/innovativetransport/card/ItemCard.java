@@ -17,6 +17,7 @@ import solab.innovativetransport.InnovativeTransport;
 import solab.innovativetransport.card.cardbase.CardBase;
 import solab.innovativetransport.pipe.normal.BlockPipe;
 import solab.innovativetransport.pipe.normal.TilePipeHolder;
+import solab.innovativetransport.utils.Constants.EnumCards;
 
 import java.util.List;
 
@@ -42,14 +43,14 @@ public class ItemCard extends Item {
     @SideOnly(Side.CLIENT)
     public void getSubItems(Item itemIn, CreativeTabs tab, List<ItemStack> subItems)
     {
-        setSubItems(itemIn,subItems, InnovativeTransport.EnumCards.ItemSink,1);
-        setSubItems(itemIn,subItems, InnovativeTransport.EnumCards.Extractor,1);
-        setSubItems(itemIn,subItems, InnovativeTransport.EnumCards.Extractor,2);
-        setSubItems(itemIn,subItems, InnovativeTransport.EnumCards.Extractor,3);
-        setSubItems(itemIn,subItems, InnovativeTransport.EnumCards.Provider,1);
-        setSubItems(itemIn,subItems, InnovativeTransport.EnumCards.Supplier,1);
+        setSubItems(itemIn,subItems, EnumCards.ItemSink,1);
+        setSubItems(itemIn,subItems, EnumCards.Extractor,1);
+        setSubItems(itemIn,subItems, EnumCards.Extractor,2);
+        setSubItems(itemIn,subItems, EnumCards.Extractor,3);
+        setSubItems(itemIn,subItems, EnumCards.Provider,1);
+        setSubItems(itemIn,subItems, EnumCards.Supplier,1);
     }
-    private void setSubItems(Item itemIn, List<ItemStack> subItems, InnovativeTransport.EnumCards type, int tier) {
+    private void setSubItems(Item itemIn, List<ItemStack> subItems, EnumCards type, int tier) {
         ItemStack stack = new ItemStack(itemIn);
         NBTTagCompound compound1 = new NBTTagCompound();
         compound1.setInteger("cardtype",type.ordinal());
@@ -74,7 +75,7 @@ public class ItemCard extends Item {
 
     @Override
     public EnumActionResult onItemUse(ItemStack stack, EntityPlayer playerIn, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
-        card = CardBase.getCardFromType(InnovativeTransport.EnumCards.values()[stack.getTagCompound().getInteger("cardtype")],stack.getTagCompound().getInteger("cardtier"));
+        card = CardBase.getCardFromType(EnumCards.values()[stack.getTagCompound().getInteger("cardtype")],stack.getTagCompound().getInteger("cardtier"));
         if (worldIn.getBlockState(pos).getBlock() == BlockPipe.INSTANCE) {
             TilePipeHolder holder = (TilePipeHolder) worldIn.getTileEntity(pos);
             if (holder != null && holder.getPipe().getCardSlot(facing) != null) {

@@ -1,7 +1,7 @@
 package solab.innovativetransport.card.cardbase;
 
-import solab.innovativetransport.InnovativeTransport;
 import solab.innovativetransport.pipe.normal.Pipe;
+import solab.innovativetransport.utils.Constants.EnumCards;
 
 public interface ICardBehaviour {
 
@@ -20,5 +20,5 @@ public interface ICardBehaviour {
      * カードの種類を返します。
      * @return カードの種類
      */
-    InnovativeTransport.EnumCards getCardType();
+    EnumCards getCardType();
 }

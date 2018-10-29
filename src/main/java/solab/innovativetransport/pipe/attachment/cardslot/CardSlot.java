@@ -2,11 +2,11 @@ package solab.innovativetransport.pipe.attachment.cardslot;
 
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
-import solab.innovativetransport.InnovativeTransport;
 import solab.innovativetransport.card.cardbase.CardBase;
 import solab.innovativetransport.card.cardbase.ICardTickable;
 import solab.innovativetransport.pipe.attachment.IPipeAttachment;
 import solab.innovativetransport.pipe.normal.Pipe;
+import solab.innovativetransport.utils.Constants.EnumCards;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,7 +23,7 @@ public class CardSlot implements IPipeAttachment {
         cards = new ArrayList<>(4);
     }
 
-    boolean insert(CardBase newCard) {
+    public boolean insert(CardBase newCard) {
         boolean success = cards.add(newCard);
         if (success) {
             cards.get(cards.size()-1).onCardInserted(pipe);
@@ -58,7 +58,7 @@ public class CardSlot implements IPipeAttachment {
         NBTTagList tagList = compound.getTagList("IT_CardSlot_Cards", TAG_COMPOUND);
         for (int i=0; i<tagList.tagCount(); i++) {
             NBTTagCompound compound1 = tagList.getCompoundTagAt(i);
-            CardBase card = CardBase.getCardFromType(InnovativeTransport.EnumCards.values()[compound1.getInteger("IT_Card_Type")],compound1.getInteger("IT_Card_Tier"));
+            CardBase card = CardBase.getCardFromType(EnumCards.values()[compound1.getInteger("IT_Card_Type")],compound1.getInteger("IT_Card_Tier"));
             if (card != null) {
                 card.readFromNBT(compound1);
                 card.onCardInserted(pipe);

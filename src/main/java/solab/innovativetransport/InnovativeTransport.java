@@ -5,7 +5,6 @@ import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
-import net.minecraft.util.IStringSerializable;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.common.Mod;
@@ -77,21 +76,5 @@ public class InnovativeTransport {
             ClientRegistry.bindTileEntitySpecialRenderer(TilePipeHolder.class,new PipeTESR());
         }
         registerItems(getItems(),event.getSide().isClient());
-    }
-
-    public enum EnumCards implements IStringSerializable {
-        ItemSink,
-        Extractor,
-        Provider,
-        Supplier;
-
-        public static int maxLength() {
-            return 4;
-        }
-
-        @Override
-        public String getName() {
-            return this.name();
-        }
     }
 }

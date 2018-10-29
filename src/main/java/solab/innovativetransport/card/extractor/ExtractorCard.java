@@ -3,10 +3,10 @@ package solab.innovativetransport.card.extractor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
-import solab.innovativetransport.InnovativeTransport;
 import solab.innovativetransport.card.cardbase.CardBase;
 import solab.innovativetransport.card.cardbase.ICardTickable;
 import solab.innovativetransport.transporter.ItemTransporter;
+import solab.innovativetransport.utils.Constants.EnumCards;
 import solab.innovativetransport.utils.ModuleInventoryAccessHelper;
 
 import java.util.Arrays;
@@ -58,8 +58,8 @@ public class ExtractorCard extends CardBase implements ICardTickable {
     }
 
     @Override
-    public InnovativeTransport.EnumCards getCardType() {
-        return InnovativeTransport.EnumCards.Extractor;
+    public EnumCards getCardType() {
+        return EnumCards.Extractor;
     }
 
     /**
