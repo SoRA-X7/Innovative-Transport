@@ -1,10 +1,17 @@
 {
   "forge_marker": 1,
-  "defaults": {
-    "model": "innovativetransport:Quantum1"
-  },
+  /*"defaults": {
+    "textures": {
+      "all": "magic_x_tech:blocks/ruinscore"
+    },
+    "model": "coreblock"
+  },*/
   "variants": {
-    "normal": [{}],
-    "inventory": [{}]
+    "normal": [
+      {"model":"innovativetransport:Quantum1"}
+    ],
+    "inventory": [
+      {"model":"innovativetransport:Quantum1"}
+    ]
   }
 }
