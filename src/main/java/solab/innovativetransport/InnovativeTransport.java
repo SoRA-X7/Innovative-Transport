@@ -18,6 +18,8 @@ import solab.innovativetransport.pipe.attachment.cardslot.ItemCardSlot;
 import solab.innovativetransport.pipe.normal.BlockPipe;
 import solab.innovativetransport.pipe.normal.TilePipeHolder;
 import solab.innovativetransport.pipe.render.PipeTESR;
+import solab.innovativetransport.routing.BlockQuantumCore;
+import solab.innovativetransport.routing.TileQuantumCore;
 
 @Mod(modid = InnovativeTransport.MODID,dependencies = InnovativeTransport.DEPENDENCIES)
 public class InnovativeTransport {
@@ -32,7 +34,8 @@ public class InnovativeTransport {
     };
 
     private static Block blocks[] = {
-            BlockPipe.INSTANCE
+            BlockPipe.INSTANCE,
+            BlockQuantumCore.INSTANCE
     };
     private static Item items[] = {
             ItemDebugger.INSTANCE,
@@ -75,6 +78,7 @@ public class InnovativeTransport {
         if (event.getSide().isClient()) {
             ClientRegistry.bindTileEntitySpecialRenderer(TilePipeHolder.class,new PipeTESR());
         }
+        GameRegistry.registerTileEntity(TileQuantumCore.class,MODID + ":quantumcore");
         registerItems(getItems(),event.getSide().isClient());
     }
 }
