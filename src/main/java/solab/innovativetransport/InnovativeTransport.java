@@ -9,7 +9,9 @@ import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
+import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import solab.innovativetransport.card.BlockDummyCardSlot;
 import solab.innovativetransport.card.ItemCard;
@@ -25,6 +27,9 @@ import solab.innovativetransport.routing.TileQuantumCore;
 public class InnovativeTransport {
     public static final String MODID = "innovativetransport";
     static final String DEPENDENCIES = "required-after:CodeChickenLib";
+
+    @Mod.Instance(MODID)
+    public static InnovativeTransport INSTANCE;
 
     public static final CreativeTabs tab = new CreativeTabs("Innovative Transport") {
         @Override
@@ -80,5 +85,10 @@ public class InnovativeTransport {
         }
         GameRegistry.registerTileEntity(TileQuantumCore.class,MODID + ":quantumcore");
         registerItems(getItems(),event.getSide().isClient());
+    }
+
+    @EventHandler
+    public void init(FMLInitializationEvent event) {
+        NetworkRegistry.INSTANCE.registerGuiHandler(this,new ITGuiHandler());
     }
 }

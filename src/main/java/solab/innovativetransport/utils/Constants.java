@@ -34,4 +34,8 @@ public class Constants {
             return this.name();
         }
     }
+
+    public enum GuiTypes {
+        CardSlot
+    }
 }

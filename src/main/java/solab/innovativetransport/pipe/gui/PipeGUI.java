@@ -1,4 +1,4 @@
-package solab.innovativetransport.pipe.GUI;
+package solab.innovativetransport.pipe.gui;
 
 /**
  * Created by kirihi on 2018/10/30.
@@ -156,7 +156,7 @@ public class PipeGUI {
             this.ySize = 166;
         }
 
-        private static final ResourceLocation texture = new ResourceLocation("innovativetransport:textures/GUI/Aaaaaaaaaaaa.png");
+        private static final ResourceLocation texture = new ResourceLocation("innovativetransport:textures/gui/guicardslot.png");
 
         protected void drawGuiContainerBackgroundLayer(float par1, int par2, int par3) {
             int posX = (this.width) / 2;
