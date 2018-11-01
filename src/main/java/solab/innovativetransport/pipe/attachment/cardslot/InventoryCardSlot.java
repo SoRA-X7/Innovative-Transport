@@ -1,4 +1,4 @@
-package solab.innovativetransport.pipe.attachment.cardslot;
+ package solab.innovativetransport.pipe.attachment.cardslot;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;

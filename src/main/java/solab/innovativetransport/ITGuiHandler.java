@@ -23,7 +23,7 @@ public class ITGuiHandler implements IGuiHandler {
     public Object getServerGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
         switch (GuiTypes.values()[ID]) {
             case CardSlot:
-                return new ContainerCardSlot(x, y, z, player);
+                return new ContainerCardSlot(world,x, y, z, player);
         }
         return null;
     }
@@ -45,7 +45,7 @@ public class ITGuiHandler implements IGuiHandler {
     public Object getClientGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
         switch (GuiTypes.values()[ID]) {
             case CardSlot:
-                return new GuiContainerCardSlot(x, y, z, player);
+                return new GuiContainerCardSlot(world,x, y, z, player);
         }
         return null;
     }

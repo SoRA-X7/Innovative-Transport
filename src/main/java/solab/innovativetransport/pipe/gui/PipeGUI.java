@@ -4,7 +4,6 @@ package solab.innovativetransport.pipe.gui;
  * Created by kirihi on 2018/10/30.
  */
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.EntityPlayer;
@@ -22,6 +21,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.GL11;
+import solab.innovativetransport.pipe.normal.TilePipeHolder;
 
 //たぶん一からやりなおすわこれ
 @SuppressWarnings("unchecked")
@@ -51,16 +51,12 @@ public class PipeGUI {
             //this.k = k;
 
             TileEntity ent = world.getTileEntity(new BlockPos(i, j, k));
-            if (ent != null /*&& (ent instanceof TilePipeHolder)*/)
+            if (ent != null && (ent instanceof TilePipeHolder))
                 inve = (IInventory) ent;
             else
                 inve = new InventoryBasic("", true, 4);
 
-            this.addSlotToContainer(new Slot(inve, 0, 10, 10) {
-                public boolean isItemValid(ItemStack stack) {
-                        return (stack != null);
-                }
-
+            /*this.addSlotToContainer(new Slot(inve, 0, 55, 9) {
                 public void onSlotChanged() {
                     super.onSlotChanged();
                     if (getHasStack()) {
@@ -70,10 +66,11 @@ public class PipeGUI {
                         int k = (int) entity.posZ;
                         MinecraftServer server = FMLCommonHandler.instance().getMinecraftServerInstance();
                         World world = server.worldServers[0];
-                        ItemStack stack = this.getStack();
+
                     }
                 }
-            });
+            });*/
+
             bindPlayerInventory(player.inventory);
 
         }
@@ -98,7 +95,7 @@ public class PipeGUI {
             }
         }
 
-        /*@Override
+        @Override
         public ItemStack transferStackInSlot(EntityPlayer playerIn, int index) {
             ItemStack itemstack = null;
             Slot slot = (Slot) this.inventorySlots.get(index);
@@ -131,7 +128,7 @@ public class PipeGUI {
             }
 
             return itemstack;
-        }*/
+        }
 
         public void onContainerClosed(EntityPlayer playerIn) {
             super.onContainerClosed(playerIn);
@@ -164,6 +161,7 @@ public class PipeGUI {
             MinecraftServer server = FMLCommonHandler.instance().getMinecraftServerInstance();
             World world = server.worldServers[0];
             GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+
             this.mc.renderEngine.bindTexture(texture);
             int k = (this.width - this.xSize) / 2;
             int l = (this.height - this.ySize) / 2;
@@ -175,7 +173,7 @@ public class PipeGUI {
         protected void drawGuiContainerForegroundLayer(int par1, int par2) {
             int posX = (this.width) / 2;
             int posY = (this.height) / 2;
-            //this.fontRendererObj.drawString("MachineState: "+readytext, 8, 5, 0x000000);//white 0xffffff
+            this.fontRendererObj.drawString("Pipepepepepepepepepepepepepe", 8, 5, 0x000000);//white 0xffffff
         }
 
         protected void mouseClicked(int par1, int par2, int par3) throws java.io.IOException {
@@ -210,7 +208,7 @@ public class PipeGUI {
             this.buttonList.clear();
             int posX = (this.width) / 2;
             int posY = (this.height) / 2;
-            this.buttonList.add(new GuiButton(0, this.guiLeft + 10, this.guiTop + 60, 36, 20, "Create"));
+            this.buttonList.add(new GuiButton(0, this.guiLeft + 10, this.guiTop + 10, 20, 20, "A"));
         }
 
         protected void actionPerformed(GuiButton button) {
