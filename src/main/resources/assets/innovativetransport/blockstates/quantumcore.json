@@ -1,17 +1,29 @@
 {
   "forge_marker": 1,
-  /*"defaults": {
-    "textures": {
-      "all": "magic_x_tech:blocks/ruinscore"
-    },
-    "model": "coreblock"
-  },*/
   "variants": {
     "normal": [
       {"model":"innovativetransport:Quantum1"}
     ],
     "inventory": [
       {"model":"innovativetransport:Quantum1"}
-    ]
+    ],
+    "facing": {
+      "north": {
+        "model": "innovativetransport:Quantum1",
+        "y": 0
+      },
+      "east": {
+        "model": "innovativetransport:Quantum1",
+        "y": 90
+      },
+      "south": {
+        "model": "innovativetransport:Quantum1",
+        "y": 180
+      },
+      "west": {
+        "model": "innovativetransport:Quantum1",
+        "y": 270
+      }
+    }
   }
 }

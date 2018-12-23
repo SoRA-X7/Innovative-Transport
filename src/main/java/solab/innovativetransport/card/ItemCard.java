@@ -25,6 +25,7 @@ public class ItemCard extends Item {
 
     CardBase card;
 
+    public static ItemCard INSTANCE;
     public ItemCard() {
         super();
         setRegistryName(InnovativeTransport.MODID,"itemcard");
@@ -36,8 +37,8 @@ public class ItemCard extends Item {
             return 0;
         });
         setCreativeTab(InnovativeTransport.tab);
+        INSTANCE = this;
     }
-    public static final ItemCard INSTANCE = new ItemCard();
 
     @Override
     @SideOnly(Side.CLIENT)

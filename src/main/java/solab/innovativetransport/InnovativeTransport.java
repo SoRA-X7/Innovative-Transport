@@ -23,6 +23,9 @@ import solab.innovativetransport.pipe.render.PipeTESR;
 import solab.innovativetransport.routing.BlockQuantumCore;
 import solab.innovativetransport.routing.TileQuantumCore;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Mod(modid = InnovativeTransport.MODID,dependencies = InnovativeTransport.DEPENDENCIES)
 public class InnovativeTransport {
     public static final String MODID = "innovativetransport";
@@ -38,22 +41,20 @@ public class InnovativeTransport {
         }
     };
 
-    private static Block blocks[] = {
-            BlockPipe.INSTANCE,
-            BlockQuantumCore.INSTANCE
-    };
-    private static Item items[] = {
-            ItemDebugger.INSTANCE,
-            ItemCard.INSTANCE,
-            ItemCardSlot.INSTANCE
-    };
+    private static List<Block> blocks = new ArrayList<>();
+    private static List<Item> items = new ArrayList<>();
     public static final BlockDummyCardSlot dummyCardSlot = new BlockDummyCardSlot();
 
-    private static Block[] getBlocks() {
-        return blocks;
+    public static Block[] getBlocks() {
+        return blocks.toArray(new Block[0]);
     }
-    private static void registerBlocks(Block[] blocks, boolean isClient) {
+
+    private static void registerBlocks(boolean isClient) {
+        blocks.add(new BlockPipe());
+        blocks.add(new BlockQuantumCore());
+
         for (Block block:blocks) {
+            System.out.println("Registering " + block.getRegistryName().toString());
             GameRegistry.register(block);
             Item item = new ItemBlock(block).setRegistryName(block.getRegistryName());
             GameRegistry.register(item);
@@ -63,11 +64,17 @@ public class InnovativeTransport {
         }
     }
 
-    private static Item[] getItems() {
-        return items;
+    public static Item[] getItems() {
+        return items.toArray(new Item[0]);
     }
-    private static void registerItems(Item[] items, boolean isClient) {
+
+    private static void registerItems(boolean isClient) {
+        items.add(new ItemDebugger());
+        items.add(new ItemCardSlot());
+        items.add(new ItemCard());
+
         for (Item item:items) {
+            System.out.println("Registering " + item.getRegistryName().toString());
             GameRegistry.register(item);
             if (isClient) {
                 ModelLoader.setCustomModelResourceLocation(item,0,new ModelResourceLocation(item.getRegistryName(),"inventory"));
@@ -78,13 +85,13 @@ public class InnovativeTransport {
     @EventHandler
     public void preInit(FMLPreInitializationEvent event) {
         GameRegistry.register(dummyCardSlot);
-        registerBlocks(getBlocks(),event.getSide().isClient());
+        registerBlocks(event.getSide().isClient());
         GameRegistry.registerTileEntity(TilePipeHolder.class,MODID + ":transportpipe");
         if (event.getSide().isClient()) {
             ClientRegistry.bindTileEntitySpecialRenderer(TilePipeHolder.class,new PipeTESR());
         }
         GameRegistry.registerTileEntity(TileQuantumCore.class,MODID + ":quantumcore");
-        registerItems(getItems(),event.getSide().isClient());
+        registerItems(event.getSide().isClient());
     }
 
     @EventHandler

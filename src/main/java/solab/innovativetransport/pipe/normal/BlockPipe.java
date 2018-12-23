@@ -45,9 +45,9 @@ public class BlockPipe extends BlockContainer implements IBlockPipe {
     private static final AxisAlignedBB EAST_AABB = new AxisAlignedBB(0.75D, 0.25D, 0.25D, 1D, 0.75D, 0.75D);
     private static final AxisAlignedBB WEST_AABB = new AxisAlignedBB(0D, 0.25D, 0.25D, 0.25D, 0.75D, 0.75D);
     private static final AxisAlignedBB[] BOX_FACES = {DOWN_AABB , UP_AABB, NORTH_AABB, SOUTH_AABB, WEST_AABB, EAST_AABB };
-    public static final BlockPipe INSTANCE = new BlockPipe();
+    public static BlockPipe INSTANCE;
 
-    private BlockPipe() {
+    public BlockPipe() {
         super(Material.CIRCUITS);
         setRegistryName(InnovativeTransport.MODID,"transportpipe");
         setUnlocalizedName("transportpipe");
@@ -60,6 +60,7 @@ public class BlockPipe extends BlockContainer implements IBlockPipe {
                 .withProperty(TilePipeHolder.states.get(EnumFacing.EAST),false)
                 .withProperty(TilePipeHolder.states.get(EnumFacing.WEST),false)
         );
+        INSTANCE = this;
     }
     @Override
     protected BlockStateContainer createBlockState(){

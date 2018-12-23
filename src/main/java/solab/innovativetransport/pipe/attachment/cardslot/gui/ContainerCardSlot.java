@@ -4,70 +4,57 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;
-import net.minecraft.inventory.InventoryBasic;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.server.MinecraftServer;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.FMLCommonHandler;
+import solab.innovativetransport.card.cardbase.CardBase;
+import solab.innovativetransport.pipe.attachment.cardslot.CardSlot;
+import solab.innovativetransport.pipe.attachment.cardslot.InventoryCardSlot;
+import solab.innovativetransport.pipe.normal.TilePipeHolder;
+import solab.innovativetransport.utils.Constants;
 
 public class ContainerCardSlot extends Container {
-    public static IInventory inve;
-    //public InventoryCardSlot cslot = new InventoryCardSlot();
+    public static IInventory inventoryCardSlot;
     //スロットの追加、処理
-    public ContainerCardSlot(World world, int i, int j, int k, EntityPlayer player) {
-            inve = new InventoryBasic("", true, 4);
+    public ContainerCardSlot(World world, int x, int y, int z, EntityPlayer player) {
+        TilePipeHolder holder = (TilePipeHolder) world.getTileEntity(new BlockPos(x, y, z));
+        CardSlot cardSlot = holder.pipe.getCardSlot(player.rayTrace(4, 0).sideHit);
+        inventoryCardSlot = new InventoryCardSlot(cardSlot);
 
-            this.addSlotToContainer(new Slot(inve, 0, 55, 9) {
-                public void onSlotChanged() {
-                    super.onSlotChanged();
-                    if (getHasStack()) {
-                        EntityPlayer entity = Minecraft.getMinecraft().thePlayer;
-                        MinecraftServer server = FMLCommonHandler.instance().getMinecraftServerInstance();
-                        World world = server.worldServers[0];
-
+        // カード用スロット
+        int[] slotX = {55, 105};
+        int[] slotY = {9, 59};
+        for (int ix = 0; ix < 2; ix++) {
+            for (int iy = 0; iy < 2; iy++) {
+                this.addSlotToContainer(new Slot(inventoryCardSlot, ix * 2 + iy, slotX[ix], slotY[iy]) {
+                    public void onSlotChanged() {
+                        super.onSlotChanged();
+                        if (getHasStack()) {
+                            EntityPlayer entity = Minecraft.getMinecraft().thePlayer;
+                            MinecraftServer server = FMLCommonHandler.instance().getMinecraftServerInstance();
+                            World world = server.worldServers[0];
+                            NBTTagCompound compound = getStack().getTagCompound();
+                            cardSlot.insert(
+                                    CardBase.getCardFromType(
+                                            Constants.EnumCards.values()[compound.getInteger("IT_Card_Type")],
+                                            compound.getInteger("IT_Card_Tier")));
+                        }
                     }
-                }
-            });
-        this.addSlotToContainer(new Slot(inve, 1, 105, 9) {
-            public void onSlotChanged() {
-                super.onSlotChanged();
-                if (getHasStack()) {
-                    EntityPlayer entity = Minecraft.getMinecraft().thePlayer;
-                    MinecraftServer server = FMLCommonHandler.instance().getMinecraftServerInstance();
-                    World world = server.worldServers[0];
-
-                }
+                });
             }
-        });
-        this.addSlotToContainer(new Slot(inve, 2, 55, 59) {
-            public void onSlotChanged() {
-                super.onSlotChanged();
-                if (getHasStack()) {
-                    EntityPlayer entity = Minecraft.getMinecraft().thePlayer;
-                    MinecraftServer server = FMLCommonHandler.instance().getMinecraftServerInstance();
-                    World world = server.worldServers[0];
+        }
 
-                }
-            }
-        });
-        this.addSlotToContainer(new Slot(inve, 3, 105, 59) {
-            public void onSlotChanged() {
-                super.onSlotChanged();
-                if (getHasStack()) {
-                    EntityPlayer entity = Minecraft.getMinecraft().thePlayer;
-                    MinecraftServer server = FMLCommonHandler.instance().getMinecraftServerInstance();
-                    World world = server.worldServers[0];
-                }
-            }
-        });
-
-        // スロットを設定する。
+        // サバイバルインベントリ
         for (int iy = 0; iy < 3; iy++) {
             for (int ix = 0; ix < 9; ix++) {
                 addSlotToContainer(new Slot(player.inventory, ix + (iy * 9) + 9, 8 + (ix * 18), 84 + (iy * 18)));
             }
         }
+        // ホットバー
         for (int ix = 0; ix < 9; ix++) {
             addSlotToContainer(new Slot(player.inventory, ix, 8 + (ix * 18), 142));
         }
@@ -81,7 +68,7 @@ public class ContainerCardSlot extends Container {
     @Override
     public ItemStack transferStackInSlot(EntityPlayer playerIn, int index) {
         ItemStack itemstack = null;
-        Slot slot = (Slot) this.inventorySlots.get(index);
+        Slot slot = this.inventorySlots.get(index);
 
         if (slot != null && slot.getHasStack()) {
             ItemStack itemstack1 = slot.getStack();
@@ -98,7 +85,7 @@ public class ContainerCardSlot extends Container {
             }
 
             if (itemstack1.stackSize == 0) {
-                slot.putStack((ItemStack) null);
+                slot.putStack(null);
             } else {
                 slot.onSlotChanged();
             }

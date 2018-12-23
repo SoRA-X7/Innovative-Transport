@@ -24,13 +24,14 @@ public class ItemDebugger extends Item {
     private int mode = 0;
     private String ctex="§a";
     private String stex="§c";
+    public static ItemDebugger INSTANCE;
     public ItemDebugger() {
         super();
         setUnlocalizedName("debugger");
         setRegistryName("debugger");
         setCreativeTab(InnovativeTransport.tab);
+        INSTANCE = this;
     }
-    public static final ItemDebugger INSTANCE = new ItemDebugger();
 
     @Override
     public ActionResult<ItemStack> onItemRightClick(ItemStack itemStackIn, World worldIn, EntityPlayer playerIn, EnumHand hand){

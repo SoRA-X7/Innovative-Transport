@@ -14,13 +14,15 @@ import solab.innovativetransport.pipe.normal.BlockPipe;
 import solab.innovativetransport.pipe.normal.TilePipeHolder;
 
 public class ItemCardSlot extends Item {
-    private ItemCardSlot() {
+    public static ItemCardSlot INSTANCE;
+
+    public ItemCardSlot() {
         super();
         setCreativeTab(InnovativeTransport.tab);
         setRegistryName("itemcardslot");
         setUnlocalizedName("itemcardslot");
+        INSTANCE = this;
     }
-    public static final ItemCardSlot INSTANCE = new ItemCardSlot();
 
     @Override
     public EnumActionResult onItemUse(ItemStack stack, EntityPlayer playerIn, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {

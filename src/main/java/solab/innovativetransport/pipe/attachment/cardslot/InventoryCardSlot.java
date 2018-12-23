@@ -16,9 +16,14 @@ import javax.annotation.Nullable;
 public class InventoryCardSlot implements IInventory {
 
     private final ItemStack[] stackCard = new ItemStack[4];
+    private final CardSlot cardSlot;
+
+    public InventoryCardSlot(CardSlot cardSlotIn) {
+        cardSlot = cardSlotIn;
+    }
 
     /**
-     * Returns the number of slots in the inventory.
+     * Returns the number of slots in the inventoryCardSlot.
      */
     @Override
     public int getSizeInventory() {
@@ -37,7 +42,7 @@ public class InventoryCardSlot implements IInventory {
     }
 
     /**
-     * Removes up to a specified number of items from an inventory slot and returns them in a new stack.
+     * Removes up to a specified number of items from an inventoryCardSlot slot and returns them in a new stack.
      *
      * @param index
      * @param count
@@ -60,7 +65,7 @@ public class InventoryCardSlot implements IInventory {
     }
 
     /**
-     * Sets the given item stack to the specified slot in the inventory (can be crafting or armor sections).
+     * Sets the given item stack to the specified slot in the inventoryCardSlot (can be crafting or armor sections).
      *
      * @param index
      * @param stack
@@ -73,7 +78,7 @@ public class InventoryCardSlot implements IInventory {
     }
 
     /**
-     * Returns the maximum stack size for a inventory slot. Seems to always be 64, possibly will be extended.
+     * Returns the maximum stack size for a inventoryCardSlot slot. Seems to always be 64, possibly will be extended.
      */
     @Override
     public int getInventoryStackLimit() {
@@ -148,7 +153,7 @@ public class InventoryCardSlot implements IInventory {
      */
     @Override
     public String getName() {
-        return InnovativeTransport.MODID + ".cardslotgui.inventory";
+        return InnovativeTransport.MODID + ".cardslotgui.inventoryCardSlot";
     }
 
     /**

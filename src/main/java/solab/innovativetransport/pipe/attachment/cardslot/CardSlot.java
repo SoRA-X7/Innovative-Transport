@@ -23,12 +23,20 @@ public class CardSlot implements IPipeAttachment {
         cards = new ArrayList<>(4);
     }
 
-    public boolean insert(CardBase newCard) {
-        boolean success = cards.add(newCard);
-        if (success) {
-            cards.get(cards.size()-1).onCardInserted(pipe);
+    public CardBase insert(CardBase newCard) {
+        return insert(newCard, -1);
+    }
+
+    public CardBase insert(CardBase newCard, int index) {
+        CardBase card;
+        if (index == -1) {
+            cards.add(newCard);
+            card = cards.get(cards.size() - 1);
+        } else {
+            card = cards.set(index, newCard);
         }
-        return success;
+        card.onCardInserted(pipe);
+        return card;
     }
 
     public List<CardBase> getCards() {
