@@ -265,7 +265,7 @@
 		},
 		"thirdperson_lefthand": {
 			"scale": [0.6, 0.6, 0.6],
-			"rotation": [68.5, 58, 0]
+			"rotation": [68.5, 51, 0]
 		},
 		"ground": {
 			"scale": [0.7, 0.7, 0.7]
