@@ -31,7 +31,7 @@ import warpdrive.innovativetransport.routing.TileQuantumCore;
 import java.util.ArrayList;
 import java.util.List;
 
-@Mod(modid = InnovativeTransport.MODID,dependencies = InnovativeTransport.DEPENDENCIES)
+@Mod(modid = InnovativeTransport.MODID, dependencies = InnovativeTransport.DEPENDENCIES, useMetadata = true)
 public class InnovativeTransport {
     public static final String MODID = "innovativetransport";
     static final String DEPENDENCIES = "required-after:CodeChickenLib";

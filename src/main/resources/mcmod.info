@@ -1,0 +1,14 @@
+[
+  {
+    "modid": "innovativetransport",
+    "name": "Innovative Transport",
+    "description": "A next-gen transport system for Minecraft.",
+    "version": "0.2.1",
+    "mcversion": "1.10.2",
+    "logoFile": "",
+    "url": "",
+    "authorList": [
+      "SoRA_X7"
+    ]
+  }
+]
