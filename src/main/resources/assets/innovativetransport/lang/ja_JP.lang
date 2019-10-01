@@ -1,11 +1,12 @@
 # Language file (ja_JP)
 itemGroup.Innovative Transport=Innovative Transport
 
-tile.transportpipe.name=輸送パイプ
+tile.innovativetransport:transportpipe.name=Transport Pipe
 
-item.debugger.name=デバッグツール
-item.itemcardslot.name=カードスロット
-item.innovativetransport_itemcard1.name=抽出カード
-item.innovativetransport_itemcard2.name=供給カード
-item.innovativetransport_itemcard3.name=補給カード
-item.innovativetransport_itemcard4.name=回収カード
+item.innovativetransport:debugger.name=Debugger
+item.innovativetransport:itemcardslot.name=Card Slot
+item.innovativetransport:itemcard0.name=Blank Card
+item.innovativetransport:itemcard1.name=Extractor Card
+item.innovativetransport:itemcard2.name=Provider Card
+item.innovativetransport:itemcard3.name=Supplier Card
+item.innovativetransport:itemcard4.name=ItemSink Card

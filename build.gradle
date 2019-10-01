@@ -33,6 +33,13 @@ minecraft {
     // makeObfSourceJar = false // an Srg named sources jar is made by default. uncomment this to disable.
 }
 
+repositories {
+    maven {
+        name = "ChickenBones Maven"
+        url = "http://chickenbones.net/maven/"
+    }
+}
+
 dependencies {
     // you may put jars on which you depend on in ./libs
     // or you may define them like so..
@@ -55,6 +62,8 @@ dependencies {
     // http://www.gradle.org/docs/current/userguide/artifact_dependencies_tutorial.html
     // http://www.gradle.org/docs/current/userguide/dependency_management.html
 
+    deobfCompile "codechicken:CodeChickenLib:1.10.2-2.5.9.320:universal"
+
 }
 
 processResources
@@ -75,15 +84,4 @@ processResources
     from(sourceSets.main.resources.srcDirs) {
         exclude 'mcmod.info'
     }
-}
-
-repositories {
-    maven {
-        name = "ChickenBones Maven"
-        url = "http://chickenbones.net/maven/"
-    }
-}
-
-dependencies {
-    deobfCompile "codechicken:CodeChickenLib:1.10.2-2.5.9.320:universal"
 }

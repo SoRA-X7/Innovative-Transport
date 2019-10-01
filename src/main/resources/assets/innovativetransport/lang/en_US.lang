@@ -1,12 +1,12 @@
 # Language file (en_US)
 itemGroup.Innovative Transport=Innovative Transport
 
-tile.transportpipe.name=Transport Pipe
+tile.innovativetransport:transportpipe.name=Transport Pipe
 
-item.debugger.name=Debugger
-item.itemcardslot.name=Card Slot
-item.innovativetransport_itemcard0.name=Blank Card
-item.innovativetransport_itemcard1.name=Extractor Card
-item.innovativetransport_itemcard2.name=Provider Card
-item.innovativetransport_itemcard3.name=Supplier Card
-item.innovativetransport_itemcard4.name=ItemSink Card
+item.innovativetransport:debugger.name=Debugger
+item.innovativetransport:itemcardslot.name=Card Slot
+item.innovativetransport:itemcard0.name=Blank Card
+item.innovativetransport:itemcard1.name=Extractor Card
+item.innovativetransport:itemcard2.name=Provider Card
+item.innovativetransport:itemcard3.name=Supplier Card
+item.innovativetransport:itemcard4.name=ItemSink Card
